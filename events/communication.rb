@@ -34,18 +34,21 @@ module Communication
 			phrase.gsub!(/(\s|^|\W)(i)(\s|$|\W)/) { |match| match.sub('i', 'I') }
 
 			case phrase
-			when /\:\)$/
+			when /:\)$/
 				rvoice = "smiles and "
 				pvoice = "smile and "
-			when /\:\($/
+			when /:\($/
 				rvoice = "frowns and "
 				pvoice = "frown and "
+			when /:D$/
+				rvoice = "laughs as #{player.pronoun} "
+				pvoice = "laugh as you "
 			else
 				rvoice = ""
 				pvoice = ""
 			end
 
-			phrase = phrase.gsub(/\s*(\:\)|\:\()/, '').strip.gsub(/\s{2,}/, ' ')
+			phrase = phrase.gsub(/\s*(:\)|:\()|:D/, '').strip.gsub(/\s{2,}/, ' ')
 
 			case phrase[-1..-1]
 			when "!"
