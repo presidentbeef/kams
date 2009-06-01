@@ -1,0 +1,15 @@
+--- 
+:log_level: 1
+:save_rate: 1440
+:debug: false
+:admin: superadmin
+:goid_type: ":guid"
+:port: 8888
+:update_rate: 30
+:restart_delay: 10
+:address: 0.0.0.0
+:intro_file: intro.txt
+:start_room: 64f1172f-d4de-2fa3-b2b6-4f28013cae96
+:restart_limit: 15
+:mccp: false
+:mssp: false

@@ -1,0 +1,15 @@
+Command: Set Word Wrap
+Syntax: SET WORDWRAP <off or number of characters>
+
+Word wrap controls the length of each line of output. You can also turn off word wrap if so desired.
+
+Example:
+To set the lines to wrap at 80 characters:
+
+SET WORDWRAP 80
+
+To turn off word wrap:
+
+SET WORDWRAP OFF
+
+See also: PAGELENGTH SETTINGS

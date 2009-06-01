@@ -1,0 +1,14 @@
+Command: Help
+Syntax: HELP <topic>
+
+The help command will find help for the specified topic.
+
+The syntax shows actual commands in uppercase, with placeholders in angled brackets (< and >). However, commands are not actually case sensitive.
+
+Example:
+
+HELP say
+hElP sAY
+
+ 
+To see all available help topics, use HELP TOPICS.

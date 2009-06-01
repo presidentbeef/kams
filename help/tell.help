@@ -1,0 +1,10 @@
+Command: Tell
+Syntax: TELL <player> <message>
+
+All inhabitants of Ahln have the ability to communicate privately with each other over long distances. This is done through the TELL command. Those who investigate these kinds of things claim there is some kind of latent telepathy in all of us. However, while no one knows for certain how it works, everyone knows it does.
+
+Example:
+TELL Justin Hey, how's it going?
+
+
+See also: SAY, SAYTO, WHISPER, REPLY

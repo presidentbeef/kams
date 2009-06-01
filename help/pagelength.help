@@ -1,0 +1,14 @@
+Syntax: SET PAGELENGTH <off or number of lines>
+
+Page length controls how many lines of text are shown at a time. If there is more than the set page length, you can type MORE to page through them.
+
+Note that this may exhibit unexpected behavior if word wrap is turned off.
+
+The default is 20.
+
+Example:
+
+SET PAGELENGTH 30
+
+
+See also: WORDWRAP, SETTINGS

@@ -1,0 +1,5 @@
+Syntax: ALOOK [OBJECT]
+
+Displays a bunch of information about an object. Probably more than you need to know. Without an OBJECT, it will show the room's information.
+
+Example: alook me

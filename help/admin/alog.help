@@ -1,0 +1,12 @@
+Syntax: ALOG {FLUSH|NORMAL|HIGH|ULTIMATE|DEBUG}
+
+This command can be used to set the logging level, flush the log, and turn debugging information on and off. FLUSH just writes the log out to disk, but this is typically done automatically so you will probably never need it.
+
+Example: alog high
+
+Syntax: ALOG {PLAYER|SERVER|SYSTEM} ([LINES])
+
+This command displays the latest log entries for the player, server, and system logs.
+
+Example: alog player
+Example: alog system 50

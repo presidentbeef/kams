@@ -1,0 +1,10 @@
+Command: Go
+Syntax: GO <direction or exit>
+
+Move in a particular direction or through a particular exit.
+
+Example:
+
+GO EAST
+
+Note that you can just use EAST, WEST, IN, OUT, UP, DOWN, etc. instead of GO.

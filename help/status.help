@@ -1,0 +1,9 @@
+Command: Status
+Syntax: STATUS
+Syntax: STAT
+Syntax: ST
+
+Shows your current health, hunger/satiety, and position.
+
+
+See also: INVENTORY, HUNGER, HEALTH

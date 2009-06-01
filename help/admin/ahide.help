@@ -1,0 +1,5 @@
+AHIDE [OBJECT]
+
+Hides an object from being shown in LOOK. Note that if you want to hide an object but have it be part of the room description, it is equivalent to do use ADESC INROOM and simply describe it as something else. Use ASHOW to reverse.
+
+Example: ahide secretdoor

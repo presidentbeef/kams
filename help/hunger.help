@@ -1,0 +1,24 @@
+Command: Hunger (or Satiety)
+Syntax: HUNGER
+Syntax: SATIETY
+
+Shows you how hungry you are.
+
+You can be:
+	completely stuffed
+	full and happy
+	full and happy
+	satisfied
+	not hungry
+	slightly hungry
+	slightly hungry
+	peckish
+	hungry
+	very hungry
+	famished
+	starving
+	literally dying of hunger
+
+
+
+See also: STAT HEALTH

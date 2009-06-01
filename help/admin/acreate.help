@@ -1,0 +1,6 @@
+Syntax: ACREATE [OBJECT_TYPE] ([NAME])
+
+This is the powerful all-purpose creation command. It creates a new object of the given OBJECT_TYPE with an optional NAME. OBJECT_TYPE corresponds to the class of the object in the code. In Ruby, classes are generally CamelCase, so if you have such a class, you will need to capitalize it properly. If it is a single word (like Dog) then it does not need to be capitalized. Puts the object in the room you are standing in.
+
+Example: acreate dog Spot
+

@@ -1,0 +1,16 @@
+Command: Say to
+Syntax: SAYTO <name> <message>
+
+Say something to someone in particular, who is in the same room:
+
+Example:
+
+sayto bob i like cheese
+
+Output:
+
+You say to Bob, "I like cheese."
+
+Also supports the same variations as the SAY command.
+
+See also: WHISPER, SAY

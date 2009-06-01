@@ -1,0 +1,11 @@
+Syntax: AREACT LOAD ({ALL}) [OBJECT] [FILE]
+
+This loads a reaction file for a given OBJECT. Assumes the FILE is in objects/reactions/ and ends in '.rx'. Case must match. Note that if this file has already been loaded for this OBJECT, it will result in duplicate reactions.
+
+Example: areact load sam townsperson
+
+Syntax: AREACT {SHOW|RELOAD|CLEAR} ({ALL}) [OBJECT]
+
+SHOW will show the reactions loaded for the given OBJECT. RELOAD will clear out any reactions and reload them from files which have been loaded before. IMPORTANT: This means you may lose reactions created online. CLEAR removes all reactions from the OBJECT.
+
+Example: areact show dog

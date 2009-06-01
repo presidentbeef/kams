@@ -1,0 +1,14 @@
+Command: Wield item
+Syntax: WIELD <item>
+Syntax: WIELD <item> <left|right>
+
+This command causes you to wield an item. The item must be wieldable and be present in your inventory.
+
+You can also specify which hand with which to wield the weapon. If you do not, it will favor your right hand.
+
+Example:
+
+WIELD sword left
+
+
+See also: UNWIELD

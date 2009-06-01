@@ -1,0 +1,6 @@
+Command: Put
+Syntax: PUT <object> IN <container>
+
+Puts an object in a container. The container must be open to do so.
+
+See also: LOOK TAKE OPEN

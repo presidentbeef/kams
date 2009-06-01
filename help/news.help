@@ -1,0 +1,42 @@
+NEWS
+
+Scattered throughout Ahln are objects on which one can post notes or read notes left by others. The appearance of these objects may vary from ledgers to large bulletin boards, but they all work the same way.
+
+The news system is currently still being tinkered on, but here is what works currently:
+
+-Reading posts
+
+Command: NEWS
+
+Lists the latest news. How many posts it lists is dependent on your pagelength.
+
+Command: NEWS LAST <number>
+
+Specify how many of the latest posts to show.
+
+Command: NEWS ALL
+
+Lists all the news postings. Might be really long.
+
+Command: NEWS READ <post id>
+Command: NEWS <post id>
+
+Shows the specified post.
+
+-Writing posts
+
+Command: NEWS WRITE
+
+First enter a subject for your post, then you will be taken to the editor to write the body of the post. If you decide not to write the post after all, then simply exit the editor without saving.
+
+Command: NEWS REPLY <post id>
+
+Write a reply to an existing post.
+
+-Deleting posts
+
+Command: NEWS DELETE <post id>
+
+For testing purposes only, you may delete your own posts. This is so you don't feel guilty about posting a bunch of nonsense to try things out.
+
+Note that this command isn't really well-supported, so it may cause some odd things to happen if there are replies to deleted posts.

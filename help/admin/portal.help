@@ -1,0 +1,8 @@
+Syntax: PORTAL {ACTION|EXIT|ENTRANCE|PORTAL} [PORTAL] [VALUE]
+
+Set various options for a portal. To set a value to the default, use '!nothing'. EXIT, ENTRANCE, and PORTAL refer to the exit, entrance, and portal messages. These messages can include the special values '!name' and '!pronoun' to get at the name and pronoun of the player who is moving. ACTION can be jump, enter, climb, or crawl.
+
+Example: portal exit mirror !nothing
+Example: portal action mirror enter
+Example: portal entrance mirror !name suddenly appears in the room, !pronoun(:possessive) eyes darting about wildly
+

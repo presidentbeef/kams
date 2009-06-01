@@ -1,0 +1,10 @@
+Command: Get
+Command: Grab
+Command: Take
+Syntax: GET <object>
+Syntax: GRAB <object>
+Syntax: TAKE <object>
+
+Pick up an object and put it in your inventory.
+
+See also: GIVE

@@ -1,0 +1,7 @@
+Syntax: ADESC [OBJECT] [DESC]
+Syntax: ADESC INROOM [DESC|FALSE]
+
+Sets an object's description. An object can be displayed as part of the room description rather than being seen in the room's object list. This either sets that description or turns it off.
+
+Example: adesc dog This is just a mongrel.
+Example: adesc inroom dog A small dog sniffs around here.

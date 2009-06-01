@@ -1,0 +1,6 @@
+Syntax: AFORCE [OBJECT] [ACTION]
+
+Force an object to 'perform' a given action, as if it were a player and had input the command. If it is a mobile, WATCH will be temporarily turned on.
+
+Example: aforce dog emote sits on its hind legs and begs pitifully
+

@@ -1,0 +1,24 @@
+Syntax: ASET [OBJECT] [@ATTRIBUTE|{SMELL|FEEL|TASTE|SOUND}] [VALUE]
+Syntax: ASET ALL [OBJECT TYPE] [@ATTRIBUTE|{SMELL|FEEL|TASTE|SOUND}] [VALUE]
+
+
+This is a fairly dangerous command which sets an attribute of an object or all objects of a given type. The '@' is required for attributes. Hopefully this will be used infrequently as AINFO replaces things. VALUE is generally converted to just a String with the following exceptions:
+
+:something => a Symbol
+false      => false
+true       => true
+nil        => nil
+!nothing   => empty String
+12345      => Integer
+!delete    => Deletes the attribute
+
+Also, if the ATTRIBUTE is already an array, then the VALUE will be made into an array like so:
+
+things apart => ["things", "apart"]
+"things together" => ["things together"]
+
+If you wish to force the setting of a non-existent attribute, use ASET!
+
+Example: aset dog @name Spot
+Example: aset! cactus feel Ow!!
+Example: aset all plant @movable true

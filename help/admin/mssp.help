@@ -1,0 +1,3 @@
+MUD Server Status Protocol (MSSP) provides dynamic data about your MUD to MUD crawlers. MSSP can be turned on or off using ACONFIG.
+
+To edit the information sent by the MSSP, please edit your conf/mssp.yaml file.

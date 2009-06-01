@@ -1,0 +1,12 @@
+Command: Look
+Syntax: LOOK
+Syntax: LOOK <object>
+Syntax: LOOK IN <object>
+
+Look by itself will show you your surroundings.
+
+Look followed by an object will look at that object.
+
+Look IN will look inside of a container (if it is open).
+
+'l' is a shortcut for look.
