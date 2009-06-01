@@ -1,8 +1,8 @@
 ## Kingdoms of Ahln MUD Server (kams)
 
-author:: Justin Collins
-license:: GPLv2 except where noted
-website:: http://kingdomsofahln.com
+Author: Justin Collins  
+License: GPLv2 except where noted  
+Website: <http://kingdomsofahln.com>
 
 ### Requires
 
