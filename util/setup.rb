@@ -83,8 +83,11 @@ def reset_storage
 	end
 
 	puts "Erasing storage..."
-	FileUtils.rm_f(Dir.glob("storage/*"))
-	FileUtils.rm_f(Dir.glob("storage/boards/*"))
+	FileUtils.rm_rf "storage/", :secure => true
+	FileUtils.mkdir "storage"
+	FileUtils.mkdir "storage/boards"
+	FileUtils.mkdir "storage/admin"
+	FileUtils.mkdir "logs" if not File.exist? "logs/"
 
 	puts "Recreating storage structure..."
 
@@ -108,6 +111,8 @@ def reset_storage
 	man = $manager.create_object(Mobile, room, nil, :@generic => "tall man", :@short_desc => "A tall man with a very long beard stands here placidly.", :@alt_names => ["man"], :@show_in_look => "A tall man with a very long beard stands here regarding you placidly.", :@sex => "m")
 
 	puts "Adding helper reactions..."
+
+	FileUtils.mkdir "objects/reactions" if not File.exist? "objects/reactions/"
 
 	File.open "objects/reactions/helper.rx", "w" do |f|
 		f.write helper_reactions
