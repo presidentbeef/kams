@@ -120,7 +120,6 @@ module Reacts
 
 	#Does "emote ..."
 	def emote string
-		log string
 		act "emote #{string}"
 	end
 
