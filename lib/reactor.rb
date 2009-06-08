@@ -164,7 +164,7 @@ class Reactor
 
 			actions.each do |a|
 				result = a[event, player, room, @mob]
-				if result and result != ""
+				if result and result.is_a? String and result != ""
 					commands << result
 				end
 			end

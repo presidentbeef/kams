@@ -87,14 +87,15 @@ class Gary
 		elsif not name.is_a? String
 			name = name.to_s
 		end
-	
+
+		name.downcase!	
 		@ghash.dup.each_value { |o|
 			if type.nil?
-				if o.generic.downcase == name.downcase or o.name.downcase == name.downcase or o.alt_names.find {|n| n.downcase == name.downcase}
+				if o.generic.downcase == name or o.name.downcase == name or o.alt_names.find {|n| n.downcase == name }
 					return o
 				end
 			else
-				if o.is_a? type and (o.generic.downcase == name.downcase or o.name.downcase == name.downcase or o.alt_names.find {|n| n.downcase == name.downcase})
+				if o.is_a? type and (o.generic.downcase == name or o.name.downcase == name or o.alt_names.find {|n| n.downcase == name })
 					return o
 				end
 			end
@@ -141,10 +142,11 @@ class Gary
 				results << obj if obj.is_a? match
 			end
 		elsif match.is_a? String
+			match.downcase!
 			@ghash.dup.each do |goid, obj|
 				if obj.instance_variables.include? attrib or obj.instance_variables.include? attrib.to_sym
 					var = obj.instance_variable_get(attrib.to_sym)
-					if var == match or (var.is_a? String and var.downcase == match.downcase)
+					if var.is_a? String and var.downcase == match
 						results << obj
 					end
 				end

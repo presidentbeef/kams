@@ -58,6 +58,11 @@ class Room < Container
 		@inventory.find(direction, Exit)
 	end
 
+	#Returns an array of all the exits in the room.
+	def exits
+		@inventory.find_all('class', Exit)
+	end
+
 	#Look around the room. Player is the player that is looking (so they don't see themselves).
 	#Returns a description of the room including: name of the room, room short description, visible people in the room,
 	#visible objects in the room. All pretty-like.
