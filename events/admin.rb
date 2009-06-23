@@ -667,6 +667,8 @@ module Admin
 				else
 					lines = 10
 				end
+
+				$LOG.dump
 					
 				player.output tail('logs/system.log', lines)
 			when 'flush'
