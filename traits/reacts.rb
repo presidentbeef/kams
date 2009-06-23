@@ -16,7 +16,7 @@ module Reacts
 	def init_reactor
 		@reactor ||= Reactor.new(self)
 		@reaction_files ||= Set.new
-		@tick_actions ||= []
+		@tick_actions ||= TickActions.new 
 		alert(Event.new(:Generic, :action => :init))
 	end
 
@@ -82,7 +82,7 @@ module Reacts
 
 	def run
 		super
-		@tick_actions ||= []
+		@tick_actions ||= TickActions.new
 		if @tick_actions.length > 0
 			@tick_actions.dup.each_with_index do |e, i|
 				if e[0] <= 0
@@ -219,5 +219,23 @@ module Reacts
 	#After every number of ticks, execute the given block.
 	def every_ticks ticks, &block
 		@tick_actions << [ticks.to_i, block, ticks.to_i]
+	end
+end
+
+class TickActions
+	def initialize
+		@tick_actions = []
+	end
+
+	def << obj
+		@tick_actions << obj
+	end
+
+	def marshal_dump
+		""
+	end
+
+	def marshal_load *args
+		@tick_actions = []
 	end
 end
