@@ -152,8 +152,8 @@ class Reactor
 			unless @reactions[event[:action]].nil?
 				@reactions[event[:action]].each { |r|
 					if r[:test][event, player, room, @mob]
-						actions << r[:reaction]
 						log "Reacting" , Logger::Ultimate
+						actions << r[:reaction]
 						#break #breaking would mean only one reaction fires, even if many match
 					end
 				}
@@ -163,7 +163,12 @@ class Reactor
 			end
 
 			actions.each do |a|
-				result = a[event, player, room, @mob]
+				begin
+					result = a[event, player, room, @mob]
+				rescue Exception => e
+					log "Reaction error. #{@mob.name} reacting to #{event[:action]}: #{e.message}"
+				end
+
 				if result and result.is_a? String and result != ""
 					commands << result
 				end
