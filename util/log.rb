@@ -49,7 +49,6 @@ class Logger
 		num_entries = @entries.length
 		@entries.clear
 		@last_dump = Time.now
-		log "Cleaned out logger. There were #{num_entries} entries."
 		GC.start
 	end
 
