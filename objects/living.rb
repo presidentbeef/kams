@@ -58,10 +58,19 @@ class LivingObject < GameObject
 		case type
 		when :health
 			info.stats.health and info.stats.health -= amount
+			if info.stats.health < 0
+				info.stats.health = 0
+			end
 		when :stamina
-			info.stats.stamina and info.stat.stamina -= amount
+			info.stats.stamina and info.stats.stamina -= amount
+			if info.stats.stamina < 0
+				info.stats.stamina = 0
+			end
 		when :fortitude
 			info.stats.fortitude and info.stats.stamina -= amount
+			if info.stats.fortitude < 0
+				info.stats.fortitude = 0
+			end
 		else
 			log "Do not know this kind of damage: #{type}"
 		end
