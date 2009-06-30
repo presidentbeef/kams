@@ -9,7 +9,7 @@ module Emote
 				action << '.'
 			end
 
-			if action.include? '$me[^a-zA-Z]'
+			if action =~ /\$me[^a-zA-Z]/i
 				action.gsub!(/\$me/i, player.name)
 				action[0,1] = action[0,1].capitalize
 				show = action
