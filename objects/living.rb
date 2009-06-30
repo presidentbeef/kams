@@ -74,6 +74,8 @@ class LivingObject < GameObject
 		else
 			log "Do not know this kind of damage: #{type}"
 		end
+
+		alert Event.new(:Generic, :action => :take_damage, :type => type, :amount => amount)
 	end
 
 	#Returns the death message for this object.
