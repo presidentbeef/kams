@@ -205,8 +205,7 @@ module WeaponCombat
 			event.target.balance = true
 			player.info.in_combat = false
 			event.target.info.in_combat = false
-			Combat.inflict_damage player, event.target, 10 #temporary set amount of damage for now 
-			room.out_event event
+			Combat.inflict_damage event, player, room, 10 #temporary set amount of damage for now 
 		end
 
 		def weapon_block(event, player, room)

@@ -106,12 +106,20 @@ module Combat
 		end
 
 		#I guess damage calculations should go here.
-		def inflict_damage(player, target, base)
+		#
+		#Calls take_damage on the target, outputs the event to the
+		#room, then calls the death sequence if necessary.
+		def inflict_damage(event, player, room, base)
+			target = event.target
+
 			if target.can? :take_damage
 				target.take_damage base
 			end
+
+			room.out_event event
+
 			if target.info.stats.health and target.info.stats.health <= 0
-				death(target)
+				death target
 			end
 		end
 
