@@ -101,14 +101,16 @@ class Calendar
 
 	#Returns the ordinal day.
 	def ordinal_day(day = @day)
-		day.to_s + case day.to_s[-1,1]
-				when '1'
+		day.to_s + case day.to_s
+				when '11', '12', '13'
+					'th'
+				when /1$/
 					'st'
-				when '2'
+				when /2$/
 					'nd'
-				when '3'
+				when /3$/
 					'rd'
-				when '4', '5', '6', '7', '8', '9', '0'
+				when /(4|5|6|7|8|9|0)$/
 					'th'
 				else
 					''
