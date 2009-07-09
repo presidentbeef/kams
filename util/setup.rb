@@ -77,8 +77,8 @@ def reset_storage
 
 	answer = gets.chomp
 
-	if answer !~ /^yes$/i
-		puts "Not doing it."
+	if answer !~ /^y/i
+		puts "!! - Not doing it."
 		return
 	end
 
