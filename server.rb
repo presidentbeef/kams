@@ -82,9 +82,9 @@ if __FILE__ == $0
 		if server_restarts < Config.restart_limit
 			if $manager and $manager.soft_restart
 				log "Server restart initiated by administrator."
-				File.open("logs/server.log", "a") { |f| f.puts "#{Time.now} Server restart by administrator." }
+				File.open("logs/server.log", "a+") { |f| f.puts "#{Time.now} Server restart by administrator." }
 			else
-				File.open("logs/server.log", "a") { |f| f.puts "#{Time.now} Server restart on error or interrupt." }
+				File.open("logs/server.log", "a+") { |f| f.puts "#{Time.now} Server restart on error or interrupt." }
 			end
 			
 			log "SERVER RESTARTING - Attempting to restart in 10 seconds...press ^C to stop...", Logger::Important
