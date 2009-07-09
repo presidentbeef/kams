@@ -24,7 +24,6 @@ module Issues
 
 		def check_access type, id, player
 			issue = get_issue type, id
-			log issue
 			if issue.nil?
 				"There is no #{type} with that number."
 			elsif not player.admin and issue[:reporter].downcase != player.name.downcase
@@ -45,7 +44,7 @@ module Issues
 Reported by #{issue[:reporter]} on #{issue[:date]}. Status: #{issue[:status]}
 Report: #{issue[:report][0]}
 Additional comments:
-#{issue[:report].length == 1 ? "  None" : issue[:report][1..-1].map { |r| "  #{r[0]}: #{r[1]}"}.join("\n")}
+#{issue[:report].length == 1 ? "  None" : issue[:report][1..-1].map { |r| "  #{r[0]} #{r[1]}"}.join("\n")}
 ------------------
 			END
 			end
@@ -90,7 +89,7 @@ Additional comments:
 			open_store type, false do |gd|
 				if gd.has_key? id
 					issue = Marshal.load gd[id]
-					issue[:report] << [reporter.capitalize, "#{Date.today}) #{report}"]
+					issue[:report] << [reporter.capitalize, "(#{Date.today}) #{report}"]
 					issue[:updated] = Date.today
 					gd[id] = Marshal.dump issue
 					"Added your comment to #{type} #{id}."
@@ -105,12 +104,16 @@ Additional comments:
 			open_store type, false do |gd|
 				if gd.has_key? id
 					issue = Marshal.load gd[id]
-					status.downcase!
-					issue[:report] << [reporter.capitalize, "(#{Date.today}) Changed status from #{issue[:status]} to #{status}."]
-					issue[:status] = status
-					issue[:updated] = Date.today
-					gd[id] = Marshal.dump issue
-					"Set status of #{type} #{id} to #{status.downcase}."
+					if status.nil?
+						"#{type} #{id} status: #{issue[:status]}."
+					else
+						status.downcase!
+						issue[:report] << [reporter.capitalize, "(#{Date.today}) Changed status from #{issue[:status]} to #{status}."]
+						issue[:status] = status
+						issue[:updated] = Date.today
+						gd[id] = Marshal.dump issue
+						"Set status of #{type} #{id} to #{status.downcase}."
+					end
 				else
 					"No such #{type} with id #{id}."
 				end
@@ -121,9 +124,9 @@ Additional comments:
 
 		def summary issue
 			if issue[:updated]
-				"#{issue[:type].capitalize}##{issue[:id]} (#{issue[:status]}) #{issue[:reporter]} #{issue[:date]}: #{issue[:report][0].length > 20 ? "#{issue[:report][0][0..20]}..." : issue[:report][0]} (Updated #{issue[:updated]})"
+				"#{issue[:type]}##{issue[:id]} (#{issue[:status]}) #{issue[:reporter]} #{issue[:date]}: #{issue[:report][0].length > 20 ? "#{issue[:report][0][0..20]}..." : issue[:report][0]} (Updated #{issue[:updated]})"
 			else
-				"#{issue[:type].capitalize}##{issue[:id]} (#{issue[:status]}) #{issue[:reporter]} #{issue[:date]}: #{issue[:report][0].length > 20 ? "#{issue[:report][0][0..20]}..." : issue[:report][0]}"
+				"#{issue[:type]}##{issue[:id]} (#{issue[:status]}) #{issue[:reporter]} #{issue[:date]}: #{issue[:report][0].length > 20 ? "#{issue[:report][0][0..20]}..." : issue[:report][0]}"
 			end
 		end
 
