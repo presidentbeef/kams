@@ -304,7 +304,7 @@ module CommandParser
 				    { :action => :status }
 			    when /^write\s+(.*)/i
 				    { :action => :write, :target => $1.strip} 
-			    when /^(listen|sniff|smell|taste|lick|feel)(\s+(.*))?$/i
+			    when /^(listen|sniff|smell|taste|lick|feel)(\s+(.+))?$/i
 				    if $1.downcase == "sniff"
 					    action = :smell
 				    elsif $1.downcase == "lick"
@@ -313,11 +313,13 @@ module CommandParser
 					    action = $1.downcase.to_sym
 				    end
 				    { :action => action, :target => $3}
+			    when /^(bug|typo|idea)\s+(\d+)\s+(show|del|add|status)(\s+(.+))?$/i
+				    { :action => :issue, :itype => $1.downcase.to_sym, :issue_id => $2, :option => $3.downcase, :value => $5 }
 			    when /^(bug|typo|idea)\s+(\d+)/i
 				    { :action => :issue, :itype => $1.downcase.to_sym, :option => "show", :issue_id => $2 }
-			    when /^(bug|typo|idea)\s+(del|add|show|status)\s+(\d+)(\s+(.*))?/i
+			    when /^(bug|typo|idea)\s+(del|add|show|status)\s+(\d+)(\s+(.+))?/i
 				    { :action => :issue, :itype => $1.downcase.to_sym, :option => $2.downcase, :issue_id => $3, :value => $5 }
-			    when /^(bug|typo|idea)\s+(new|show|del|add|status|list)(\s+(.*))?$/i
+			    when /^(bug|typo|idea)\s+(new|show|del|add|status|list)(\s+(.+))?$/i
 				    { :action => :issue, :itype => $1.downcase.to_sym, :option => $2.downcase, :value => $4 }
 			    when /^(bug|typo|idea)\s+(.*)$/i
 				    { :action => :issue, :itype => $1.downcase.to_sym, :option => "new", :value => $2 }
