@@ -228,6 +228,18 @@ class TickActions
 		@tick_actions = []
 	end
 
+	def length
+		@tick_actions.length
+	end
+
+	def each_with_index &block
+		@tick_actions.each_with_index &block
+	end
+
+	def delete item
+		@tick_actions.delete item
+	end
+
 	def << obj
 		@tick_actions << obj
 	end
