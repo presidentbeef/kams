@@ -80,6 +80,7 @@ module Reacts
 		end
 	end
 
+	#Runs any actions set up on ticks.
 	def run
 		super
 		@tick_actions ||= TickActions.new
@@ -205,7 +206,7 @@ module Reacts
 	#Checks if the given phrase was said in the event.
 	def said? event, phrase
 		if event[:phrase]
-			event[:phrase].include? phrase.downcase
+			event[:phrase].downcase.include? phrase.downcase
 		else
 			false
 		end
