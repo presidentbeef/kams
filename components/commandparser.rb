@@ -458,7 +458,7 @@ module CommandParser
 				event[:action] = :acreate
 				event[:object] = "exit"
 				event[:alt_names] = [$1.strip]
-				event[:exit_room] = $2.strip
+				event[:args] = [$2.strip]
 			when /^aconfig(\s+reload)?$/i
 				event[:action] = :aconfig
 				event[:setting] = "reload" if $1
@@ -471,7 +471,7 @@ module CommandParser
 				event[:object] = "portal"
 				event[:alt_names] = []
 				event[:portal_action] = $2
-				event[:exit_room] = $4
+				event[:args] = [$4]
 			when /^portal\s+(.*?)\s+(action|exit|entrance|portal)\s+(.*)$/i
 				event[:action] = :portal
 				event[:object] = $1

@@ -80,9 +80,9 @@ module Admin
 			vars[:@name] = event[:name] if event[:name]
 			vars[:@alt_names] = event[:alt_names] if event[:alt_names]
 			vars[:@generic] = event[:generic] if event[:generic]
-			vars[:@exit_room] = event[:exit_room] if event[:exit_room]
+			args = event[:args]
 
-			object = $manager.create_object(klass, room, nil, vars)
+			object = $manager.create_object(klass, room, args, vars)
 
 			if room
 				event[:to_player] = "Frowning in concentration, you make vague motions with your hands. There is a small flash of light as #{object.name} appears."
