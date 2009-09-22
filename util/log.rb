@@ -62,7 +62,7 @@ unless Object.respond_to? :log, true
 
 		#Log a message and optionally force writing to disk.
 		def log(msg, log_level = Logger::Normal, dump_log = false)
-			logmsg = "[#{Time.now.strftime("%x %X")} #{self.class}#{" " << self.name if defined? GameObject and self.is_a? GameObject}]: " + msg.to_s
+			logmsg = "[#{Time.now.strftime("%x %X")} #{self.class}#{(defined? GameObject and self.is_a? GameObject) ? " #{self.name}" : ""}]: " + msg.to_s
 			$LOG ||= Logger.new
 			$LOG.add(logmsg, log_level, dump_log)
 		end
