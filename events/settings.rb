@@ -9,10 +9,11 @@ module Settings
 			when 'wordwrap'
 				value = event[:value]
 				if player.word_wrap.nil?
-					player.output("Pagination is currently off.", true)
+					player.output("Word wrap is currently off.", true)
 				else
-					player.output("Page length currently set to #{player.word_wrap}.", true)
+					player.output("Word wrap currently set to #{player.word_wrap}.", true)
 				end
+
 				if value.nil?
 					player.output "Please specific 'off' or a value between 10 - 200."
 					return
