@@ -5,6 +5,8 @@ module Syntax
 	Reference = {
 "acarea" =>
 "ACAREA [NAME]",
+"acdoor" =>
+"ACDOOR [DIRECTION] [EXIT_ROOM]",
 "acexit" =>
 "ACEXIT [DIRECTION] [EXIT_ROOM]",
 "acomm" =>

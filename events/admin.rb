@@ -94,6 +94,28 @@ module Admin
 			object
 		end
 
+		def acdoor event, player, room
+			exit_room = $manager.get_object event[:exit_room]
+
+			if exit_room.nil?
+				player.output "Cannot find #{event[:exit_room]} to connect to."
+				return
+			end
+
+			door_here = $manager.create_object Door, room, exit_room.goid, {:@alt_names => [event[:direction]] }
+			door_there = $manager.create_object Door, exit_room, room.goid, {:@alt_names => [opposite_dir(event[:direction])] }
+			door_here.connect_to door_there
+
+			player.output "Created: #{door_here}"
+			player.output "Created: #{door_there}"
+
+			if room
+				event[:to_player] = "Frowning in concentration, you make vague motions with your hands. There is a small flash of light as #{door_here.name} to #{exit_room.name} appears."
+				event[:to_other] = "Frowning in concentration, #{player.name} makes vague motions with #{player.pronoun(:possessive)} hands. There is a small flash of light as #{door_here.name} to #{exit_room.name} appears."
+				room.out_event event
+			end
+		end
+
 		#Creates a portal.
 		def acportal(event, player, room)
 			object = Admin.acreate(event, player, room)

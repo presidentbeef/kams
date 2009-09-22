@@ -163,6 +163,7 @@ module CommandParser
 	'astatus',
 	'acroom',
 	'acexit',
+	'acdoor',
 	'acprop',
 	'asave',
 	'awatch',
@@ -459,6 +460,10 @@ module CommandParser
 				event[:object] = "exit"
 				event[:alt_names] = [$1.strip]
 				event[:args] = [$2.strip]
+			when /^acdoor\s+(\w+)\s+(.*)$/i
+				event[:action] = :acdoor
+				event[:direction] = $1.strip
+				event[:exit_room] = $2.strip
 			when /^aconfig(\s+reload)?$/i
 				event[:action] = :aconfig
 				event[:setting] = "reload" if $1
