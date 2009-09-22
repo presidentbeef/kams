@@ -24,20 +24,16 @@ class Door < Exit
 
 	#Method called when the other side of the door opens.
 	def other_side_opened
-		log "The other side of this door opened. I'm in room #{@container}"
 		room = $manager.find @container
-		log "Looked up #{@container} and got #{room}"
 		@open = true
-		room.output("The #{@generic} opens.")
+		room.output "The #{@generic} opens."
 	end
 	
 	#Method called when the other side of the door closes.
 	def other_side_closed
-		log "The other side of this door closed. I'm in room #{@container}"
 		room = $manager.find @container
-		log "Looked up #{@container} and got #{room}"
 		@open = false
-		room.output("The #{@generic} closes.")
+		room.output "The #{@generic} closes."
 	end
 
 	#Opens the door.
