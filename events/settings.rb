@@ -15,11 +15,11 @@ module Settings
 				end
 
 				if value.nil?
-					player.output "Please specific 'off' or a value between 10 - 200."
+					player.output "Please specify 'off' or a value between 10 - 200."
 					return
 				elsif value.downcase == 'off'
 					player.word_wrap = nil
-					player.output "Word wrap disabled."
+					player.output "Word wrap is now disabled."
 					return
 				else
 					value = value.to_i
@@ -28,7 +28,7 @@ module Settings
 						return
 					else
 						player.word_wrap = value
-						player.output "Word wrap set to: #{value} characters."
+						player.output "Word wrap is now set to: #{value} characters."
 						return
 					end
 				end
@@ -37,7 +37,7 @@ module Settings
 				if player.page_height.nil?
 					player.output("Pagination is currently off.", true)
 				else
-					player.output("Page length currently set to #{player.page_height}.", true)
+					player.output("Page length is currently set to #{player.page_height}.", true)
 				end
 
 				if value.nil?
@@ -54,7 +54,7 @@ module Settings
 						return
 					else
 						player.page_height = value
-						player.output "Page length set to: #{value} characters."
+						player.output "Page length is now set to: #{value} lines."
 						return
 					end
 
