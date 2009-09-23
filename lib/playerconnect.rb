@@ -192,7 +192,8 @@ module PlayerConnection
 		ph = @player.page_height
 
 		out = []
-		message.scan(/((((\e\[\d+m)|.){1,#{@word_wrap}})(\r\n|\n|\s+|\Z)?)|(\r\n|\n)/) do |m|
+		message = message.gsub(/((\e\[\d+m|[^\r\n\n\s\Z]){#@word_wrap})/, "\\1 ") if @word_wrap
+		message.scan(/((((\e\[\d+m)|.){1,#{@word_wrap}})(\r\n|\n|\s+|\Z))|(\r\n|\n)/) do |m|
 			if $2
 				out << $2
 			else
@@ -210,7 +211,8 @@ module PlayerConnection
 
 	#Only use if there is no line height
 	def line_wrap message
-		message.gsub(/(((\e\[\d+m)|.){1,#{@word_wrap}})(\r\n|\n|\s+|\Z)?/, "\\1\r\n")
+		message = message.gsub(/((\e\[\d+m|[^\r\n\n\s\Z]){#{@word_wrap}})/, "\\1 ") if @word_wrap
+		message.gsub(/(((\e\[\d+m)|.){1,#{@word_wrap}})(\r\n|\n|\s+|\Z)/, "\\1\r\n")
 	end
 
 	#Next page of paginated output
