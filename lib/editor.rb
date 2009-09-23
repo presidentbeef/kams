@@ -29,7 +29,7 @@ module Editor
 		@editor_callback = callback
 
 		editor_out "Type *help for help."
-		editor_out("-" * (@wordwrap || 80))
+		editor_out("-" * (@word_wrap || 80))
 		editor_echo
 	end
 
