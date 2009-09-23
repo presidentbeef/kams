@@ -105,7 +105,7 @@ def reset_storage
 	$manager.create_object(Room, nil, nil, :@name => "GarbageRoom")
 	area = $manager.create_object(Area, nil, nil, :@name => "an Expansive Wilderness")
 	area.info.terrain.area_type = :grassland
-	room = $manager.create_object(Room, area, nil,  :@name => "A wide-open field", :@short_desc => "Endless possibilities stretch out the the horizon.")
+	room = $manager.create_object(Room, area, nil,  :@name => "A wide-open field", :@short_desc => "Endless possibilities stretch out to the horizon.")
 	room.info.terrain.room_type = :grassland
 	Config[:start_room] = room.goid
 	man = $manager.create_object(Mobile, room, nil, :@generic => "tall man", :@short_desc => "A tall man with a very long beard stands here placidly.", :@alt_names => ["man"], :@show_in_look => "A tall man with a very long beard stands here regarding you placidly.", :@sex => "m")
