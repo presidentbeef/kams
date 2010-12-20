@@ -221,6 +221,52 @@ module Reacts
 	def every_ticks ticks, &block
 		@tick_actions << [ticks.to_i, block, ticks.to_i]
 	end
+
+	#Turns an array of actions into a chained sequence of events.
+	#This method returns the first event in the sequence, but does not
+	#add it to the event queue.
+	#
+	#Options should be passed in as a hash.
+	#
+	#  :initial_delay  -  delay before first action (Default: 0 seconds)
+	#  :delay  -  delay between actions (Default: 0 seconds)
+	#  :loop   -  true to repeat sequence infinitely (Default: false)
+	def action_sequence sequence, options
+		delay = options[:delay] || 0
+		continuous_loop = false || options[:loop]
+
+		first_step = sequence.shift
+		
+		if first_step.is_a? String
+			first_step = CommandParser.parse self, sequence.shift
+		end
+
+		last_step = first_step
+
+		if delay > 0 
+			sequence.each do |next_step|
+				next_step = CommandParser.parse self, next_step if next_step.is_a? String
+				last_step.attach_event CommandParser.future_event self, delay, next_step
+				last_step = next_step
+			end
+		else
+			sequence.each do |next_step|
+				next_step = CommandParser.parse self, next_step if next_step.is_a? String
+				last_step.attach_event next_step
+				last_step = next_step
+			end
+		end
+
+		if options[:initial_delay]
+			first_step = CommandParser.future_event self, options[:initial_delay], first_step
+		end
+
+		if continuous_loop
+			last_step.attach_event first_step
+		end
+
+		first_step
+	end
 end
 
 class TickActions
