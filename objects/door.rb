@@ -6,7 +6,7 @@ class Door < Exit
 	include Openable
 	attr_reader :connected_to
 
-	def initialize(exit_room = nil, lockable = false, *args)
+	def initialize(exit_room = nil, lockable = true, *args)
 		super(exit_room, *args)
 	
 		@connected_to = nil
