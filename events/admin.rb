@@ -95,7 +95,27 @@ module Admin
 		end
 
 		def acdoor event, player, room
-			exit_room = $manager.get_object event[:exit_room]
+
+			exit_room = nil
+			if event[:exit_room].nil?
+				out = find_object event[:direction], event
+				if out and out.is_a? Exit
+					exit_room = $manager.find out.exit_room
+					other_side = $manager.find opposite_dir(event[:direction]), out.exit_room
+
+					if other_side
+						$manager.delete_object other_side
+						player.output "Removed opposite exit (#{other_side})."
+					else
+						player.output "Could not find opposite exit"
+					end
+
+					$manager.delete_object out
+					player.output "Removed exit (#{out})."
+				end
+			else
+				exit_room = $manager.get_object event[:exit_room]
+			end
 
 			if exit_room.nil?
 				player.output "Cannot find #{event[:exit_room]} to connect to."
