@@ -61,6 +61,14 @@ class Calendar
 		"Today is the #{ordinal_day} day of the #{MONTH_NAMES[@month]} Month in the year #@year."
 	end
 
+	def night?
+		not day?
+	end
+
+	def day?
+		@hour >= 15 and @hour < 44
+	end
+
 	#Prints out a nice version of the in-game date and time.
 	def to_s
 		"It is currently #{time_of_day} on the #{ordinal_day} day of the #{MONTH_NAMES[@month]} Month in the year #@year."
