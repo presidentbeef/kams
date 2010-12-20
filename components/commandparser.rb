@@ -460,6 +460,9 @@ module CommandParser
 				event[:object] = "exit"
 				event[:alt_names] = [$1.strip]
 				event[:args] = [$2.strip]
+			when /^acdoor\s+(\w+)$/i
+				event[:action] = :acdoor
+				event[:direction] = $1
 			when /^acdoor\s+(\w+)\s+(.*)$/i
 				event[:action] = :acdoor
 				event[:direction] = $1.strip
