@@ -63,7 +63,7 @@ module Reacts
 					changed
 					notify_observers(action)
 				else
-					log "Action did not parse: #{action}", Logger::Medium
+					log "Action did not parse: #{reaction}", Logger::Medium
 				end
 			end
 		else
