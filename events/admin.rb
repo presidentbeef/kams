@@ -102,8 +102,8 @@ module Admin
 				return
 			end
 
-			door_here = $manager.create_object Door, room, exit_room.goid, {:@alt_names => [event[:direction]] }
-			door_there = $manager.create_object Door, exit_room, room.goid, {:@alt_names => [opposite_dir(event[:direction])] }
+			door_here = $manager.create_object Door, room, exit_room.goid, :@alt_names => [event[:direction]], :@name => "a door to the #{event[:direction]}"
+			door_there = $manager.create_object Door, exit_room, room.goid, :@alt_names => [opposite_dir(event[:direction])], :@name => "a door to the #{opposite_dir event[:direction]}"
 			door_here.connect_to door_there
 
 			player.output "Created: #{door_here}"
