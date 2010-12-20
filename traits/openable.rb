@@ -2,7 +2,7 @@
 #
 #This is an older module and the API may be revised in the future.
 module Openable
-	attr_accessor :keys
+	attr_accessor :keys, :lockable
 	
 	def initialize(*args)
 		super(*args)
@@ -42,9 +42,13 @@ module Openable
 			@open = true
 			room = $manager.find(player.room, nil)
 
-			player.output("You open #{@article} #{@generic}.")
-
-			room.output("#{player.name} opens #{@article} #{@generic}.", player)
+			if @name.empty?
+				player.output "You open #@article #@generic."
+				room.output "#{player.name} opens #@article #@generic.", player
+			else
+				player.output "You open #@name."
+				room.output "#{player.name} opens #@name.", player
+			end
 		end
 	end
 
@@ -58,9 +62,13 @@ module Openable
 			@open = false
 			room = $manager.find(player.room, nil)
 
-			player.output("You close #{@article} #{@generic}.")
-
-			room.output("#{player.name} closes #{@article} #{@generic}.", player)
+			if @name.empty?
+				player.output "You close #@article #@generic."
+				room.output "#{player.name} close #@article #@generic.", player
+			else
+				player.output "You close #@name."
+				room.output "#{player.name} close #@name.", player
+			end
 		end
 	end
 
