@@ -27,6 +27,7 @@ module Movement
 			end
 
 			new_room = $manager.find dir_exit.exit_room
+			event[:exit_room] = dir_exit.exit_room
 
 			if new_room.nil?
 				player.output('You start to move in that direction, then stop when you realize that exit leads into the void.')
@@ -114,6 +115,7 @@ module Movement
 			end
 
 			new_room = $manager.find portal.exit_room
+			event[:exit_room] = portal.exit_room
 
 			if new_room.nil?
 				player.output('You start to move in that direction, then stop when you realize that way leads into the void.')
