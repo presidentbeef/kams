@@ -67,8 +67,8 @@ module Openable
 	#Locks the object with the key. Returns true if successful, false otherwise.
 	#
 	#In this case the key is the GOID of a key.
-	def lock(key)
-		if @lockable and not @locked and @keys.include? key
+	def lock(key, admin = false)
+		if @lockable and not @locked and (@keys.include? key or admin)
 			@locked = true
 		else
 			false
@@ -78,8 +78,8 @@ module Openable
 	#Unlocks the object with the key. Returns true if successful, false otherwise.
 	#
 	#In this case the key is the GOID of a key.
-	def unlock(key)
-		if @lockable and @locked and @keys.include? key
+	def unlock(key, admin = false)
+		if @lockable and @locked and (@keys.include? key or admin)
 			@locked = false
 			true
 		else

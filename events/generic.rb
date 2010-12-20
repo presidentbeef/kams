@@ -323,8 +323,8 @@ module Generic
 				end
 			}
 
-			if has_key
-				status = object.lock(has_key)
+			if has_key or player.admin
+				status = object.lock(has_key, player.admin)
 				if status
 					event[:to_player] = "You lock #{object.name}."
 					event[:to_other] = "#{player.name} locks #{object.name}."
@@ -372,8 +372,8 @@ module Generic
 				end
 			}
 
-			if has_key
-				status = object.unlock(has_key)
+			if has_key or player.admin
+				status = object.unlock(has_key, player.admin)
 				if status
 					event[:to_player] = "You unlock #{object.name}."
 					event[:to_other] = "#{player.name} unlocks #{object.name}."
