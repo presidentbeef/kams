@@ -480,7 +480,7 @@ module Generic
 		def deleteme(event, player, room)
 			if event[:password]
 				if $manager.check_password(player.name, event[:password])	
-					player.output "This character #{player.name} will no longer exist in the lands of Ahln."
+					player.output "This character #{player.name} will no longer exist."
 					player.quit
 					$manager.delete_player(player.name)
 				else
