@@ -12,7 +12,7 @@ require 'set'
 #
 #The server's Manager is a global named $manager.
 class Manager
-	attr_reader :soft_restart, :uptime
+	attr_reader :soft_restart, :uptime, :calendar
 	
 	#Creates a new Manager (only need one, though!)
 	#
