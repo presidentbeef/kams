@@ -61,14 +61,18 @@ class EventHandler
 					e.target = player.goid
 				end
 
-				begin
-					Module.const_get(e.type).send(e.action, e, player, room)
-				rescue NameError => exp
-					log "Error when running event: #{exp}"
-					log exp.backtrace
-				rescue Exception => exp
-					log exp
-					log exp.backtrace
+				if e.type == :Future
+					$manager.future_event e
+				else
+					begin
+						Module.const_get(e.type).send(e.action, e, player, room)
+					rescue NameError => exp
+						log "Error when running event: #{exp}"
+						log exp.backtrace
+					rescue Exception => exp
+						log exp
+						log exp.backtrace
+					end
 				end
 			else
 				log "[Error] Mal-formed event: #{e}"
