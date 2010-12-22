@@ -53,6 +53,16 @@ module Movement
 			event_other[:to_other] = player.exit_message(event_other[:direction], out_message)
 			event_other[:to_blind_other] = "You hear the sounds of someone leaving."
 			room.out_event(event_other)
+
+			if player.info.followers
+				player.info.followers.each do |f|
+					follower = $manager.find f
+					room.remove follower
+					new_room.add follower
+
+					room.output "#{follower.name.capitalize} follows #{player.name} #{event[:direction]}."
+				end
+			end
 		end
 
 		def flee(event, player, room)
@@ -134,6 +144,16 @@ module Movement
 			event_other[:to_other] = portal.exit_message(player, event_other[:portal_action])
 			event_other[:to_blind_other] = "You hear the sounds of someone leaving."
 			room.out_event(event_other)
+
+			if player.info.followers
+				player.info.followers.each do |f|
+					follower = $manager.find f
+					room.remove follower
+					new_room.add follower
+
+					room.output "#{follower.name.capitalize} follows #{player.name} #{event[:direction]}."
+				end
+			end
 		end
 
 		#Sit down.

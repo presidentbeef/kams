@@ -272,6 +272,53 @@ module Reacts
 		event = Event.new :Mobiles, {:action => :teleport, :player => self, :object => item, :in => destination}.merge(options)
 		add_event event
 	end
+
+	def follow object, message = nil
+		unless object.is_a? GameObject
+			object = $manager.find event[:object]
+		end
+
+		if object.nil?
+			self.output "Cannot follow that."
+			return
+		end
+
+		self.info.following = object.goid
+		object.info.followers ||= Set.new
+		object.info.followers << self.goid
+
+		if message
+			object.output message unless message.empty?
+		else
+			object.output "#{self.name.capitalize} begins to follow you."
+		end
+	end
+
+	def unfollow object, message = nil
+		if self.info.following.nil?
+			self.output "Not following anyone"
+			return
+		elsif not object.is_a? GameObject
+			object = $manager.find object
+		end
+
+		if object.nil?
+			self.output "Cannot follow that."
+			return
+		end
+
+		self.info.following = nil
+		object.info.followers.delete self.goid
+
+		$stderr.puts "GOT AWAY WITH IT"
+
+		if message
+			object.output message unless message.empty?
+		else
+			object.output "#{self.name.capitalize} is no longer following you."
+		end
+	end
+
 end
 
 class TickActions
