@@ -38,9 +38,13 @@ module Admin
 				current_container.inventory.remove(object) if current_container
 			end
 			
-			container.inventory.add(object)
-			object.container = container.goid
-
+			if container.is_a? Container
+				container.add object
+			else
+				container.inventory.add(object)
+				object.container = container.goid
+			end
+		
 			player.output "Moved #{object} into #{container}"
 		end
 
