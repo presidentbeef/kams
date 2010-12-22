@@ -64,6 +64,8 @@ class Container < GameObject
 			skip << event[:target]
 		end
 
+		self.alert event if self.is_a? Reacts and skip.include? self
+
 		@inventory.each { |o|
 			o.out_event(event) unless skip.include?(o)
 		}
