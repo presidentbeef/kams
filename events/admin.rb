@@ -8,8 +8,12 @@ module Admin
 		#
 		# APUT [OBJECT] IN [CONTAINER]
 		def aput(event, player, room)
-			event[:object] = player.container if event[:object].downcase == "here"
-			object = find_object(event[:object], event)
+			if event[:object].is_a? GameObject
+				object = event[:object]
+			else
+				event[:object] = player.container if event[:object].downcase == "here"
+				object = find_object(event[:object], event)
+			end
 
 			container = find_object(event[:in], event)
 
