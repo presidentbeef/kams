@@ -267,6 +267,11 @@ module Reacts
 
 		first_step
 	end
+
+	def teleport item, destination, options = {}
+		event = Event.new :Mobiles, {:action => :teleport, :player => self, :object => item, :in => destination}.merge(options)
+		add_event event
+	end
 end
 
 class TickActions
