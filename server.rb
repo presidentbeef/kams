@@ -21,6 +21,7 @@ License:        GPL unless otherwise noted.
     along with KAMS.  If not, see <http://www.gnu.org/licenses/>.
 =end
 $KAMS_VERSION = "0.2.3"
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'eventmachine'

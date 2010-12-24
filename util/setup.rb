@@ -1,15 +1,14 @@
 #Erases and resets manager.
 
-if Dir.pwd.include? "util"
-	Dir.chdir ".."
-end
+here =File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH << here
 
 require "gdbm"
 require "fileutils"
-require "util/config"
-require "util/log"
-require 'lib/util'
-require 'components/manager'
+require "config"
+require "log"
+require "#{here}/../lib/util"
+require "#{here}/../components/manager"
 
 def log *args
 
@@ -55,20 +54,20 @@ end
 
 def initial_options
 	puts "Press RETURN to keep current value."
-	print "Administrator login (currently #{Config[:admin]}): "
+	print "Administrator login (currently #{ServerConfig[:admin]}): "
 	name = gets.strip.downcase
-	print "Port number (currently #{Config[:port]}): "
+	print "Port number (currently #{ServerConfig[:port]}): "
 	port = gets.strip.to_i
-	print "Address (currently #{Config[:address]}): "
+	print "Address (currently #{ServerConfig[:address]}): "
 	address = gets.strip
 
-	Config[:admin] = name unless name.empty?
-	Config[:port] = port unless port == 0
-	Config[:address] = address unless address.empty?
+	ServerConfig[:admin] = name unless name.empty?
+	ServerConfig[:port] = port unless port == 0
+	ServerConfig[:address] = address unless address.empty?
 
-	puts "Administrator login set to: #{Config[:admin]}"
-	puts "Port number set to: #{Config[:port]}"
-	puts "Address set to: #{Config[:address]}"
+	puts "Administrator login set to: #{ServerConfig[:admin]}"
+	puts "Port number set to: #{ServerConfig[:port]}"
+	puts "Address set to: #{ServerConfig[:address]}"
 end
 
 def reset_storage
