@@ -38,9 +38,9 @@ class Server
 	def initialize(address, port)
 		$manager = Manager.new
 		EventMachine.run do
-			EventMachine.add_periodic_timer(Config.update_rate) { $manager.update_all }
-			if Config.save_rate and Config.save_rate > 0
-				EventMachine.add_periodic_timer(Config.save_rate * 60) { log "Automatic state save."; $manager.save_all }
+			EventMachine.add_periodic_timer(ServerConfig.update_rate) { $manager.update_all }
+			if ServerConfig.save_rate and ServerConfig.save_rate > 0
+				EventMachine.add_periodic_timer(ServerConfig.save_rate * 60) { log "Automatic state save."; $manager.save_all }
 			end
 			EventMachine.start_server address, port, PlayerConnection
 			File.open("logs/server.log", "a") { |f| f.puts "#{Time.now} Server started." }
@@ -74,13 +74,13 @@ if __FILE__ == $0
 
 	begin 
 		#result = RubyProf.profile do
-		Server.new(Config.address, Config.port)
+		Server.new(ServerConfig.address, ServerConfig.port)
 		#end
 		#File.open "logs/profile", "w" do |f|
 		#	RubyProf::CallTreePrinter.new(result).print f, 1
 		#end
 	ensure
-		if server_restarts < Config.restart_limit
+		if server_restarts < ServerConfig.restart_limit
 			if $manager and $manager.soft_restart
 				log "Server restart initiated by administrator."
 				File.open("logs/server.log", "a+") { |f| f.puts "#{Time.now} Server restart by administrator." }
@@ -89,7 +89,7 @@ if __FILE__ == $0
 			end
 			
 			log "SERVER RESTARTING - Attempting to restart in 10 seconds...press ^C to stop...", Logger::Important
-			sleep Config.restart_delay
+			sleep ServerConfig.restart_delay
 			log "RESTARTING SERVER", Logger::Important, true
 
 			program_name = ENV["_"] || "ruby"

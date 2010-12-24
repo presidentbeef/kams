@@ -54,13 +54,13 @@ module PlayerConnection
 		@expect_callback = nil
 		@ip_address = Socket.unpack_sockaddr_in(self.get_peername)[1]
 
-		print File.read(Config.intro_file) if File.exist? Config.intro_file
+		print File.read(ServerConfig.intro_file) if File.exist? ServerConfig.intro_file
 
 		echo_on
 
-		ask_mssp if Config[:mssp]
+		ask_mssp if ServerConfig[:mssp]
 	
-		ask_mccp if Config[:mccp]
+		ask_mccp if ServerConfig[:mccp]
 		
 		show_server_menu
 
@@ -332,8 +332,8 @@ CONF
 		options << (MSSP_VAR + "ANSI" + MSSP_VAL + "1") 
 		options << (MSSP_VAR + "FAMILY" + MSSP_VAL + "CUSTOM") 
 		options << (MSSP_VAR + "CODEBASE" + MSSP_VAL + "KAMS " + $KAMS_VERSION)
-		options << (MSSP_VAR + "PORT" + MSSP_VAL + Config.port.to_s) 
-		options << (MSSP_VAR + "MCCP" + MSSP_VAL + (Config[:mccp] ? "1" : "0"))
+		options << (MSSP_VAR + "PORT" + MSSP_VAL + ServerConfig.port.to_s) 
+		options << (MSSP_VAR + "MCCP" + MSSP_VAL + (ServerConfig[:mccp] ? "1" : "0"))
 		options << (IAC + SE)
 		send_data options
 	end
@@ -387,7 +387,7 @@ CONF
 					send_data(IAC + WILL + OPT_BINARY)
 				elsif OPT_MSSP == $1[1,1]
 					send_mssp
-				elsif OPT_COMPRESS2 == $1[1,1] and Config[:mccp]
+				elsif OPT_COMPRESS2 == $1[1,1] and ServerConfig[:mccp]
 					begin
 						require 'zlib'
 						send_data(IAC + SB + OPT_COMPRESS2 + IAC + SE)

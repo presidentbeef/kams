@@ -137,7 +137,7 @@ module Combat
 			when Player
 				player.output "You vision fills with darkness as you breathe your last breath."
 				after 5 do
-					defroom = $manager.get_object Config.start_room
+					defroom = $manager.get_object ServerConfig.start_room
 					player.info.stats.health = player.info.stats.max_health
 					player.output "Streams of golden light pour down on you as you are restored to life."
 					defroom.add player

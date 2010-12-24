@@ -106,7 +106,7 @@ def reset_storage
 	area.info.terrain.area_type = :grassland
 	room = $manager.create_object(Room, area, nil,  :@name => "A wide-open field", :@short_desc => "Endless possibilities stretch out to the horizon.")
 	room.info.terrain.room_type = :grassland
-	Config[:start_room] = room.goid
+	ServerConfig[:start_room] = room.goid
 	man = $manager.create_object(Mobile, room, nil, :@generic => "tall man", :@short_desc => "A tall man with a very long beard stands here placidly.", :@alt_names => ["man"], :@show_in_look => "A tall man with a very long beard stands here regarding you placidly.", :@sex => "m")
 
 	puts "Adding helper reactions..."
@@ -189,7 +189,7 @@ def change_password
 end
 
 def change_goid
-	current_setting = Config[:goid_type] || "GUID"
+	current_setting = ServerConfig[:goid_type] || "GUID"
 	puts "The Game Object ID is used to identify game objects."
 
 	loop do
@@ -204,19 +204,19 @@ def change_goid
 
 		case choice
 		when 1
-			Config[:goid_type] = :guid
+			ServerConfig[:goid_type] = :guid
 			puts "Set GOID to use GUIDs"
 			return
 		when 2
-			Config[:goid_type] = :integer_16
+			ServerConfig[:goid_type] = :integer_16
 			puts "Set GOID to use integers up to 2^16"
 			return
 		when 3
-			Config[:goid_type] = :integer_24
+			ServerConfig[:goid_type] = :integer_24
 			puts "Set GOID to use integers up to 2^24"
 			return
 		when 4
-			Config[:goid_type] = :integer_32
+			ServerConfig[:goid_type] = :integer_32
 			puts "Set GOID to use integers up to 2^32"
 			return
 		when 5
@@ -227,7 +227,7 @@ end
 
 def config_options
 	loop do
-		keys = Config.options.sort_by {|a| a.to_s }
+		keys = ServerConfig.options.sort_by {|a| a.to_s }
 
 		puts "\nServer configuration options:"
 
@@ -262,17 +262,17 @@ end
 def show_config
 	puts "\nCurrent configuration:"
 
-	keys = Config.options.sort_by {|a| a.to_s }
+	keys = ServerConfig.options.sort_by {|a| a.to_s }
 
 	keys.each_with_index do |k, i|
-		puts "#{k.to_s.gsub("_", " ").capitalize}: #{Config[k]}"
+		puts "#{k.to_s.gsub("_", " ").capitalize}: #{ServerConfig[k]}"
 	end
 
 end
 
 def set_config option
 
-	puts "Option: #{option.to_s.gsub("_", " ").capitalize}", "Current value: #{Config[option]}"
+	puts "Option: #{option.to_s.gsub("_", " ").capitalize}", "Current value: #{ServerConfig[option]}"
 	print "New value: "
 
 	answer = gets.strip
@@ -282,19 +282,19 @@ def set_config option
 		return
 	end
 
-	case Config[option]
+	case ServerConfig[option]
 	when String
-		Config[option] = answer
+		ServerConfig[option] = answer
 	when Integer, Float
 		if answer.to_i == answer.to_f
-			Config[option] = answer.to_i
+			ServerConfig[option] = answer.to_i
 		else
-			Config[option] = answer.to_f
+			ServerConfig[option] = answer.to_f
 		end
 	when Symbol
-		Config[option] = answer.to_sym
+		ServerConfig[option] = answer.to_sym
 	when TrueClass, FalseClass
-		answer.downcase == "true" ? Config[option] = true : Config[option] = false
+		answer.downcase == "true" ? ServerConfig[option] = true : ServerConfig[option] = false
 	else
 		puts "What should this value be?"
 		["String", "Symbol", "Float", "Integer", "Boolean"].each_with_index do |o, i|
@@ -307,21 +307,21 @@ def set_config option
 
 		case index
 		when 1
-			Config[option] = answer
+			ServerConfig[option] = answer
 		when 2
-			Config[option] = answer.to_sym
+			ServerConfig[option] = answer.to_sym
 		when 3
-			Config[option] = answer.to_f
+			ServerConfig[option] = answer.to_f
 		when 4
-			Config[option] = answer.to_i
+			ServerConfig[option] = answer.to_i
 		when 5
-			answer.downcase == "true" ? Config[option] = true : Config[option] = false
+			answer.downcase == "true" ? ServerConfig[option] = true : ServerConfig[option] = false
 		else
 			puts "Not a valid option."
 		end
 	end
 
-	puts "#{option.to_s.gsub("_", " ").capitalize} set to #{Config[option]}"
+	puts "#{option.to_s.gsub("_", " ").capitalize} set to #{ServerConfig[option]}"
 end
 
 def helper_reactions

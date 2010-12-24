@@ -86,8 +86,8 @@ class Guid
 	end
 
 	def to_s
-		if defined? Config and Config[:goid_type]
-			case Config[:goid_type]
+		if defined? ServerConfig and ServerConfig[:goid_type]
+			case ServerConfig[:goid_type]
 			when :hex_code
 				@bytes.unpack("h6")
 			when :integer_16

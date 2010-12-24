@@ -1,7 +1,7 @@
 require 'yaml'
 
 #Used for the server config.
-module Config
+module ServerConfig
 
 	class << self
 		#Returns array of configuration keys.
@@ -11,7 +11,7 @@ module Config
 
 		#Returns an arbitrary configuration item.
 		#
-		# Config[:something]
+		# ServerConfig[:something]
 		def [] item
 			self.load[item]
 		end

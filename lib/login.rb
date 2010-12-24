@@ -152,7 +152,7 @@ module Login
 
 		log "#{@player.name} logged in from #{@ip_address}"
 
-		if @player.name.downcase == Config.admin.downcase
+		if @player.name.downcase == ServerConfig.admin.downcase
 			@player.instance_variable_set(:@admin, true)
 		end
 
@@ -256,7 +256,7 @@ module Login
 
 	#Creates a new player
 	def create_new_player
-		@player = Player.new(self, nil, Config.start_room, @new_name, [], "a typical person", "This is a normal, everyday kind of person.", "person", @sex)
+		@player = Player.new(self, nil, ServerConfig.start_room, @new_name, [], "a typical person", "This is a normal, everyday kind of person.", "person", @sex)
 		@player.word_wrap = 80
 		
 		require 'objects/clothing_items' #why not
@@ -279,7 +279,7 @@ module Login
 		@player.wear(pants)
 		@player.wear(shirt)
 
-		if @player.name.downcase == Config.admin.downcase
+		if @player.name.downcase == ServerConfig.admin.downcase
 			@player.instance_variable_set(:@admin, true)
 		end
 

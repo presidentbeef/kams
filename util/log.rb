@@ -6,7 +6,7 @@ class Logger
 	Important = 0
 
 	def initialize(log_file = "logs/system.log", buffer_size = 45, buffer_time = 300, max_log_size = 50000000)
-		Config[:log_level] ||= 1
+		ServerConfig[:log_level] ||= 1
 		@last_dump = Time.now
 		@entries = []
 		@log_file = log_file
@@ -18,7 +18,7 @@ class Logger
 	#Log something.	
 	def add(msg, log_level = Normal, dump_log = false)
 
-		if log_level <= Config[:log_level]
+		if log_level <= ServerConfig[:log_level]
 			$stderr.puts msg
 
 			@entries << msg

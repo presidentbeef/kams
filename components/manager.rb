@@ -198,7 +198,7 @@ class Manager
 				if game_object.info.former_room
 					game_object.container = game_object.info.former_room
 				else
-					game_object.container = Config.start_room
+					game_object.container = ServerConfig.start_room
 				end
 			end
 

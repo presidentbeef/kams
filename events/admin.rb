@@ -243,17 +243,17 @@ module Admin
 		def aconfig(event, player, room)
 
 			if event[:setting].nil?
-				player.output "Current configuration:\n#{Config}"
+				player.output "Current configuration:\n#{ServerConfig}"
 				return
 			end
 
 			setting = event[:setting].downcase.to_sym
 
 			if setting == :reload
-				Config.reload
-				player.output "Reloaded configuration:\n#{Config}"
+				ServerConfig.reload
+				player.output "Reloaded configuration:\n#{ServerConfig}"
 				return
-			elsif not Config.has_setting? setting
+			elsif not ServerConfig.has_setting? setting
 				player.output "No such setting."
 				return
 			end
@@ -263,9 +263,9 @@ module Admin
 				value = value.to_i
 			end
 
-			Config[setting] = value
+			ServerConfig[setting] = value
 
-			player.output "New configuration:\n#{Config}"
+			player.output "New configuration:\n#{ServerConfig}"
 		end
 
 		#Deletes an object.
@@ -726,19 +726,19 @@ module Admin
 				$LOG.dump
 				player.output 'Flushed log to disk.'
 			when 'ultimate'
-				Config[:log_level] = 3
+				ServerConfig[:log_level] = 3
 				player.output "Log level now set to ULTIMATE."
 			when 'high'
-				Config[:log_level] = 2
+				ServerConfig[:log_level] = 2
 				player.output "Log level now set to high."
 			when 'low', 'normal'
-				Config[:log_level] = 1
+				ServerConfig[:log_level] = 1
 				player.output "Log level now set to normal."
 			when 'off'
-				Config[:log_level] = 0
+				ServerConfig[:log_level] = 0
 				player.output "Logging mostly turned off. You may also want to turn off debugging."
 			when 'debug'
-				Config[:debug] = !$DEBUG
+				ServerConfig[:debug] = !$DEBUG
 				player.output "Debug info is now: #{$DEBUG ? 'on' : 'off'}"
 			else
 				player.output 'Possible settings: Off, Debug, Normal, High, or Ultimate'
