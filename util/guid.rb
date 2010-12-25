@@ -9,7 +9,7 @@
 #
 # Note from Justin Collins: Thanks, David!
 
-if RUBY_PLATFORM =~ /win/i
+if RUBY_PLATFORM =~ /win|ming/i
 	module Guid_Win32_
 		require 'Win32API'
 
@@ -54,28 +54,28 @@ if RUBY_PLATFORM =~ /win/i
 			end
 		end
 	end
-end
+else
+	module Guid_Unix_
+		@@random_device = nil
 
-module Guid_Unix_
-	@@random_device = nil
-
-	def initialize
-		if !@@random_device
-			if File.exists? "/dev/urandom"
-				@@random_device = File.open "/dev/urandom", "r"
-			elsif File.exists? "/dev/random"
-				@@random_device = File.open "/dev/random", "r"
-			else
-				raise RuntimeError, "Can't find random device"
+		def initialize
+			if !@@random_device
+				if File.exists? "/dev/urandom"
+					@@random_device = File.open "/dev/urandom", "r"
+				elsif File.exists? "/dev/random"
+					@@random_device = File.open "/dev/random", "r"
+				else
+					raise RuntimeError, "Can't find random device"
+				end
 			end
-		end
 
-		@bytes = @@random_device.read(16)
+			@bytes = @@random_device.read(16)
+		end
 	end
 end
 
 class Guid
-	if RUBY_PLATFORM =~ /win/
+	if RUBY_PLATFORM =~ /win|ming/i
 		include Guid_Win32_
 	else
 		include Guid_Unix_
