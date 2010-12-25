@@ -1,7 +1,7 @@
 #Erases and resets manager.
 
 here =File.expand_path(File.dirname(__FILE__))
-$LOAD_PATH << here
+$LOAD_PATH << here << "."
 
 require "gdbm"
 require "fileutils"
