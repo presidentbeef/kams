@@ -67,7 +67,7 @@ class LivingObject < GameObject
 				info.stats.stamina = 0
 			end
 		when :fortitude
-			info.stats.fortitude and info.stats.stamina -= amount
+			info.stats.fortitude and info.stats.fortitude -= amount
 			if info.stats.fortitude < 0
 				info.stats.fortitude = 0
 			end
