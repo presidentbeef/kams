@@ -165,7 +165,7 @@ module Emote
     end
 
     def skip(event, player, room)
-      
+
       make_emote event, player, room do
 
         no_target do
@@ -262,7 +262,7 @@ module Emote
           to_blind_target "Someone gives you a great big hug."
           to_deaf_other event[:to_other]
         end
-      end   
+      end
     end
 
     def grin(event, player, room)
@@ -342,7 +342,7 @@ module Emote
           to_other "#{player.name} blushes at #{event.target.name}, clearly uncomfortable."
           to_deaf_other event[:to_other]
         end
-      end 
+      end
     end
 
     def ew(event, player, room)
@@ -572,7 +572,7 @@ module Emote
         end
       end
 
-    end   
+    end
 
     def bow(event, player, room)
 
@@ -686,7 +686,7 @@ module Emote
           to_deaf_other event[:to_other]
         end
 
-        target do 
+        target do
           to_player "You nod your head in agreement with #{event.target.name}."
           to_target "#{player.name} nods #{player.pronoun(:possessive)} head in agreement with you."
           to_other "#{player.name} nods #{player.pronoun(:possessive)} head in agreement with #{event.target.name}."
@@ -866,7 +866,7 @@ module Emote
     #If there is a target, return the given block.
     def target
       return if @return_event
-      
+
       unless @object.nil?
         @return_event = yield
       end
@@ -918,7 +918,7 @@ module Emote
       @event.to_deaf_target = output
       @event
     end
-    
+
     #Appends suffix to emote.
     def set_post
       return if not @post
@@ -942,8 +942,8 @@ module Emote
     end
 
     private
-  
-    #Find target for emote. 
+
+    #Find target for emote.
     def find_target
       if @object.nil? and @event[:object]
         @object = @room.find(@event[:object]) || @player.search_inv(@event[:object])

@@ -41,14 +41,14 @@ module Admin
         current_container = $manager.find object.container
         current_container.inventory.remove(object) if current_container
       end
-      
+
       if container.is_a? Container
         container.add object
       else
         container.inventory.add(object)
         object.container = container.goid
       end
-    
+
       player.output "Moved #{object} into #{container}"
     end
 
@@ -71,7 +71,7 @@ module Admin
       class_name = event[:object]
 
       class_name[0,1] = class_name[0,1].capitalize
-      
+
       if Object.const_defined? class_name
         klass = Object.const_get(class_name)
       else
@@ -97,7 +97,7 @@ module Admin
         event[:to_other] = "Frowning in concentration, #{player.name} makes vague motions with #{player.pronoun(:possessive)} hands. There is a small flash of light as #{object.name} appears."
         room.out_event event
       end
-      
+
       player.output "Created: #{object}"
       object
     end
@@ -469,7 +469,7 @@ module Admin
     #Sets object variables.
     def aset(event, player, room)
       if event[:object].downcase == "here"
-        event[:object] = player.container 
+        event[:object] = player.container
       elsif event[:object] and event[:object].split.first.downcase == "all"
         log event[:object].split
         klass = event[:object].split[1]
@@ -595,9 +595,9 @@ module Admin
     #Display and edit the Info object for a GameObject.
     def ainfo(event, player, room)
       if event[:object].downcase == "here"
-        event[:object] = player.container 
+        event[:object] = player.container
       elsif event[:object].downcase == "me"
-        event[:object] = player 
+        event[:object] = player
       elsif event[:object] and event[:object].split.first.downcase == "all"
         log event[:object].split
         klass = event[:object].split[1]
@@ -702,7 +702,7 @@ module Admin
         else
           lines = 10
         end
-          
+
         player.output tail('logs/player.log', lines)
       when 'server'
         if event[:value]
@@ -710,7 +710,7 @@ module Admin
         else
           lines = 10
         end
-          
+
         player.output tail('logs/server.log', lines)
       when 'system'
         if event[:value]
@@ -720,7 +720,7 @@ module Admin
         end
 
         $LOG.dump
-          
+
         player.output tail('logs/system.log', lines)
       when 'flush'
         log('Flushing log')

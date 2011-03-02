@@ -15,7 +15,7 @@ class Logger
     @max_log_size = max_log_size
   end
 
-  #Log something. 
+  #Log something.
   def add(msg, log_level = Normal, dump_log = false)
 
     if log_level <= ServerConfig[:log_level]

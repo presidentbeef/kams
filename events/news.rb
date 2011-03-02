@@ -1,6 +1,6 @@
 module News
   class << self
-    
+
     #Show latest news on a Newsboard.
     def latest_news(event, player, room)
       board = find_board(event, room)
@@ -29,7 +29,7 @@ module News
         player.output "There do not seem to be any postings here."
         return
       end
-      
+
       wordwrap = player.word_wrap || 100
 
       player.output board.list_latest(wordwrap, 0, nil)

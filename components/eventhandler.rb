@@ -85,7 +85,7 @@ class EventHandler
   def get_attached event
     events = []
     if event.attached_events
-      events += event.attached_events 
+      events += event.attached_events
       event.attached_events.each do |e|
         events += get_attached(e)
       end

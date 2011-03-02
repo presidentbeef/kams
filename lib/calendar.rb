@@ -125,7 +125,7 @@ class Calendar
         end
   end
 
-  #Returns the time of day based on the current time. 
+  #Returns the time of day based on the current time.
   def time_of_day(hour = @hour)
     case hour
     when 0..3

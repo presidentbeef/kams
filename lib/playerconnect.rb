@@ -18,13 +18,13 @@ module PlayerConnection
 
   #Default colors
   @@colors = {
-      "black" => Color.black, 
-      "red" => Color.red, 
-      "green" => Color.green, 
-      "yellow" => Color.yellow,  
-      "blue" => Color.blue, 
-      "magenta" => Color.magenta, 
-      "cyan" => Color.cyan, 
+      "black" => Color.black,
+      "red" => Color.red,
+      "green" => Color.green,
+      "yellow" => Color.yellow,
+      "blue" => Color.blue,
+      "magenta" => Color.magenta,
+      "cyan" => Color.cyan,
       "white" => Color.white,
       "brightred" => (Color.red + Color.bold),
       "brightgreen" => (Color.green + Color.bold),
@@ -59,9 +59,9 @@ module PlayerConnection
     echo_on
 
     ask_mssp if ServerConfig[:mssp]
-  
+
     ask_mccp if ServerConfig[:mccp]
-    
+
     show_server_menu
 
     log "Connection from #{@ip_address}."
@@ -98,13 +98,13 @@ module PlayerConnection
   #Connection closed
   def unbind
     File.open("logs/player.log", "a") { |f| f.puts "#{Time.now} - #{@player ? @player.name : "Someone"} logged out (#{@ip_address})." }
-    log "#{@player ? @player.name: "Someone"} logged out (#{@ip_address}).", Logger::Ultimate 
+    log "#{@player ? @player.name: "Someone"} logged out (#{@ip_address}).", Logger::Ultimate
     @closed = true
     @mccp_to_client.finish if @mccp_to_client
     after 3 do
       if @player and $manager.object_loaded? @player.goid
         log "Connection broken, forcing manager to drop #{@player and @player.name}.", Logger::Medium
-        $manager.drop_player(@player) 
+        $manager.drop_player(@player)
       end
       nil
     end
@@ -132,7 +132,7 @@ module PlayerConnection
       "regular" => "none"
     }
   end
-  
+
   #Checks if the io connection is nil or closed
   def closed?
     @closed
@@ -175,7 +175,7 @@ module PlayerConnection
         end
       end
       message = @@colors[@color_settings["regular"]] + message + Color.clear
-      send_data message 
+      send_data message
     end
   end
 
@@ -226,7 +226,7 @@ module PlayerConnection
       @paginator = nil
       self.puts "There is no more."
     end
-  end 
+  end
 
   #Sets the colors in the string according to the player's preferences.
   def colorize string
@@ -244,7 +244,7 @@ module PlayerConnection
   end
 
   #Sets the foreground color for a given setting.
-  def set_fg_color(code, color) 
+  def set_fg_color(code, color)
     code.downcase! unless code.nil?
     color.downcase! unless color.nil?
 
@@ -259,7 +259,7 @@ module PlayerConnection
         end
         @use_color = true
       end
-      
+
       @color_settings[code] = color
       "Set #{code} to <#{code}>#{color}</>."
     end
@@ -283,7 +283,7 @@ Editor              editor           <editor>#{@color_settings['editor']}</edito
 News                news             <news>#{@color_settings['news']}</news>
 Regular             regular          #{@color_settings['regular']}
 CONF
-    
+
   end
 
   #Close the io connection
@@ -313,7 +313,7 @@ CONF
 
   def send_mssp
     mssp_options = nil
-    options = IAC + SB + OPT_MSSP 
+    options = IAC + SB + OPT_MSSP
 
     if File.exist? "conf/mssp.yaml"
       File.open "conf/mssp.yaml" do |f|
@@ -329,10 +329,10 @@ CONF
     options << (MSSP_VAR + "UPTIME" + MSSP_VAL + $manager.uptime.to_s)
     options << (MSSP_VAR + "ROOMS" + MSSP_VAL + $manager.find_all("class", Room).length.to_s)
     options << (MSSP_VAR + "AREAS" + MSSP_VAL + $manager.find_all("class", Area).length.to_s)
-    options << (MSSP_VAR + "ANSI" + MSSP_VAL + "1") 
-    options << (MSSP_VAR + "FAMILY" + MSSP_VAL + "CUSTOM") 
+    options << (MSSP_VAR + "ANSI" + MSSP_VAL + "1")
+    options << (MSSP_VAR + "FAMILY" + MSSP_VAL + "CUSTOM")
     options << (MSSP_VAR + "CODEBASE" + MSSP_VAL + "KAMS " + $KAMS_VERSION)
-    options << (MSSP_VAR + "PORT" + MSSP_VAL + ServerConfig.port.to_s) 
+    options << (MSSP_VAR + "PORT" + MSSP_VAL + ServerConfig.port.to_s)
     options << (MSSP_VAR + "MCCP" + MSSP_VAL + (ServerConfig[:mccp] ? "1" : "0"))
     options << (IAC + SE)
     send_data options
@@ -369,7 +369,7 @@ CONF
     string = string.gsub(/#{CR}#{NULL}/no, CR)
 
       # combine EOL into "\n"
-      string = string.gsub(/#{EOL}/no, "\n") 
+      string = string.gsub(/#{EOL}/no, "\n")
 
       string.gsub!(/#{IAC}(
         [#{IAC}#{AO}#{AYT}#{DM}#{IP}#{NOP}]|
@@ -406,7 +406,7 @@ CONF
         if OPT_COMPRESS2 == $1[1,1]
           @mccp_to_client = false
           send_data(IAC + WONT + $1[1..1])
-        end 
+        end
         ''
       elsif WILL == $1[0,1]  # respond to "IAC WILL x"
         if OPT_BINARY == $1[1,1]

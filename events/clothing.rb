@@ -20,7 +20,7 @@ module Clothing
         room.out_event(event)
       end
     end
-    
+
     #Remove some clothing.
     def remove(event, player, room)
 

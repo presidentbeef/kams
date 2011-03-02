@@ -22,7 +22,7 @@ module Sittable
   end
 
   #I find this module really humorous for some reason
-  def sat_on_by object 
+  def sat_on_by object
     @sitting_on_me << object.goid
   end
 

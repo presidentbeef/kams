@@ -16,7 +16,7 @@ module Reacts
   def init_reactor
     @reactor ||= Reactor.new(self)
     @reaction_files ||= Set.new
-    @tick_actions ||= TickActions.new 
+    @tick_actions ||= TickActions.new
     alert(Event.new(:Generic, :action => :init))
   end
 
@@ -30,7 +30,7 @@ module Reacts
       end
     end
     alert(Event.new(:Generic, :action => :init))
-  end 
+  end
 
   #Deletes all reactions but does not clear the list of reaction files.
   def unload_reactions
@@ -59,7 +59,7 @@ module Reacts
         log "I am reacting...#{reaction.inspect}", Logger::Ultimate
         action = CommandParser.parse(self, reaction)
         unless action.nil?
-          log "I am doing an action...", Logger::Ultimate 
+          log "I am doing an action...", Logger::Ultimate
           changed
           notify_observers(action)
         else
@@ -194,7 +194,7 @@ module Reacts
   #Creates an object and puts it in the creator's inventory if it has one
   def make_object klass
     obj = $manager.make_object klass
-    inventory << obj if self.respond_to? :inventory 
+    inventory << obj if self.respond_to? :inventory
     obj
   end
 
@@ -236,14 +236,14 @@ module Reacts
     continuous_loop = false || options[:loop]
 
     first_step = sequence.shift
-    
+
     if first_step.is_a? String
       first_step = CommandParser.parse self, sequence.shift
     end
 
     last_step = first_step
 
-    if delay > 0 
+    if delay > 0
       sequence.each do |next_step|
         next_step = CommandParser.parse self, next_step if next_step.is_a? String
         last_step.attach_event CommandParser.future_event self, delay, next_step

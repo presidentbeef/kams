@@ -28,7 +28,7 @@ class Inventory < Gary
     inv = []
     each do |o|
       if o.is_a? GameObject
-        inv << o.game_object_id 
+        inv << o.game_object_id
       else
         inv << o
       end
@@ -50,7 +50,7 @@ class Inventory < Gary
       #loads the objects from this list of goids into
       #the new one, replaces this one with the new one
       #and everything goes from there.
-      @ghash = inv_capacity   
+      @ghash = inv_capacity
     end
   end
 
@@ -61,9 +61,9 @@ class Inventory < Gary
       @ghash.dup.each do |goid|
         yield goid
       end
-    end 
+    end
   end
-  
+
   #Add an object to the container. Checks capacity first.
   def add game_object
     if @capacity.nil? or length < @capacity
@@ -76,7 +76,7 @@ class Inventory < Gary
   #Returns nice listing of inventory.
   def show
     inv_out = []
-    
+
     if empty?
       return "nothing"
     else

@@ -57,7 +57,7 @@ AREACT [RELOAD|CLEAR] [OBJECT]",
 "astatus" =>
 "ASTATUS",
 "ateach" =>
-"ATEACH [OBJECT] [SKILL]", 
+"ATEACH [OBJECT] [SKILL]",
 "awho" =>
 "AWHO",
 "portal" =>

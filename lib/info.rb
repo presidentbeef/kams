@@ -19,7 +19,7 @@ require 'ostruct'
 #===Note
 #
 #Every GameObject has an Info attribute called info.
-#The info attributes used in the class are listed in the documentation for these classes. 
+#The info attributes used in the class are listed in the documentation for these classes.
 class Info < OpenStruct
 
   #Creates a new Info object. If a hash is given, the Info will be initialized with the keys (Strings or Symbols)

@@ -17,7 +17,7 @@ module HasInventory
     end
     object
   end
-  
+
   #Returns the inventory.
   def inventory
     @inventory

@@ -25,7 +25,7 @@ module Combat
         args.each do |k,v|
           if e[k] != v
             match = false
-            break 
+            break
           end
         end
         match
@@ -39,7 +39,7 @@ module Combat
         args.each do |k,v|
           if e[k] != v
             match = false
-            break 
+            break
           end
         end
         match
@@ -92,7 +92,7 @@ module Combat
       if rand > 0.5
         dir = expand_direction event.direction
         events.each do |e|
-          e.action = :flee  
+          e.action = :flee
           e.type = :Movement
           e.direction = dir
         end
@@ -126,7 +126,7 @@ module Combat
     #Goes through death sequence for give player/mobile.
     def death player
       room = $manager.get_object player.container
-      player.alive = false  
+      player.alive = false
 
       unless room.nil?
         room.remove player
@@ -203,7 +203,7 @@ module Combat
       player = event[:player]
       room = $manager.find player.room
       if event[:target].nil?
-        if player.last_target.nil? 
+        if player.last_target.nil?
           target = nil
         else
           target = room.find(player.last_target)
@@ -244,7 +244,7 @@ module Combat
     #Add an event for the future. Does Combat#add_event as well.
     #
     #If there are already events which target this player,
-    #the event will be attached to those events so it ends 
+    #the event will be attached to those events so it ends
     #at the same time.
     #
     #Otherwise, the event will occur after the given delay.

@@ -35,7 +35,7 @@ def setup_menu
     when 4
       change_password
     when 5
-      change_goid 
+      change_goid
     when 6
       config_options
     when 7
@@ -49,7 +49,7 @@ def initial_setup
   puts "Setting up storage..."
   reset_storage
   puts "Setting up initial configuration...", ""
-  initial_options 
+  initial_options
 end
 
 def initial_options

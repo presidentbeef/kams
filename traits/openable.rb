@@ -3,7 +3,7 @@
 #This is an older module and the API may be revised in the future.
 module Openable
   attr_accessor :keys, :lockable
-  
+
   def initialize(*args)
     super(*args)
 
@@ -13,7 +13,7 @@ module Openable
     @lockable = false
     @keys = []
   end
-  
+
   #Overrides look_inside methods to first check if an object is open prior to
   #looking inside.
   def Openable.included(klass)
@@ -29,11 +29,11 @@ module Openable
     end
   end
 
-  
+
   #Opens container, if possible. Takes care of notifying the player of the result.
   def open(event)
     player = event[:player]
-    
+
     if @locked
       player.output("The #{@generic} is locked.")
     elsif @open
@@ -55,7 +55,7 @@ module Openable
   #Closes container, if possible. Takes care of notifying the player of the result.
   def close(event)
     player = event[:player]
-    
+
     if not @open
       player.output("The #{@generic} is already closed, silly.")
     else

@@ -88,7 +88,7 @@ class Gary
       name = name.to_s
     end
 
-    name.downcase!  
+    name.downcase!
     @ghash.dup.each_value { |o|
       if type.nil?
         if o.generic.downcase == name or o.name.downcase == name or o.alt_names.find {|n| n.downcase == name }
@@ -163,7 +163,7 @@ class Gary
   def find_by_id(goid)
     self[goid]
   end
-  
+
   alias :remove :delete
   alias :add :<<
   alias :count :length

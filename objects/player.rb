@@ -37,7 +37,7 @@ class Player < LivingObject
     0 => "dead"
 
   }
-    
+
   attr_reader :admin
   attr_accessor :color_settings, :use_color, :reply_to, :page_height
 
@@ -82,7 +82,7 @@ class Player < LivingObject
     @blind
   end
 
-  #Sets balance 
+  #Sets balance
   def balance= val
     #was = @balance
     @balance = val
@@ -131,8 +131,8 @@ class Player < LivingObject
       end
     end
   end
-  
-  
+
+
   #Outputs a message to the Player. Used for all communication to Player.
   def output(message, suppress_prompt = false)
     return if message.nil?
@@ -173,7 +173,7 @@ class Player < LivingObject
       else
         h_color = "almostdead"
       end
-    
+
     position = case
       when self.prone?
         "_"
@@ -182,8 +182,8 @@ class Player < LivingObject
       else
         "\\"
       end
-        
-    "<people>H:#{info.stats.health}#{position}></> #{IAC + GA}" 
+
+    "<people>H:#{info.stats.health}#{position}></> #{IAC + GA}"
   end
 
   #Just outputs a message to the player that we don't know what

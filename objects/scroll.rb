@@ -10,7 +10,7 @@ class Scroll < GameObject
 
   def initialize(*args)
     super(*args)
-    
+
     @generic = "scroll"
     @movable = true
     @short_desc = "a plain scroll"

@@ -8,7 +8,7 @@ require 'traits/news'
 # announce_new (String)
 class Newsboard < GameObject
   include News
-  
+
   def initialize(*args)
     super
     @name = 'newsboard'

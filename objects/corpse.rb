@@ -4,10 +4,10 @@ require 'traits/expires'
 #Corpses are left when something dies. Expires after a while.
 class Corpse < GameObject
   include Expires
-  
+
   def initialize(*args)
     super(*args)
-    
+
     @generic = "corpse"
     @long_desc = "A smelly, rapidly decomposing corpse. Yuck."
     @movable = true
