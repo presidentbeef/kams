@@ -241,7 +241,7 @@ module CommandParser
 					parse_news input
 				elsif @mobile.include? command and player.is_a? Mobile
 					parse_mobile command
-				elsif input =~ /^alarm\s+([0-9]*)$/i
+				elsif input =~ /^alarm\s+([0-9]+)$/i
 					after $1.to_i do 
 						player.output "***ALARM***" 
 					end
