@@ -188,6 +188,7 @@ module CommandParser
 		#If a block is given, the event parameter is ignored.
 		def future_event(player, seconds_delay, f_event = nil, &block)
 			event = Event.new(:Future, :player => player, :time => seconds_delay)
+
 			if block_given?
 				event.action = :call
 				event.event = block
@@ -195,7 +196,8 @@ module CommandParser
 				event.action = :event
 				event.event = f_event
 			end
-			return event
+
+			event
 		end
 		
 		#Parses input into a hash that can be passed to the EventHandler.
@@ -253,7 +255,7 @@ module CommandParser
 				event.player = player
 			end
 
-			return event
+			event
 		end
 
 		alias :create_event :parse
@@ -280,7 +282,7 @@ module CommandParser
 				    { :action => :give, :item => $2.strip, :to => $3 }
 			    when /^(i|inv|inventory)$/i
 				    { :action => :show_inventory }
-                            when /^more/i
+			    when /^more/i
 				    { :action => :more }
 			    when /^open\s+(\w+)$/i
 				    { :action => :open, :object => $1 }
@@ -374,11 +376,10 @@ module CommandParser
 				return nil
 			end
 
-			return event
+			event
 		end
 
 		def parse_movement(input)
-
 			event = Event.new(:Movement, :action => :move)
 
 			case input
@@ -401,7 +402,7 @@ module CommandParser
 				event[:action] = :stand
 			when /^(jump|crawl|climb|enter)$/i
 				input.downcase!
-				return nil
+				return nil  ### TODO: handle portal movement
 			when /^(east|west|northeast|northwest|north|southeast|southwest|south|e|w|nw|ne|sw|se|n|s|up|down|u|d|in|out)(\s+\((.*)\))?$/i
 				event[:direction] = expand_direction $1
 				event[:pre] = $3
@@ -409,11 +410,10 @@ module CommandParser
 				return nil
 			end
 
-			return event
+			event
 		end
 
 		def parse_equipment(input)
-
 			event = Event.new(:Clothing)
 
 			case input
@@ -429,7 +429,7 @@ module CommandParser
 				return nil
 			end
 
-			return event
+			event
 		end
 
 		def parse_admin(input)
@@ -618,11 +618,10 @@ module CommandParser
 				return nil
 			end
 
-			return event
+			event
 		end
 
 		def parse_settings(input)
-
 			event = Event.new(:Settings)
 
 			case input
@@ -645,11 +644,10 @@ module CommandParser
 				return nil
 			end
 
-			return event
+			event
 		end
 
 		def parse_weapon_combat(input)
-
 			event = Event.new(:WeaponCombat)
 
 			case input
@@ -672,7 +670,7 @@ module CommandParser
 				return nil
 			end
 
-			return event
+			event
 		end
 
 		def parse_custom(input)
@@ -689,6 +687,7 @@ module CommandParser
 
 		def parse_news(input)
 			event = Event.new(:News)
+
 			case input.downcase
 			when "news"
 				event.action = :latest_news
