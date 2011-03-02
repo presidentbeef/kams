@@ -21,83 +21,83 @@ require 'ostruct'
 #
 class Event < OpenStruct
 
-	#name must be a symbol which is the same as the module which handles the event.
-	#
-	#An optional hash can be passed in as well to define attributes.
-	def initialize(type, args = nil)
-		super args
-		self.type = type
-	end
+  #name must be a symbol which is the same as the module which handles the event.
+  #
+  #An optional hash can be passed in as well to define attributes.
+  def initialize(type, args = nil)
+    super args
+    self.type = type
+  end
 
-	#This is the event type. <i>Depreciated.</i>
-	def type
-		@table[:type]
-	end
+  #This is the event type. <i>Depreciated.</i>
+  def type
+    @table[:type]
+  end
 
-	def type= value
-		@table[:type] = value
-	end
+  def type= value
+    @table[:type] = value
+  end
 
-	#Retrieve an attribute.
-	#
-	#Note: it is preferable to use accessor methods instead, like Event.new(:Combat).name 
-	def [] index
-		@table[index.to_sym]
-	end
+  #Retrieve an attribute.
+  #
+  #Note: it is preferable to use accessor methods instead, like Event.new(:Combat).name 
+  def [] index
+    @table[index.to_sym]
+  end
 
-	#Set an attribute.
-	#
-	#Note: it is preferable to use accessor methods instead, like Event.new(:Combat).target = "bob" 
-	def []= index, value
-		self.new_ostruct_member(index)
-		@table[index.to_sym] = value
-		self
-	end
+  #Set an attribute.
+  #
+  #Note: it is preferable to use accessor methods instead, like Event.new(:Combat).target = "bob" 
+  def []= index, value
+    self.new_ostruct_member(index)
+    @table[index.to_sym] = value
+    self
+  end
 
-	#Takes a hash and adds them just like initialize does.
-	def << args
-		unless args.nil?
-			args.each do |k,v|
-				@table[k.to_sym] = v
-				new_ostruct_member(k)
-			end
-		end
-		self
-	end
+  #Takes a hash and adds them just like initialize does.
+  def << args
+    unless args.nil?
+      args.each do |k,v|
+        @table[k.to_sym] = v
+        new_ostruct_member(k)
+      end
+    end
+    self
+  end
 
-	#Copied from OpenStruct.inspect, but don't recursively inspect things (that is bad for Events, trust me).
-	def to_s
-		str = "#<#{self.class}"
+  #Copied from OpenStruct.inspect, but don't recursively inspect things (that is bad for Events, trust me).
+  def to_s
+    str = "#<#{self.class}"
 
-		Thread.current[InspectKey] ||= []
-		if Thread.current[InspectKey].include?(self) then
-			str << " ..."
-		else
-			first = true
-			for k,v in @table
-				str << "," unless first
-				first = false
+    Thread.current[InspectKey] ||= []
+    if Thread.current[InspectKey].include?(self) then
+      str << " ..."
+    else
+      first = true
+      for k,v in @table
+        str << "," unless first
+        first = false
 
-				Thread.current[InspectKey] << v
-				begin
-					if k == :attached_events
-						str << "#{k}=<Events...>"
-					else
-						str << " #{k}=#{v}"
-					end
-				ensure
-					Thread.current[InspectKey].pop
-				end
-			end
-		end
+        Thread.current[InspectKey] << v
+        begin
+          if k == :attached_events
+            str << "#{k}=<Events...>"
+          else
+            str << " #{k}=#{v}"
+          end
+        ensure
+          Thread.current[InspectKey].pop
+        end
+      end
+    end
 
-		str << ">"
-	end
+    str << ">"
+  end
 
-	#Attach another event to this one. Attached events will be run immediately after
-	#the event they are attached to.	
-	def attach_event event
-		self.attached_events ||= []
-		self.attached_events << event
-	end
+  #Attach another event to this one. Attached events will be run immediately after
+  #the event they are attached to.  
+  def attach_event event
+    self.attached_events ||= []
+    self.attached_events << event
+  end
 end

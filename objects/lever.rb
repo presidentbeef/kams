@@ -6,12 +6,12 @@ require 'objects/container'
 #or has different semantics to different objects, this would be the way to go,
 #I think.
 class Lever < GameObject
-	def initialize(*args)
-		super(*args)
-		@name = 'lever'
-		@generic = 'lever'
-		@short_desc = 'lever'
-		@long_desc = 'A lever, about 2 feet long with a grip situated near the top, just begging to be pulled.'
-		@actions << "pull"
-	end
+  def initialize(*args)
+    super(*args)
+    @name = 'lever'
+    @generic = 'lever'
+    @short_desc = 'lever'
+    @long_desc = 'A lever, about 2 feet long with a grip situated near the top, just begging to be pulled.'
+    @actions << "pull"
+  end
 end

@@ -69,7 +69,7 @@ OPT_NEW_ENVIRON    =  39.chr # "'"    # "\x27" # New Environment Option
 OPT_EXOPL          = 255.chr # "\377" # "\xff" # Extended-Options-List
 #MCCP
 OPT_COMPRESS       = 85.chr
-OPT_COMPRESS2	   = 86.chr
+OPT_COMPRESS2    = 86.chr
 OPT_MSSP           = 70.chr
 MSSP_VAR           = 1.chr
 MSSP_VAL           = 2.chr

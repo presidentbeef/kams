@@ -6,16 +6,16 @@ require 'traits/readable'
 #===Info
 # writable (Boolean)
 class Scroll < GameObject
-	include Readable
+  include Readable
 
-	def initialize(*args)
-		super(*args)
-		
-		@generic = "scroll"
-		@movable = true
-		@short_desc = "a plain scroll"
-		@long_desc = "This is simply a long piece of paper rolled up into a tight tube."
-		@alt_names = ["plain scroll"]
-		info.writable = true
-	end
+  def initialize(*args)
+    super(*args)
+    
+    @generic = "scroll"
+    @movable = true
+    @short_desc = "a plain scroll"
+    @long_desc = "This is simply a long piece of paper rolled up into a tight tube."
+    @alt_names = ["plain scroll"]
+    info.writable = true
+  end
 end

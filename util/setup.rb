@@ -15,317 +15,317 @@ def log *args
 end
 
 def setup_menu
-	loop do
-		puts "", "-" * 30
-		puts "WARNING: Do not use this setup script while KAMS is running!"
-		puts "-" * 30
-		puts "\nSetup Options for the Kingdoms of Ahln MUD Server:\n"
-		puts ["1. Initial setup", "2. Initialize/reset storage", "3. Delete a player", "4. Change password", "5. Change GOID type", "6. Configuration options", "7. Exit"].join("\n")
-		print "? "
+  loop do
+    puts "", "-" * 30
+    puts "WARNING: Do not use this setup script while KAMS is running!"
+    puts "-" * 30
+    puts "\nSetup Options for the Kingdoms of Ahln MUD Server:\n"
+    puts ["1. Initial setup", "2. Initialize/reset storage", "3. Delete a player", "4. Change password", "5. Change GOID type", "6. Configuration options", "7. Exit"].join("\n")
+    print "? "
 
-		choice = gets.strip.to_i
+    choice = gets.strip.to_i
 
-		case choice
-		when 1
-			initial_setup
-		when 2
-			reset_storage
-		when 3
-			delete_player
-		when 4
-			change_password
-		when 5
-			change_goid	
-		when 6
-			config_options
-		when 7
-			exit
-		end
-	end
+    case choice
+    when 1
+      initial_setup
+    when 2
+      reset_storage
+    when 3
+      delete_player
+    when 4
+      change_password
+    when 5
+      change_goid 
+    when 6
+      config_options
+    when 7
+      exit
+    end
+  end
 end
 
 def initial_setup
-	puts "\nThis option will walk you through a few steps to set up the server."
-	puts "Setting up storage..."
-	reset_storage
-	puts "Setting up initial configuration...", ""
-	initial_options	
+  puts "\nThis option will walk you through a few steps to set up the server."
+  puts "Setting up storage..."
+  reset_storage
+  puts "Setting up initial configuration...", ""
+  initial_options 
 end
 
 def initial_options
-	puts "Press RETURN to keep current value."
-	print "Administrator login (currently #{ServerConfig[:admin]}): "
-	name = gets.strip.downcase
-	print "Port number (currently #{ServerConfig[:port]}): "
-	port = gets.strip.to_i
-	print "Address (currently #{ServerConfig[:address]}): "
-	address = gets.strip
+  puts "Press RETURN to keep current value."
+  print "Administrator login (currently #{ServerConfig[:admin]}): "
+  name = gets.strip.downcase
+  print "Port number (currently #{ServerConfig[:port]}): "
+  port = gets.strip.to_i
+  print "Address (currently #{ServerConfig[:address]}): "
+  address = gets.strip
 
-	ServerConfig[:admin] = name unless name.empty?
-	ServerConfig[:port] = port unless port == 0
-	ServerConfig[:address] = address unless address.empty?
+  ServerConfig[:admin] = name unless name.empty?
+  ServerConfig[:port] = port unless port == 0
+  ServerConfig[:address] = address unless address.empty?
 
-	puts "Administrator login set to: #{ServerConfig[:admin]}"
-	puts "Port number set to: #{ServerConfig[:port]}"
-	puts "Address set to: #{ServerConfig[:address]}"
+  puts "Administrator login set to: #{ServerConfig[:admin]}"
+  puts "Port number set to: #{ServerConfig[:port]}"
+  puts "Address set to: #{ServerConfig[:address]}"
 end
 
 def reset_storage
 
-	print "\nThis will erase all data and storage.\nAre you SURE you wish to do this (yes/no)? "
+  print "\nThis will erase all data and storage.\nAre you SURE you wish to do this (yes/no)? "
 
-	answer = gets.chomp
+  answer = gets.chomp
 
-	if answer !~ /^y/i
-		puts "!! - Not doing it."
-		return
-	end
+  if answer !~ /^y/i
+    puts "!! - Not doing it."
+    return
+  end
 
-	puts "Erasing storage..."
-	FileUtils.rm_rf "storage/", :secure => true
-	FileUtils.mkdir "storage"
-	FileUtils.mkdir "storage/boards"
-	FileUtils.mkdir "storage/admin"
-	FileUtils.mkdir "logs" if not File.exist? "logs/"
+  puts "Erasing storage..."
+  FileUtils.rm_rf "storage/", :secure => true
+  FileUtils.mkdir "storage"
+  FileUtils.mkdir "storage/boards"
+  FileUtils.mkdir "storage/admin"
+  FileUtils.mkdir "logs" if not File.exist? "logs/"
 
-	puts "Recreating storage structure..."
+  puts "Recreating storage structure..."
 
-	["passwords", "players", "goids"].each do |f|
-		GDBM.open "storage/#{f}" do |g|
-			g.fastmode = false
-			g.clear
-			g.reorganize
-		end
-	end
+  ["passwords", "players", "goids"].each do |f|
+    GDBM.open "storage/#{f}" do |g|
+      g.fastmode = false
+      g.clear
+      g.reorganize
+    end
+  end
 
-	puts "Recreating initial objects..."
+  puts "Recreating initial objects..."
 
-	$manager = Manager.new
-	$manager.create_object(Room, nil, nil, :@name => "GarbageRoom")
-	area = $manager.create_object(Area, nil, nil, :@name => "an Expansive Wilderness")
-	area.info.terrain.area_type = :grassland
-	room = $manager.create_object(Room, area, nil,  :@name => "A wide-open field", :@short_desc => "Endless possibilities stretch out to the horizon.")
-	room.info.terrain.room_type = :grassland
-	ServerConfig[:start_room] = room.goid
-	man = $manager.create_object(Mobile, room, nil, :@generic => "tall man", :@short_desc => "A tall man with a very long beard stands here placidly.", :@alt_names => ["man"], :@show_in_look => "A tall man with a very long beard stands here regarding you placidly.", :@sex => "m")
+  $manager = Manager.new
+  $manager.create_object(Room, nil, nil, :@name => "GarbageRoom")
+  area = $manager.create_object(Area, nil, nil, :@name => "an Expansive Wilderness")
+  area.info.terrain.area_type = :grassland
+  room = $manager.create_object(Room, area, nil,  :@name => "A wide-open field", :@short_desc => "Endless possibilities stretch out to the horizon.")
+  room.info.terrain.room_type = :grassland
+  ServerConfig[:start_room] = room.goid
+  man = $manager.create_object(Mobile, room, nil, :@generic => "tall man", :@short_desc => "A tall man with a very long beard stands here placidly.", :@alt_names => ["man"], :@show_in_look => "A tall man with a very long beard stands here regarding you placidly.", :@sex => "m")
 
-	puts "Adding helper reactions..."
+  puts "Adding helper reactions..."
 
-	FileUtils.mkdir "objects/reactions" if not File.exist? "objects/reactions/"
+  FileUtils.mkdir "objects/reactions" if not File.exist? "objects/reactions/"
 
-	File.open "objects/reactions/helper.rx", "w" do |f|
-		f.write helper_reactions
-	end
+  File.open "objects/reactions/helper.rx", "w" do |f|
+    f.write helper_reactions
+  end
 
-	man.load_reactions("helper")
+  man.load_reactions("helper")
 
-	puts "Saving everything..."
+  puts "Saving everything..."
 
-	$manager.save_all
-	$manager = nil
+  $manager.save_all
+  $manager = nil
 
-	puts "...done."
+  puts "...done."
 end
 
 def delete_player
 
-	print "Player to delete: "
+  print "Player to delete: "
 
-	name = gets.strip
+  name = gets.strip
 
-	puts "Attempting to delete #{name}...\n"
+  puts "Attempting to delete #{name}...\n"
 
-	manager = Manager.new
+  manager = Manager.new
 
-	if manager.player_exist? name
+  if manager.player_exist? name
 
-		manager.set_password name, "deleting"
+    manager.set_password name, "deleting"
 
-		go = Gary.new
+    go = Gary.new
 
-		puts "Attempting to load player..."
+    puts "Attempting to load player..."
 
-		player = manager.load_player(name, "deleting")
+    player = manager.load_player(name, "deleting")
 
-		puts "Attempting to delete player..."
+    puts "Attempting to delete player..."
 
-		manager.delete_player name
+    manager.delete_player name
 
-		puts "Saving changes..."
+    puts "Saving changes..."
 
-		manager.save_all
+    manager.save_all
 
-		if manager.player_exist? name
-			puts "Could not delete #{name}"
-		else
-			puts "Deleted #{name}"
-		end
-	else
-		puts "#{name} does not exist."
-	end
+    if manager.player_exist? name
+      puts "Could not delete #{name}"
+    else
+      puts "Deleted #{name}"
+    end
+  else
+    puts "#{name} does not exist."
+  end
 end
 
 def change_password
-	puts
-	print "Player name: "
-	name = gets.chomp
+  puts
+  print "Player name: "
+  name = gets.chomp
 
-	manager = Manager.new(Gary.new)
+  manager = Manager.new(Gary.new)
 
-	if manager.player_exist? name
-		print "New password: "
-		password = gets.chomp
-		puts "Setting new password..."
-		manager.set_password(name, password)
-		puts "Verifying..."
-		if manager.check_password(name, password)
-			puts "Password set."
-		else
-			puts "Problem setting password."
-		end
-	else
-		puts "Error: No player with that name."
-	end
+  if manager.player_exist? name
+    print "New password: "
+    password = gets.chomp
+    puts "Setting new password..."
+    manager.set_password(name, password)
+    puts "Verifying..."
+    if manager.check_password(name, password)
+      puts "Password set."
+    else
+      puts "Problem setting password."
+    end
+  else
+    puts "Error: No player with that name."
+  end
 end
 
 def change_goid
-	current_setting = ServerConfig[:goid_type] || "GUID"
-	puts "The Game Object ID is used to identify game objects."
+  current_setting = ServerConfig[:goid_type] || "GUID"
+  puts "The Game Object ID is used to identify game objects."
 
-	loop do
-		puts "Currently, you are using #{current_setting} for GOIDs.\n"
-		puts "1. GUID (Example: 51e4b36f-d6ae-1916-ebd6-0e23a6f9bcb1)",
-			"2. 16-bit integer (numbers up to 65,536)",
-			"3. 24-bit integer (numbers up to 16777216)",
-			"4. 32-bit integer (numbers up to  4294967296)",
-			"5. No change"
+  loop do
+    puts "Currently, you are using #{current_setting} for GOIDs.\n"
+    puts "1. GUID (Example: 51e4b36f-d6ae-1916-ebd6-0e23a6f9bcb1)",
+      "2. 16-bit integer (numbers up to 65,536)",
+      "3. 24-bit integer (numbers up to 16777216)",
+      "4. 32-bit integer (numbers up to  4294967296)",
+      "5. No change"
 
-		choice = gets.strip.to_i
+    choice = gets.strip.to_i
 
-		case choice
-		when 1
-			ServerConfig[:goid_type] = :guid
-			puts "Set GOID to use GUIDs"
-			return
-		when 2
-			ServerConfig[:goid_type] = :integer_16
-			puts "Set GOID to use integers up to 2^16"
-			return
-		when 3
-			ServerConfig[:goid_type] = :integer_24
-			puts "Set GOID to use integers up to 2^24"
-			return
-		when 4
-			ServerConfig[:goid_type] = :integer_32
-			puts "Set GOID to use integers up to 2^32"
-			return
-		when 5
-			return
-		end
-	end
+    case choice
+    when 1
+      ServerConfig[:goid_type] = :guid
+      puts "Set GOID to use GUIDs"
+      return
+    when 2
+      ServerConfig[:goid_type] = :integer_16
+      puts "Set GOID to use integers up to 2^16"
+      return
+    when 3
+      ServerConfig[:goid_type] = :integer_24
+      puts "Set GOID to use integers up to 2^24"
+      return
+    when 4
+      ServerConfig[:goid_type] = :integer_32
+      puts "Set GOID to use integers up to 2^32"
+      return
+    when 5
+      return
+    end
+  end
 end
 
 def config_options
-	loop do
-		keys = ServerConfig.options.sort_by {|a| a.to_s }
+  loop do
+    keys = ServerConfig.options.sort_by {|a| a.to_s }
 
-		puts "\nServer configuration options:"
+    puts "\nServer configuration options:"
 
-		keys.each_with_index do |k, i|
-			puts "#{i + 1}. #{k.to_s.gsub("_", " ").capitalize}"
-		end
+    keys.each_with_index do |k, i|
+      puts "#{i + 1}. #{k.to_s.gsub("_", " ").capitalize}"
+    end
 
-		puts "#{keys.length + 1}. Show current configuration"
-		puts "#{keys.length + 2}. Return to main menu"
+    puts "#{keys.length + 1}. Show current configuration"
+    puts "#{keys.length + 2}. Return to main menu"
 
-		print "? "
-		answer = gets.chomp
+    print "? "
+    answer = gets.chomp
 
-		if answer =~ /^\d+$/
-			answer = answer.to_i
+    if answer =~ /^\d+$/
+      answer = answer.to_i
 
-			if answer == keys.length + 2
-				return
-			elsif answer == keys.length + 1
-				show_config
-			elsif answer <= keys.length and answer > 0
-				set_config(keys[answer - 1])
-			else
-				puts "Invalid option"
-			end
-		else
-			puts "Please choose one of the options."
-		end
-	end
+      if answer == keys.length + 2
+        return
+      elsif answer == keys.length + 1
+        show_config
+      elsif answer <= keys.length and answer > 0
+        set_config(keys[answer - 1])
+      else
+        puts "Invalid option"
+      end
+    else
+      puts "Please choose one of the options."
+    end
+  end
 end
 
 def show_config
-	puts "\nCurrent configuration:"
+  puts "\nCurrent configuration:"
 
-	keys = ServerConfig.options.sort_by {|a| a.to_s }
+  keys = ServerConfig.options.sort_by {|a| a.to_s }
 
-	keys.each_with_index do |k, i|
-		puts "#{k.to_s.gsub("_", " ").capitalize}: #{ServerConfig[k]}"
-	end
+  keys.each_with_index do |k, i|
+    puts "#{k.to_s.gsub("_", " ").capitalize}: #{ServerConfig[k]}"
+  end
 
 end
 
 def set_config option
 
-	puts "Option: #{option.to_s.gsub("_", " ").capitalize}", "Current value: #{ServerConfig[option]}"
-	print "New value: "
+  puts "Option: #{option.to_s.gsub("_", " ").capitalize}", "Current value: #{ServerConfig[option]}"
+  print "New value: "
 
-	answer = gets.strip
+  answer = gets.strip
 
-	if answer.empty?
-		puts "Keeping current configuration."
-		return
-	end
+  if answer.empty?
+    puts "Keeping current configuration."
+    return
+  end
 
-	case ServerConfig[option]
-	when String
-		ServerConfig[option] = answer
-	when Integer, Float
-		if answer.to_i == answer.to_f
-			ServerConfig[option] = answer.to_i
-		else
-			ServerConfig[option] = answer.to_f
-		end
-	when Symbol
-		ServerConfig[option] = answer.to_sym
-	when TrueClass, FalseClass
-		answer.downcase == "true" ? ServerConfig[option] = true : ServerConfig[option] = false
-	else
-		puts "What should this value be?"
-		["String", "Symbol", "Float", "Integer", "Boolean"].each_with_index do |o, i|
-			puts "#{i + 1}. #{o}"
-		end
+  case ServerConfig[option]
+  when String
+    ServerConfig[option] = answer
+  when Integer, Float
+    if answer.to_i == answer.to_f
+      ServerConfig[option] = answer.to_i
+    else
+      ServerConfig[option] = answer.to_f
+    end
+  when Symbol
+    ServerConfig[option] = answer.to_sym
+  when TrueClass, FalseClass
+    answer.downcase == "true" ? ServerConfig[option] = true : ServerConfig[option] = false
+  else
+    puts "What should this value be?"
+    ["String", "Symbol", "Float", "Integer", "Boolean"].each_with_index do |o, i|
+      puts "#{i + 1}. #{o}"
+    end
 
-		print "? "
+    print "? "
 
-		index = gets.strip
+    index = gets.strip
 
-		case index
-		when 1
-			ServerConfig[option] = answer
-		when 2
-			ServerConfig[option] = answer.to_sym
-		when 3
-			ServerConfig[option] = answer.to_f
-		when 4
-			ServerConfig[option] = answer.to_i
-		when 5
-			answer.downcase == "true" ? ServerConfig[option] = true : ServerConfig[option] = false
-		else
-			puts "Not a valid option."
-		end
-	end
+    case index
+    when 1
+      ServerConfig[option] = answer
+    when 2
+      ServerConfig[option] = answer.to_sym
+    when 3
+      ServerConfig[option] = answer.to_f
+    when 4
+      ServerConfig[option] = answer.to_i
+    when 5
+      answer.downcase == "true" ? ServerConfig[option] = true : ServerConfig[option] = false
+    else
+      puts "Not a valid option."
+    end
+  end
 
-	puts "#{option.to_s.gsub("_", " ").capitalize} set to #{ServerConfig[option]}"
+  puts "#{option.to_s.gsub("_", " ").capitalize} set to #{ServerConfig[option]}"
 end
 
 def helper_reactions
-	<<'HERE'
+  <<'HERE'
 !action
 say hi emote
 !test
