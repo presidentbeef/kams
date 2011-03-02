@@ -8,16 +8,16 @@ require 'objects/container'
 # info.terrain.area_type = :urban
 class Area < Container
 
-	def initialize(*args)
-		super
-		info.terrain = Info.new
-		info.terrain.area_type = :urban
-		@article = "an"
-		@generic = "area"
-	end
+  def initialize(*args)
+    super
+    info.terrain = Info.new
+    info.terrain.area_type = :urban
+    @article = "an"
+    @generic = "area"
+  end
 
-	#Returns self.
-	def area
-		self
-	end
+  #Returns self.
+  def area
+    self
+  end
 end
