@@ -397,7 +397,6 @@ event[:phrase] and event[:phrase].downcase.include? "info" and event[:player] !=
 player = event[:player]
 "sayto #{player.name} Every game object has an Info object which can hold arbitrary information about an object. This is much easier and flexible than using attributes or instance variables. You can manipulate an object's information with the AINFO command."
 
-
 !action
 say
 !test

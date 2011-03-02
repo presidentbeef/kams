@@ -283,7 +283,6 @@ module Admin
 
         objects = $manager.find_all("class", klass)
 
-
         objects.each do |obj|
           e = event.dup
           e[:object] = obj.goid
@@ -610,7 +609,6 @@ module Admin
 
         objects = $manager.find_all("class", klass)
 
-
         objects.each do |obj|
           e = event.dup
           e[:object] = obj.goid
@@ -844,7 +842,6 @@ module Admin
         end
       end
     end
-
 
     #Set a comment on an object.
     def acomment(event, player, room)

@@ -104,7 +104,6 @@ class Gary
     return nil
   end
 
-
   #First does find_by_id and then find_by_generic. Since find_by_generic also does find_by_name, you are all set.
   #This is probably the most useful of the find functions, if you ask me.
   #Note that find_by_id and find_by_name do not use the type comparison, only find_by_generic.

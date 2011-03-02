@@ -132,7 +132,6 @@ class Player < LivingObject
     end
   end
 
-
   #Outputs a message to the Player. Used for all communication to Player.
   def output(message, suppress_prompt = false)
     return if message.nil?

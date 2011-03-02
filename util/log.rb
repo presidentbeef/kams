@@ -55,7 +55,6 @@ class Logger
   alias :<< :add
 end
 
-
 unless Object.respond_to? :log, true
 
   class Object

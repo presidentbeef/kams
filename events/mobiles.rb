@@ -26,7 +26,6 @@ module Mobiles
         object = $manager.find event[:object]
       end
 
-
       object.output event[:to_object] if event[:to_object]
 
       Admin.aput(event, player, room)

@@ -188,7 +188,6 @@ module Emote
       end
     end
 
-
     def pet(event, player, room)
 
       make_emote event, player, room do
@@ -240,7 +239,6 @@ module Emote
       end
     end
 
-
     def hug(event, player, room)
 
       make_emote event, player, room do
@@ -280,7 +278,6 @@ module Emote
           to_other "#{player.name} grins madly at #{event.target.pronoun(:reflexive)}."
           to_deaf_other event[:to_other]
         end
-
 
         target do
           to_player "You give #{event.target.name} a wide grin."
@@ -814,7 +811,6 @@ module Emote
       end
 
     end
-
 
     private
 

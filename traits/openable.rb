@@ -29,7 +29,6 @@ module Openable
     end
   end
 
-
   #Opens container, if possible. Takes care of notifying the player of the result.
   def open(event)
     player = event[:player]

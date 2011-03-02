@@ -559,7 +559,6 @@ module Generic
 
       object = player.search_inv(event[:target]) || room.find(event[:target])
 
-
       if object == player or event[:target] == "me"
         event[:target] = player
         event[:to_player] = "You cautiously sniff your armpits. "
@@ -626,7 +625,6 @@ module Generic
 
     def feel(event, player, room)
       object = player.search_inv(event[:target]) || room.find(event[:target])
-
 
       if object == player or event[:target] == "me"
         player.output "You feel fine."

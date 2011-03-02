@@ -77,7 +77,6 @@ class Portal < Exit
     end
   end
 
-
   #The message sent to the player as they pass through the portal.
   def portal_message player, action = nil
     if info.portal_message

@@ -179,7 +179,6 @@ module PlayerConnection
     end
   end
 
-
   def paginate message
     if @player.nil?
       return line_wrap(message)
