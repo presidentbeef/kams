@@ -108,7 +108,6 @@ class Room < Container
       end
     }
 
-
     #What to show if there are no exits.
     if exits.empty?
       exits << "nowhere, apparently"

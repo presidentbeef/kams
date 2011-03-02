@@ -3,7 +3,6 @@
 # Author:: Wakou Aoyama <wakou@ruby-lang.org>
 # Documentation:: William Webber and Wakou Aoyama
 
-
 IAC   = 255.chr # "\377" # "\xff" # interpret as command
 DONT  = 254.chr # "\376" # "\xfe" # you are not to use option
 DO    = 253.chr # "\375" # "\xfd" # please, you use option

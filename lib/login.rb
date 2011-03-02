@@ -135,7 +135,6 @@ module Login
       return
     end
 
-
     if player.color_settings.nil?
       @use_color = false
     else

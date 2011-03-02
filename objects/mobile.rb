@@ -65,8 +65,6 @@ class Mobile < LivingObject
     return desc
   end
 
-
-
   def take_damage amount, type = :health
     super
 

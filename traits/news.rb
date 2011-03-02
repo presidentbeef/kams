@@ -220,7 +220,6 @@ module News
     "#{post[:post_id]}. <news>#{post[:author]}</>: #{post[:title][0, length_limit]}"
   end
 
-
   #Opens up the store with the given file name and yields it to the given block.
   def open_store(file, read_only = true)
     file = file.to_s

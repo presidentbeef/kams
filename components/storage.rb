@@ -8,7 +8,6 @@ require 'lib/errors'
 load 'util/all-behaviors.rb'
 load 'util/all-objects.rb'
 
-
 #Storage class for object persistance. Uses GDBM.
 #
 #GDBM is a file-system hash table which is fast and available on many platforms. However, it only stores strings. So objects are stored as Strings representing the marshaled object.
@@ -24,7 +23,6 @@ class StorageMachine
     @mutex = Mutex.new
     @saved = 0
   end
-
 
   #This is the save function for a Player, since they need special handling.
   #
@@ -199,7 +197,6 @@ class StorageMachine
       object.instance_variable_set(:@observer_peers, observers)
     end
 
-
     if object.respond_to? :equipment
       object.equipment.each do |o|
         store_object(o) unless o.is_a? Player #this shouldn't happen, but who knows
@@ -256,7 +253,6 @@ class StorageMachine
       log "No file found for that goid (#{game_object_id})"
       raise MUDError::NoSuchGOID
     end
-
 
     open_store file do |gd|
       object = Marshal.load(gd[game_object_id])
