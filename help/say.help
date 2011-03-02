@@ -1,28 +1,18 @@
 Command: Say
 Syntax: SAY <message>
 
-This is the basic command for communication.
+This is the basic command for communication.  Everyone in the room hears what you say.
+Some formatting is automatic, and a few emoticons are supported at the end of the command.
 
-Example:
+Example: say i like cheese
+Output:  You say, "I like cheese."
 
-say i like cheese
+Example: say i like cheese! :)
+Output:  You smile and exclaim, "I like cheese!"
 
-Output:
+You can also specify a prefix in parentheses after the say command.
 
-You say, "I like cheese."
-
-Note the automatic formatting.
-
-A few emoticons are supported, if you use them at the end of the command.
-
-Example:
-
-say i like cheese :)
-
-Output:
-
-You smile and say, "I like cheese."
-
-Note that extra spaces will be removed.
+Example: say (in trepidation) are you going to take my cheese?
+Output:  In trepidation, you ask, "Are you going to take my cheese?"
 
 See also: WHISPER, SAYTO
