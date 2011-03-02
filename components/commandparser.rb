@@ -326,17 +326,14 @@ module CommandParser
 				    { :action => :issue, :itype => $1.downcase.to_sym, :option => $2.downcase, :value => $4 }
 			    when /^(bug|typo|idea)\s+(.*)$/i
 				    { :action => :issue, :itype => $1.downcase.to_sym, :option => "new", :value => $2 }
+			    when /^who$/i
+				    { :action => :who }
+			    when /^time$/i
+				    { :action => :time }
+			    when /^date$/i
+				    { :action => :date }
 			    else
-				    case input.downcase
-				    when "who"
-					    { :action => :who }
-				    when "time"
-					    { :action => :time }
-				    when "date"
-					    { :action => :date }
-				    else
-					    nil
-				    end
+				    nil
 			    end
 
 			Event.new(:Generic, e) if e
