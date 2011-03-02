@@ -130,7 +130,7 @@ module Communication
       last_char = phrase[-1..-1]
 
       unless ["!", "?", "."].include? last_char
-        ender = "." 
+        ender = "."
       end
 
       phrase = ", <say>\"#{phrase}#{ender}\"</say>"

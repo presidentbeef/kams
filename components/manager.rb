@@ -13,7 +13,7 @@ require 'set'
 #The server's Manager is a global named $manager.
 class Manager
   attr_reader :soft_restart, :uptime, :calendar
-  
+
   #Creates a new Manager (only need one, though!)
   #
   #The objects parameter is not for general use, but when you want to use
@@ -165,7 +165,7 @@ class Manager
     if vars
       vars.each do |k,v|
         object.instance_variable_set(k, v)
-      end 
+      end
     end
 
     add_object(object)
@@ -217,7 +217,7 @@ class Manager
     end
 
     player = @game_objects.find(name, Player)
-    
+
     if player.nil?
       set_password name, "deleting"
       player = load_player name, "deleting"
@@ -244,14 +244,14 @@ class Manager
 
     player = nil
 
-    @storage.delete_player(name)  
+    @storage.delete_player(name)
   end
 
   #Remove GameObject from the game completely.
   def delete_object(game_object)
     leave_in_room = nil
 
-    #See if we need to drop anything the object is holding  
+    #See if we need to drop anything the object is holding
     unless game_object.container.nil?
       container = @game_objects.find_by_id(game_object.container)
       unless container.nil?
@@ -318,7 +318,7 @@ class Manager
       room.output("#{game_object.name} vanishes in a poof of smoke.", game_object)
       room.remove(game_object)
     end
-    
+
     if game_object
       @game_objects.delete(game_object)
       game_object.output("Farewell, for now.")
@@ -335,7 +335,7 @@ class Manager
     log "Error when dropping player, but recovering and continuing."
   end
 
-  #Update gets called when an event occurs. The event is just passed along to the EventHandler, unless it is a :quit  or :save 
+  #Update gets called when an event occurs. The event is just passed along to the EventHandler, unless it is a :quit  or :save
   #event, in which case the Manager takes care of it.
   def update(event)
     return if not @running
@@ -410,7 +410,7 @@ class Manager
     end
   end
 
-  #Calls update on all objects. 
+  #Calls update on all objects.
   def update_all
     #require 'benchmark'
     #updated = 0

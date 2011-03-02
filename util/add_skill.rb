@@ -46,10 +46,10 @@ loop do
   skill.description = gets.chomp
 
   skills[skill.command] = skill
-  
+
   File.open("lib/combat_skill.yaml", "w") { |f| YAML.dump(skills, f) }
-  
+
   puts "More (y/n):"
-  break if gets.chomp.downcase[0,1] == 'n'  
+  break if gets.chomp.downcase[0,1] == 'n'
 end
 

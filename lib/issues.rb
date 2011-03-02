@@ -16,7 +16,7 @@ module Issues
       open_store type do |gd|
         if gd.has_key? id
           Marshal.load gd[id]
-        else 
+        else
           nil
         end
       end
@@ -56,7 +56,7 @@ Additional comments:
         if gd.has_key? id
           gd.delete id
           "Deleted #{type} ##{id}."
-        else 
+        else
           "No such #{type} with id #{id}."
         end
       end

@@ -6,7 +6,7 @@ class Parchment < GameObject
 
   def initialize(*args)
     super(*args)
-    
+
     @generic = "parchment"
     @movable = true
     @short_desc = "a piece of parchment"

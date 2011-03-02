@@ -24,8 +24,8 @@ class StorageMachine
     @mutex = Mutex.new
     @saved = 0
   end
-  
-  
+
+
   #This is the save function for a Player, since they need special handling.
   #
   #If password is something other than nil, then it saves the password. You
@@ -41,11 +41,11 @@ class StorageMachine
         gd[player.goid] = Digest::MD5.new.update(password).to_s
       end
     end
-    
+
     #Yeah, so whatever on this little deal. Probably should do it better later.
     player.use_color = player.io.use_color if player.io
     player.color_settings = player.io.color_settings if player.io
-    
+
     #Okay, this is tricky. We can't serialize the IO object stored in the Player
     #objects. To get around this (we don't want to store it anyhow), we temporarily
     #set it to nil, then back to whatever it was.
@@ -86,7 +86,7 @@ class StorageMachine
   def player_exist?(name)
     open_store "players" do |gd|
       gd.has_key? name.downcase
-    end 
+    end
   end
 
   #Returns the type of the object with the supplied goid
@@ -135,7 +135,7 @@ class StorageMachine
     end
     open_store "passwords" do |gd|
       stored_password = gd[goid]
-    end   
+    end
 
     if stored_password.nil?
       log "Could not fetch password for #{name}"
@@ -169,7 +169,7 @@ class StorageMachine
 
     open_store("passwords", false) do |gd|
       gd.delete goid
-    end 
+    end
 
     return delete_object(goid)
   end
@@ -192,7 +192,7 @@ class StorageMachine
     end
 
     open_store(object.class, false) do |gd|
-      gd[object.goid] = Marshal.dump(object) 
+      gd[object.goid] = Marshal.dump(object)
     end
 
     if object.is_a? Observable and not observers.nil?
@@ -206,7 +206,7 @@ class StorageMachine
       end
     end
 
-    @saved += 1   
+    @saved += 1
 
     log "Stored #{object} # #{object.game_object_id}", Logger::Ultimate
   end
@@ -258,7 +258,7 @@ class StorageMachine
     end
 
 
-    open_store file do |gd| 
+    open_store file do |gd|
       object = Marshal.load(gd[game_object_id])
     end
 
@@ -299,7 +299,7 @@ class StorageMachine
         #Don't want to load players until they are playing.
         #We can add the player to a room once they login, not before.
         unless obj.is_a? Player or obj.nil?
-          object.equipment.inventory << obj 
+          object.equipment.inventory << obj
           obj.info.equipment_of = object.goid
         end
 
@@ -364,7 +364,7 @@ class StorageMachine
               fix_observers object
             end
 
-            game_objects << object 
+            game_objects << object
             objects << object
           end
         end
@@ -437,7 +437,7 @@ class StorageMachine
       if game_objects.include? inv_obj
         obj = game_objects[inv_obj]
         unless obj.is_a? Player
-          inv.add(obj) 
+          inv.add(obj)
           obj.container = object.goid
         end
         #log "Added #{obj} to #{object}"
@@ -466,7 +466,7 @@ class StorageMachine
 
   #THIS IS DANGEROUS
   #
-  #THIS IS DANGEROUS - WHATEVER YOU DO, DO NOT RUN ON LIVE SERVER 
+  #THIS IS DANGEROUS - WHATEVER YOU DO, DO NOT RUN ON LIVE SERVER
   #
   #THIS IS DANGEROUS
   #

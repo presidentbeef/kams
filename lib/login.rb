@@ -141,7 +141,7 @@ module Login
     else
       @color_settings = player.color_settings
     end
-      
+
     @word_wrap = player.word_wrap
     player.instance_variable_set(:@player, self)
     $manager.add_object(player)
@@ -211,7 +211,7 @@ module Login
     @sex = data[0..1].downcase
 
     ask_password
-  end 
+  end
 
   #Asks password for new character.
   def ask_password
@@ -243,7 +243,7 @@ module Login
     data.strip!
     case data
     when /^y/i
-      @use_color = true   
+      @use_color = true
     when /^n/i
       @use_color = false
     else
@@ -258,7 +258,7 @@ module Login
   def create_new_player
     @player = Player.new(self, nil, ServerConfig.start_room, @new_name, [], "a typical person", "This is a normal, everyday kind of person.", "person", @sex)
     @player.word_wrap = 80
-    
+
     require 'objects/clothing_items' #why not
     shirt = Shirt.new
     pants = Pants.new
@@ -284,7 +284,7 @@ module Login
     end
 
     $manager.add_player(@player, @new_password)
-  
+
     File.open("logs/player.log", "a") { |f| f.puts "#{Time.now} - #{@player.name} logged in." }
 
     @state = nil

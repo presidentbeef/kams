@@ -28,7 +28,7 @@ module Mobiles
 
 
       object.output event[:to_object] if event[:to_object]
-      
+
       Admin.aput(event, player, room)
 
       if event[:to_room]

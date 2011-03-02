@@ -1,9 +1,9 @@
 require 'objects/exit'
 #Like an Exit, but different.
 #
-#Portals can be entered, do not show up on the list of exits, 
+#Portals can be entered, do not show up on the list of exits,
 class Portal < Exit
-  
+
   #Creates a new portal. args same as Exit.
   def initialize(exit_room = nil, *args)
     super

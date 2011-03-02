@@ -83,7 +83,7 @@ class Equipment
     else
       item = ((@equipment[:left_wield] and @equipment[:left_wield][0]) || (@equipment[:right_wield] and @equipment[:right_wield][0]) || (@equipment[:dual_wield] and @equipment[:dual_wield][0]))
     end
-    
+
     if item
       @inventory[item]
     else
@@ -135,7 +135,7 @@ class Equipment
 
     nil
   end
-  
+
   #Put on an item in a position or the first place it fits.
   #
   #Returns nil upon failure.
@@ -151,11 +151,11 @@ class Equipment
     return nil if position.nil?
 
     container = $manager.get_object(item.container)
-    
+
     if container and not container.is_a? Player
       container.remove(item)
     end
-  
+
     item.container = nil
 
     @equipment[position] ||= []
@@ -204,7 +204,7 @@ class Equipment
   def position_of(game_object, position = nil)
     position ||= game_object.position
     position = sym(position)
-    
+
     if [:arm, :leg, :wield, :wrist, :foot, :ankle, :ring_finger, :ear, :hand].include? position
       return position_of(game_object, "left_#{position}".to_sym) || position_of(game_object, "right_#{position}".to_sym)
     end
@@ -277,7 +277,7 @@ class Equipment
         elsif item
           "\t#{@inventory[item].name} on #{wearer.pronoun(:possessive)} #{nice(position)}."
         elsif eq[0]
-          
+
           "\t#{@inventory[eq[0]].name} on #{wearer.pronoun(:possessive)} #{nice(position)}."
         else
           nil
@@ -286,7 +286,7 @@ class Equipment
         nil
       end
     end
-        
+
   end
 
   #Show what the object is wielding.
@@ -329,7 +329,7 @@ class Equipment
   #Returns nil if it is, a message for the player if it is not.
   def check_position(item, position = nil)
     position = sym(position) unless position.nil?
-    
+
     if not item.is_a? Wearable
       return "You cannot wear #{item.name}."
     elsif position.nil?
@@ -354,7 +354,7 @@ class Equipment
       else
         return "You are wearing #{@inventory[@equipment[position][item.layer]].name} where #{item.name} would be worn."
       end
-    end 
+    end
   end
 
   private

@@ -40,7 +40,7 @@ class Container < GameObject
   def include?(game_object_id)
     @inventory.include? game_object_id
   end
-  
+
   #Outputs message to all in container, except those listed in skip.
   def output(message, *skip)
     skip = Set.new(skip)
@@ -70,7 +70,7 @@ class Container < GameObject
       o.out_event(event) unless skip.include?(o)
     }
   end
-  
+
   #Returns a String describing contents.
   def look_inside(event)
     event[:player].output("#{self.name} contains:\n" << @inventory.show)

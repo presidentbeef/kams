@@ -3,7 +3,7 @@ class Armor < GameObject
   include Wearable
 
   attr_accessor :position, :slash_def, :pierce_def, :blunt_def, :frost_def, :energy_def
-  
+
   def initialize(*args)
     super
     @generic = "armor"

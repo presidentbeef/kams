@@ -1,6 +1,6 @@
 require 'lib/gameobject'
 require 'objects/equipment'
-require 'traits/position' 
+require 'traits/position'
 require 'traits/hasinventory'
 
 #Shared parent class of Player and Mobile.

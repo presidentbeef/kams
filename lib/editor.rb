@@ -37,7 +37,7 @@ module Editor
   def editor_prompt
     self.print "<editor>#{@editor_line + 1}]</> #{IAC + GA}"
   end
-  
+
   #Handle input.
   def editor_input input
     case input.downcase
@@ -84,7 +84,7 @@ module Editor
 
     if @editor_line >= @limit
       self.puts "You have run out of room on this document."
-    end 
+    end
     editor_prompt
   end
 
@@ -179,7 +179,7 @@ module Editor
         editor_save
       when /^n/
         editor_really_quit
-      else 
+      else
         editor_out "Resuming editing at line #{@editor_line + 1}."
         editor_prompt
       end

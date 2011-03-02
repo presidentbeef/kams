@@ -6,7 +6,7 @@ require 'observer'
 require 'lib/info'
 
 #Base class for all game objects, including players. Should be subclassed to do anything useful.
-class GameObject 
+class GameObject
   include Observable
   include Pronoun
 
@@ -77,7 +77,7 @@ class GameObject
   def out_event(event)
     alert(event)
   end
-  
+
   #Generic 'tick' function called to update the object's state.
   #
   #Calls GameObject#run , which is where any "thinking" or decision
@@ -91,7 +91,7 @@ class GameObject
     run
     @busy = false
   end
-  
+
   #Checks if the GameObject is busy in the GameObject#update method.
   #This prevents the update method from being called more than once
   #at a time.
@@ -108,7 +108,7 @@ class GameObject
       "#{@names}s"
     else
       "unkowns"
-    end 
+    end
   end
 
   #Run any logic you need (thinking).
@@ -126,7 +126,7 @@ class GameObject
   #Basically, this is where hooks for events would go.
   def alert(event)
   end
-  
+
   #This is implemented so that we can just ignore calls that don't apply.
   def method_missing(*args)
     log "#{@name} - #{@game_object_id} is ignoring #{args.inspect}"

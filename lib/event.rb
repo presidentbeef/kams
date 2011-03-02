@@ -40,14 +40,14 @@ class Event < OpenStruct
 
   #Retrieve an attribute.
   #
-  #Note: it is preferable to use accessor methods instead, like Event.new(:Combat).name 
+  #Note: it is preferable to use accessor methods instead, like Event.new(:Combat).name
   def [] index
     @table[index.to_sym]
   end
 
   #Set an attribute.
   #
-  #Note: it is preferable to use accessor methods instead, like Event.new(:Combat).target = "bob" 
+  #Note: it is preferable to use accessor methods instead, like Event.new(:Combat).target = "bob"
   def []= index, value
     self.new_ostruct_member(index)
     @table[index.to_sym] = value
@@ -95,7 +95,7 @@ class Event < OpenStruct
   end
 
   #Attach another event to this one. Attached events will be run immediately after
-  #the event they are attached to.  
+  #the event they are attached to.
   def attach_event event
     self.attached_events ||= []
     self.attached_events << event

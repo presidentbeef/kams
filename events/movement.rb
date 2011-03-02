@@ -110,7 +110,7 @@ module Movement
       if not player.balance
         player.output "You cannot use a portal while unbalanced."
         return
-      elsif portal.nil? 
+      elsif portal.nil?
         player.output "What are you trying to #{event[:portal_action]}?"
         return
       elsif not portal.is_a? Portal
@@ -212,7 +212,7 @@ module Movement
 
       if player.sitting?
         object = $manager.find(player.sitting_on, room)
-      else 
+      else
         object = $manager.find(player.lying_on, room)
       end
 

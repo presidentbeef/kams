@@ -69,7 +69,7 @@ module WeaponCombat
       else
         events = Combat.find_events(:target => player, :blockable => true)
       end
-      
+
       if events.empty?
         player.output "What are you trying to block?"
         return
@@ -99,7 +99,7 @@ module WeaponCombat
       room.out_event event
     end
 
-    #Wield a weapon.    
+    #Wield a weapon.
     def wield(event, player, room)
       weapon = player.inventory.find(event[:weapon])
       if weapon.nil?
@@ -205,7 +205,7 @@ module WeaponCombat
       event.target.balance = true
       player.info.in_combat = false
       event.target.info.in_combat = false
-      Combat.inflict_damage event, player, room, 10 #temporary set amount of damage for now 
+      Combat.inflict_damage event, player, room, 10 #temporary set amount of damage for now
     end
 
     def weapon_block(event, player, room)

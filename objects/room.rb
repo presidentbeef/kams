@@ -13,7 +13,7 @@ require 'objects/exit'
 class Room < Container
 
   attr_reader :terrain
-  
+
   #Create new room. Arguments same as GameObject.
   def initialize(*args)
     super(nil, *args)
@@ -78,7 +78,7 @@ class Room < Container
         add_to_desc << " " << item.show_in_look if item.show_in_look != ""
         next
       end
-      
+
       if item.is_a?(Player) and item != player and item.visible
         if item.pose
           people << ("#{item.name}, #{item.pose},")

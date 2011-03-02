@@ -1,11 +1,11 @@
 #The Pronoun mixin provides the pronoun function, which gives the correct pronoun
 #based on the sex of the object.
 module Pronoun
-  @@pronouns = { :normal => 
+  @@pronouns = { :normal =>
       { 'm' => 'he',
       'f' => 'she',
       'n' => 'it' },
-    :possessive => 
+    :possessive =>
       { 'm' => 'his',
       'f' => 'her',
       'n' => 'its' },
@@ -21,7 +21,7 @@ module Pronoun
       { 'm' => 'his',
       'f' => 'hers',
       'n' => 'its' }
-    } 
+    }
 
   #This is the only function of the Pronoun mixin. It returns the correct pronoun
   #based on the sex of the object.
@@ -39,7 +39,7 @@ module Pronoun
   def pronoun(type = :normal)
     if @@pronouns[type]
       if @@pronouns[type][@sex].nil?
-        log "What the heck."    
+        log "What the heck."
       else
         return @@pronouns[type][@sex]
       end

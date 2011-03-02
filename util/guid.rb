@@ -2,7 +2,7 @@
 # Guid - Ruby library for portable GUID/UUID generation.
 #
 # Copyright (c) 2004 David Garamond <davegaramond at icqmail com>
-# 
+#
 # This library is free software; you can redistribute it and/or modify it
 # under the same terms as Ruby itself.
 #
@@ -20,7 +20,7 @@ if RUBY_PLATFORM =~ /win|ming/i
 
     CryptAcquireContext = Win32API.new("advapi32", "CryptAcquireContext",
                'PPPII', 'L')
-    CryptGenRandom = Win32API.new("advapi32", "CryptGenRandom", 
+    CryptGenRandom = Win32API.new("advapi32", "CryptGenRandom",
           'LIP', 'L')
     CryptReleaseContext = Win32API.new("advapi32", "CryptReleaseContext",
                'LI', 'L')

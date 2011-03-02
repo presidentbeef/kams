@@ -72,7 +72,7 @@ if __FILE__ == $0
 
   log "Server restart ##{server_restarts}"
 
-  begin 
+  begin
     #result = RubyProf.profile do
     Server.new(ServerConfig.address, ServerConfig.port)
     #end
@@ -87,7 +87,7 @@ if __FILE__ == $0
       else
         File.open("logs/server.log", "a+") { |f| f.puts "#{Time.now} Server restart on error or interrupt." }
       end
-      
+
       log "SERVER RESTARTING - Attempting to restart in 10 seconds...press ^C to stop...", Logger::Important
       sleep ServerConfig.restart_delay
       log "RESTARTING SERVER", Logger::Important, true

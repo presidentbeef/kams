@@ -8,7 +8,7 @@ class Door < Exit
 
   def initialize(exit_room = nil, lockable = true, *args)
     super(exit_room, *args)
-  
+
     @connected_to = nil
     @lockable = lockable
     @generic = "door"
@@ -28,7 +28,7 @@ class Door < Exit
     @open = true
     room.output "The #{@generic} opens."
   end
-  
+
   #Method called when the other side of the door closes.
   def other_side_closed
     room = $manager.find @container
@@ -39,7 +39,7 @@ class Door < Exit
   #Opens the door.
   def open(event)
     currently_open = @open
-    
+
     if @connected_to
       super
 
@@ -69,7 +69,7 @@ class Door < Exit
       super
     end
   end
-  
+
   #Connects this door to another door so it works correctly.
   #Accepts either a Door or a String. If door is a Door, then it automatically connects the other door to itself.
   #Otherwise, you have to call connect_to for each Door. If the other Door is already connected, that connection shall remain.

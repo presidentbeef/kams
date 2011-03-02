@@ -133,7 +133,7 @@ module CommandParser
 
   @equipment = Set.new(['wear', 'remove'])
 
-  @admin = Set.new(['acreate', 
+  @admin = Set.new(['acreate',
   'alook',
   'adesc',
   'acarea',
@@ -181,7 +181,7 @@ module CommandParser
   #etc...
 
   class <<self
-    
+
     #Creates an event to occur in the future. The event can be an event generated with CommandParser.parse or a block to be executed
     #when the time elapses.
     #
@@ -199,7 +199,7 @@ module CommandParser
 
       event
     end
-    
+
     #Parses input into a hash that can be passed to the EventHandler.
     #Returns nil if the input cannot be parsed into a meaningful command.
     def parse(player, input)
@@ -217,14 +217,14 @@ module CommandParser
 
       if command.empty?
         return nil
-      else 
+      else
         command = command[0].downcase
       end
 
       event = if @generic_commands.include? command
           parse_generic input
         elsif @emotes.include? command
-          parse_emote input 
+          parse_emote input
         elsif @movement.include? command
           parse_movement input
         elsif @equipment.include? command
@@ -244,8 +244,8 @@ module CommandParser
         elsif @mobile.include? command and player.is_a? Mobile
           parse_mobile command
         elsif input =~ /^alarm\s+([0-9]+)$/i
-          after $1.to_i do 
-            player.output "***ALARM***" 
+          after $1.to_i do
+            player.output "***ALARM***"
           end
         elsif input =~ /^(\w+)\s+(.*)$/
           parse_custom input
@@ -306,7 +306,7 @@ module CommandParser
           when /^(st|stat|status)$/i
             { :action => :status }
           when /^write\s+(.*)/i
-            { :action => :write, :target => $1.strip} 
+            { :action => :write, :target => $1.strip}
           when /^(listen|sniff|smell|taste|lick|feel)(\s+(.+))?$/i
             if $1.downcase == "sniff"
               action = :smell
@@ -470,7 +470,7 @@ module CommandParser
       when /^aconfig\s+(\w+)\s+(.*)$/i
         event[:action] = :aconfig
         event[:setting] = $1
-        event[:value] = $2 
+        event[:value] = $2
       when /^acportal(\s+(jump|climb|crawl|enter))?(\s+(.*))?$/i
         event[:action] = :acportal
         event[:object] = "portal"
@@ -737,4 +737,4 @@ module CommandParser
       event
     end
   end
-end 
+end

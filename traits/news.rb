@@ -14,7 +14,7 @@ require 'gdbm'
 module News
 
   #Save post information to a new post
-  def save_post(player, title, reply_to, message) 
+  def save_post(player, title, reply_to, message)
     posts = nil
     open_store(goid) do |gd|
       posts = gd.length
@@ -54,7 +54,7 @@ module News
     unless post[:reply_to].nil?
       parent = get_post post[:reply_to]
       if parent
-        output << "Re  : '#{parent[:title]}' by #{parent[:author]} (#{post[:reply_to]})" 
+        output << "Re  : '#{parent[:title]}' by #{parent[:author]} (#{post[:reply_to]})"
       end
     end
     output << "By  : #{post[:author]}"
@@ -64,7 +64,7 @@ module News
     output << post[:message]
 
     output << ("-" * word_wrap)
-    
+
     replies = list_replies(post[:post_id], word_wrap)
     if replies
       output + replies
@@ -92,7 +92,7 @@ module News
       else
         latest_keys.collect {|k| k.to_s }.each do |k|
           latest[k.to_i] = Marshal.load(gd[k])
-        end 
+        end
       end
     end
 
@@ -162,7 +162,7 @@ module News
         output << " " + post_summary(replies[post_id], wordwrap)
       end
       output
-    end 
+    end
   end
 
   #Deletes the post.
@@ -204,7 +204,7 @@ module News
   #Finds and adds the highest parent for a post.
   def insert_parent tree, latest, id
     reply = latest[id][:reply_to].to_i
-    if reply.nil? 
+    if reply.nil?
       tree << id
     elsif not latest.include? reply
       tree << id

@@ -40,7 +40,7 @@ module MartialCombat
     end
 
     def punch(event, player, room)
-      return unless Combat.ready? player 
+      return unless Combat.ready? player
 
       target = (event.target && room.find(event.target)) || room.find(player.last_target)
 
@@ -76,7 +76,7 @@ module MartialCombat
     end
 
     def simple_dodge(event, player, room)
-      return unless Combat.ready? player 
+      return unless Combat.ready? player
 
       target = (event.target && room.find(event.target)) || room.find(player.last_target)
 
@@ -88,7 +88,7 @@ module MartialCombat
       else
         events = Combat.find_events(:target => player, :blockable => true)
       end
-      
+
       if events.empty?
         player.output "What are you trying to dodge?"
         return
@@ -124,7 +124,7 @@ module MartialCombat
       event.target.balance = true
       player.info.in_combat = false
       event.target.info.in_combat = false
-      Combat.inflict_damage event, player, room, 8 #temporary set amount of damage for now 
+      Combat.inflict_damage event, player, room, 8 #temporary set amount of damage for now
     end
 
     def martial_miss(event, player, room)

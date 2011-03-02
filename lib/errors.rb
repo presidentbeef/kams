@@ -1,6 +1,6 @@
 #Just some custom errors.
 module MUDError
-  
+
   #Raised when an unknown character name is entered.
   class UnknownCharacter < RuntimeError; end
 

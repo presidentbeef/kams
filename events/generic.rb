@@ -282,7 +282,7 @@ module Generic
 
       if topic.include? 'topics' or topic == ''
         player.output('Help topics available:', true)
-        topics = [] 
+        topics = []
         Dir.glob("#{path}*.help").sort.each do |filename|
           topics << filename[/#{path}(.*)\.help/, 1].upcase
         end
@@ -479,7 +479,7 @@ module Generic
     #Delete your player.
     def deleteme(event, player, room)
       if event[:password]
-        if $manager.check_password(player.name, event[:password]) 
+        if $manager.check_password(player.name, event[:password])
           player.output "This character #{player.name} will no longer exist."
           player.quit
           $manager.delete_player(player.name)
@@ -511,14 +511,14 @@ module Generic
         return
       end
 
-      player.output "You begin to write on #{object.name}."   
+      player.output "You begin to write on #{object.name}."
 
       player.editor(object.readable_text || [], 100) do |data|
         unless data.nil?
           object.readable_text = data
         end
         player.output "You finish your writing."
-      end 
+      end
     end
 
     def taste(event, player, room)

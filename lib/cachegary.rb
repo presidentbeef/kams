@@ -62,13 +62,13 @@ class CacheGary < Gary
   #This function is potentially dangerous, since it is not using a mutex
   def [] goid
     if @ghash[goid]
-      return @ghash[goid] 
+      return @ghash[goid]
     elsif @all_goids.include? goid
       log "Loading #{goid} from storage" , Logger::Ultimate
       begin
         obj = @storage.load_object(goid, self)
         obj.add_observer(@manager)
-      rescue MUDError::NoSuchGOID 
+      rescue MUDError::NoSuchGOID
         log "Tried to load #{goid}, but it must have been deleted."
         return nil
       end

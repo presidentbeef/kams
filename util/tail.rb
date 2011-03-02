@@ -97,7 +97,7 @@ class File
       def self.open(filename, opts = {}, &block) # :yields: file
         file = new filename
         opts.each do |o, v|
-          writer = o.to_s + "=" 
+          writer = o.to_s + "="
           file.__send__(writer, v) if file.respond_to? writer
         end
         if opts.key?(:wind) or opts.key?(:rewind)
@@ -156,12 +156,12 @@ class File
     class BreakException < TailException; end
 
     # The ReopenException is raised internally if File::Tail
-    # gets suspicious something unusual has happend to 
+    # gets suspicious something unusual has happend to
     # the tailed file, e. g., it was rotated away. The exception
     # is caught and an attempt to reopen it is made.
     class ReopenException < TailException
       attr_reader :mode
-    
+
       # Creates an ReopenException object. The mode defaults to
       # <code>:bottom</code> which indicates that the file
       # should be tailed beginning from the end. <code>:top</code>
@@ -236,7 +236,7 @@ class File
     #
     # The additional argument <code>bufsiz</code> is
     # used to determine the buffer size that is used to step through
-    # the file backwards. It defaults to the block size of the 
+    # the file backwards. It defaults to the block size of the
     # filesystem this file belongs to or 8192 bytes if this cannot
     # be determined.
     def backward(n = 0, bufsiz = nil)
@@ -313,7 +313,7 @@ class File
         end
       end
     end
-    
+
     private
 
     def read_line(&block)
@@ -390,7 +390,7 @@ class File
       sleep @interval
       @no_read += @interval
     end
-    
+
     def reopen_file(mode)
       $DEBUG and $stdout.print "Reopening '#{path}', mode = #{mode}.\n"
       @no_read = 0
@@ -399,7 +399,7 @@ class File
         backward
       end
     rescue Errno::ESTALE, Errno::ENOENT
-      if @reopen_deleted    
+      if @reopen_deleted
         sleep @max_interval
         retry
       else
@@ -410,7 +410,7 @@ class File
     def debug
 =begin
       $DEBUG or return
-      STDERR.puts({ 
+      STDERR.puts({
         :lines    => @lines,
         :interval => @interval,
         :no_read  => @no_read,
