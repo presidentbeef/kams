@@ -37,9 +37,9 @@ class Logger
         File.delete(@log_file)
       end
 
-      File.open(@log_file, "a") { |f|
+      File.open(@log_file, "a") do |f|
         f.puts @entries
-      }
+      end
     end
     self.clear
   end

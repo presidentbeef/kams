@@ -72,7 +72,7 @@ class Room < Container
     exits = Array.new
     add_to_desc = String.new
 
-    @inventory.each { |item|
+    @inventory.each do |item|
 
       if item.show_in_look
         add_to_desc << " " << item.show_in_look if item.show_in_look != ""
@@ -106,7 +106,7 @@ class Room < Container
           things << "#{item.name}"
         end
       end
-    }
+    end
 
     #What to show if there are no exits.
     if exits.empty?
