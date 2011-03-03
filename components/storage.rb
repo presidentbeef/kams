@@ -103,13 +103,9 @@ class StorageMachine
   #and loads the player.
   def load_player(name, password, game_objects)
     goid = nil
-    stored_password = nil
 
     open_store "players" do |gd|
       goid = gd[name.downcase]
-    end
-    open_store "passwords" do |gd|
-      stored_password = gd[goid]
     end
 
     if goid.nil?
