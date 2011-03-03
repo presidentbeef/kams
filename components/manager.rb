@@ -429,14 +429,14 @@ class Manager
 
   #Sends alert to all players.
   def alert_all(message = "<important>Server is shutting down, sorry!</important>", ignore_lost = true)
-    @game_objects.find_all('class', Player).each { |object|
+    @game_objects.find_all('class', Player).each do |object|
       begin
         unless ignore_lost and object.container.nil?
           object.output message
         end
       rescue
       end
-    }
+    end
   end
 
   #Finds the object in the container. If container is nil, then searches whole world.

@@ -20,9 +20,9 @@ class Container < GameObject
 
   #Propagates alert to all in the container.
   def alert(event)
-    @inventory.each { |o|
+    @inventory.each do |o|
       o.alert(event)
-    }
+    end
   end
 
   #Remove object from room.
@@ -45,9 +45,9 @@ class Container < GameObject
   def output(message, *skip)
     skip = Set.new(skip)
 
-    @inventory.each { |o|
+    @inventory.each do |o|
       o.output(message) unless skip.include?(o)
-    }
+    end
   end
 
   #Sends an event out to contents.
@@ -66,9 +66,9 @@ class Container < GameObject
 
     self.alert event if self.is_a? Reacts and not skip.include? self
 
-    @inventory.each { |o|
+    @inventory.each do |o|
       o.out_event(event) unless skip.include?(o)
-    }
+    end
   end
 
   #Returns a String describing contents.

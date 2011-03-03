@@ -19,13 +19,13 @@ module Openable
   def Openable.included(klass)
     if klass.respond_to? :look_inside
       klass.instance_eval { alias_method :old_look_inside, :look_inside }
-      klass.send(:define_method, :look_inside) { |event|
+      klass.send(:define_method, :look_inside) do |event|
         if @open
           old_look_inside(event)
         else
           event[:player].output("You'll need to open it first.")
         end
-      }
+      end
     end
   end
 

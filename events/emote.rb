@@ -15,16 +15,16 @@ module Emote
         show = action
       elsif action.include? '$'
         people = []
-        action.gsub!(/\$(\w+)/) { |name|
+        action.gsub!(/\$(\w+)/) do |name|
           target = room.find($1)
           people << target unless target.nil?
           target ? target.name : 'no one'
-        }
+        end
 
-        people.each { |person|
+        people.each do |person|
           out = action.gsub(person.name, 'you')
           person.output("#{player.name} #{out}") unless person.can? :blind and person.blind?
-        }
+        end
 
         room.output("#{player.name} #{action}", player, *people)
         player.output("You emote: #{player.name} #{action}")

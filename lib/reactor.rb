@@ -108,9 +108,9 @@ class Reactor
 
   #Adds a bunch of reactions, in some kind of Enumerable
   def add_all(reactions)
-    reactions.each { |r|
+    reactions.each do |r|
       self.add(r)
-    }
+    end
   end
 
   #Adds a single reaction
@@ -125,13 +125,13 @@ class Reactor
         actions = [reaction[:action]]
       end
 
-      actions.each { |action|
+      actions.each do |action|
         if @reactions[action].nil?
           @reactions[action] = [reaction]
         else
           @reactions[action] << reaction
         end
-      }
+      end
       log "Added #{reaction.inspect}"
     else
       log "Not accepting reaction: #{reaction.inspect}" , Logger::Ultimate
@@ -150,13 +150,13 @@ class Reactor
     room = $manager.get_object(@mob.room)
     begin
       unless @reactions[event[:action]].nil?
-        @reactions[event[:action]].each { |r|
+        @reactions[event[:action]].each do |r|
           if r[:test][event, player, room, @mob]
             log "Reacting" , Logger::Ultimate
             actions << r[:reaction]
             #break #breaking would mean only one reaction fires, even if many match
           end
-        }
+        end
         log "No other tests passed for that action." , Logger::Ultimate
       else
         log "No reaction for that action." , Logger::Ultimate

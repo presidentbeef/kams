@@ -263,7 +263,7 @@ class StorageMachine
       log "Loading inventory for #{object}", Logger::Ultimate
       load_too = object.inventory
       object.inventory = Inventory.new(object.inventory.capacity)
-      load_too.each { |goid|
+      load_too.each do |goid|
         if game_objects.find_by_id(goid)
           obj = game_objects.find_by_id(goid)
         else
@@ -274,7 +274,7 @@ class StorageMachine
         #We can add the player to a room once they login, not before.
         object.inventory << obj unless obj.is_a? Player
         obj.container = object.goid
-      }
+      end
     end
 
     if object.respond_to? :equipment
@@ -425,7 +425,7 @@ class StorageMachine
 
     inv = Inventory.new(object.inventory.capacity)
 
-    object.inventory.each { |inv_obj|
+    object.inventory.each do |inv_obj|
       if game_objects.include? inv_obj
         obj = game_objects[inv_obj]
         unless obj.is_a? Player
@@ -436,7 +436,7 @@ class StorageMachine
       else
         log "Don't have #{inv_obj} loaded...what does that mean? (Probably a Player)", Logger::Medium
       end
-    }
+    end
 
     object.inventory = inv
   end
@@ -468,10 +468,10 @@ class StorageMachine
   #
   #THIS IS REALLY DANGEROUS
   def update_all_objects!
-    load_all(true).each { |game_object|
+    load_all(true).each do |game_object|
       game_object = yield game_object
       store_object(game_object)
-    }
+    end
   end
 
   #Fixes issue with changes with Observer between Ruby 1.8.7 and 1.9.1

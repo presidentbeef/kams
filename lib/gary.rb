@@ -32,9 +32,9 @@ class Gary
 
   #Add a new object to the list of game objects.
   def << game_object
-    @mutex.synchronize {
+    @mutex.synchronize do
       @ghash[game_object.game_object_id] = game_object
-    }
+    end
   end
 
   #Creates a duplicate of the Gary and runs the block for each member
@@ -55,9 +55,9 @@ class Gary
 
   #Look up a game object by its game_object_id (aka: goid). Returns the object or nil if it's not found.
   def [] game_object_id
-    @mutex.synchronize {
+    @mutex.synchronize do
       return @ghash[game_object_id]
-    }
+    end
   end
 
   #Object can be an game object id or a game object. Deletes it from the game object set.
@@ -69,9 +69,9 @@ class Gary
       object = find_by_id(object_id)
     end
 
-    @mutex.synchronize {
+    @mutex.synchronize do
       game_object = @ghash.delete(object_id)
-    }
+    end
   end
 
   #Returns the number of objects in the set.
@@ -89,7 +89,7 @@ class Gary
     end
 
     name.downcase!
-    @ghash.dup.each_value { |o|
+    @ghash.dup.each_value do |o|
       if type.nil?
         if o.generic.downcase == name or o.name.downcase == name or o.alt_names.find {|n| n.downcase == name }
           return o
@@ -99,7 +99,7 @@ class Gary
           return o
         end
       end
-    }
+    end
 
     return nil
   end

@@ -385,29 +385,29 @@ module Admin
       output = "Object: #{object}\n"
       output << "Attributes:\n"
 
-      object.instance_variables.sort.each { |var|
+      object.instance_variables.sort.each do |var|
         val = object.instance_variable_get(var)
         if var == :@observer_peers
           val = val.keys.map {|k| k.to_s }
         end
         output << "\t#{var} = #{val}\n"
-      }
+      end
 
       output << "\r\nInventory:\r\n"
 
       if object.respond_to? :inventory
-        object.inventory.each { |o|
+        object.inventory.each do |o|
           output << "\t#{o.name} # #{o.goid}\n"
-        }
+        end
       else
         output << "\tNo Inventory"
       end
 
       if object.respond_to? :equipment
         output << "\r\nEquipment:\r\n"
-        object.equipment.inventory.each { |o|
+        object.equipment.inventory.each do |o|
           output << "\t#{o.name} # #{o.goid}\n"
-        }
+        end
         output << "\t#{object.equipment.equipment.inspect}\n"
       end
 
@@ -427,9 +427,9 @@ module Admin
         player.output "Nothing like that to list!"
       else
         output = []
-        objects.each { |o|
+        objects.each do |o|
           output << "\t" + o.to_s
-        }
+        end
 
         output = output.join("\n")
 
@@ -665,9 +665,9 @@ module Admin
       players = $manager.find_all('class', Player)
 
       names = []
-      players.each { |playa|
+      players.each do |playa|
         names << playa.name
-      }
+      end
 
       player.output('Players currently online:', true)
       player.output(names.join(', '))
@@ -678,9 +678,9 @@ module Admin
       awho(event, player, room)
       total_objects = $manager.game_objects_count
       player.output("Object Counts:" , true)
-      $manager.type_count.each { |obj, count|
+      $manager.type_count.each do |obj, count|
         player.output("#{obj}: #{count}", true)
-      }
+      end
       player.output("Total Objects: #{total_objects}")
     end
 

@@ -316,12 +316,12 @@ module Generic
       end
 
       has_key = false
-      object.keys.each { |key|
+      object.keys.each do |key|
         if player.inventory.include? key
           has_key = key
           break
         end
-      }
+      end
 
       if has_key or player.admin
         status = object.lock(has_key, player.admin)
@@ -365,12 +365,12 @@ module Generic
       end
 
       has_key = false
-      object.keys.each { |key|
+      object.keys.each do |key|
         if player.inventory.include? key
           has_key = key
           break
         end
-      }
+      end
 
       if has_key or player.admin
         status = object.unlock(has_key, player.admin)
