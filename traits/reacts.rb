@@ -231,7 +231,7 @@ module Reacts
 	#  :initial_delay  -  delay before first action (Default: 0 seconds)
 	#  :delay  -  delay between actions (Default: 0 seconds)
 	#  :loop   -  true to repeat sequence infinitely (Default: false)
-	def action_sequence sequence, options
+	def action_sequence sequence, options = {}
 		delay = options[:delay] || 0
 		continuous_loop = false || options[:loop]
 
