@@ -559,7 +559,8 @@ module Admin
 				player.output "#{object}:No such setting/variable/attribute: #{attrib}"
 				return
 			else
-				if object.instance_variable_get(attrib).is_a? Array
+				current_value = object.instance_variable_get(attrib)
+				if current_value.is_a? Array
 					object.instance_variable_set(attrib, event[:value].split(/s*"(.*?)"\s*|\s+/))
 					player.output "Set #{object} attribute #{attrib} to #{event[:value].inspect}"
 				else
@@ -575,7 +576,7 @@ module Admin
 						when "nil"
 							value = nil
 						when /^[0-9]+$/
-							value = value.to_i
+							value = value.to_i unless current_value.is_a? String
 						when "!nothing"
 							value = ""
 						when "!delete"
