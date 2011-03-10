@@ -220,7 +220,7 @@ module Generic
         return
       end
 
-      container =  player.search_inv(event[:item]) || $manager.find(event[:container], room)
+      container = player.search_inv(event[:container]) || $manager.find(event[:container], room)
 
       if container.nil?
         player.output("There is no #{event[:container]} in which to put #{item.name}.")
