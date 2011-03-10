@@ -890,7 +890,12 @@ module Admin
 					Admin.areaction(e, player, room)
 				end
 			else
-				object = find_object(event[:object], event)
+				if event[:object] == "here"
+					object = room
+				else
+					object = find_object(event[:object], event)
+				end
+
 				if object.nil?
 					player.output "Cannot find:#{event[:object]}"
 					return
