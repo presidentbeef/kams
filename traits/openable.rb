@@ -64,10 +64,10 @@ module Openable
 
 			if @name.empty?
 				player.output "You close #@article #@generic."
-				room.output "#{player.name} close #@article #@generic.", player
+				room.output "#{player.name} closes #@article #@generic.", player
 			else
 				player.output "You close #@name."
-				room.output "#{player.name} close #@name.", player
+				room.output "#{player.name} closes #@name.", player
 			end
 		end
 	end
