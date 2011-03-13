@@ -899,7 +899,6 @@ module Admin
         elsif not object.is_a? Reacts and (event[:command] == "load" or event[:command] == "reload")
           player.output "Object cannot react, adding react ability."
           object.extend(Reacts)
-          object.init_reactor
         end
 
         case event[:command]

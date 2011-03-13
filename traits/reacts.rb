@@ -11,8 +11,11 @@ module Reacts
     @reactions_files.include? file
   end
 
-  #This is called when the object is created, but if the
-  #module is mixed in dynamically this needs to be called before being used
+  # Automatically set up the reactor when we extend an object
+  def self.extended(obj)
+    obj.init_reactor
+  end
+
   def init_reactor
     @reactor ||= Reactor.new(self)
     @reaction_files ||= Set.new
