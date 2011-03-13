@@ -571,7 +571,7 @@ module Admin
             when "false"
               value = false
             when /^:/
-              value = value.to_sym
+              value = value[1..-1].to_sym
             when "nil"
               value = nil
             when /^[0-9]+$/
