@@ -5,7 +5,6 @@ class Key < GameObject
     super(*args)
 
     @generic = "key"
-    @name = "key"
     @movable = true
     @short_desc = 'an unremarkable key'
   end

@@ -63,10 +63,10 @@ module Openable
 
       if @name.empty?
         player.output "You close #@article #@generic."
-        room.output "#{player.name} close #@article #@generic.", player
+        room.output "#{player.name} closes #@article #@generic.", player
       else
         player.output "You close #@name."
-        room.output "#{player.name} close #@name.", player
+        room.output "#{player.name} closes #@name.", player
       end
     end
   end
@@ -77,6 +77,13 @@ module Openable
   def lock(key, admin = false)
     if @lockable and not @locked and (@keys.include? key or admin)
       @locked = true
+
+      if self.can? :connected_to
+        other = $manager.find self.connected_to
+        other.lock(key, admin) if other.can? :lock
+      end
+
+      true
     else
       false
     end
@@ -88,6 +95,12 @@ module Openable
   def unlock(key, admin = false)
     if @lockable and @locked and (@keys.include? key or admin)
       @locked = false
+
+      if self.can? :connected_to
+        other = $manager.find self.connected_to
+        other.unlock(key, admin) if other.can? :lock
+      end
+
       true
     else
       false

@@ -10,7 +10,7 @@ class GameObject
   include Observable
   include Pronoun
 
-  attr_reader :short_desc, :game_object_id, :alt_names, :generic, :article, :sex, :show_in_look, :actions, :balance
+  attr_reader :short_desc, :game_object_id, :alt_names, :generic, :article, :sex, :show_in_look, :actions, :balance, :admin
   attr_accessor :container, :show_in_look, :actions, :pose, :visible, :comment, :movable, :quantity, :info
   attr_writer :plural
   alias :room :container
@@ -66,6 +66,7 @@ class GameObject
     end
     @plural = nil
     @actions = Set.new
+    @admin = false
   end
 
   #Outputs a string to the object.
