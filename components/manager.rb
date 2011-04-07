@@ -20,8 +20,8 @@ class Manager
   #a Manager object in an external script.
   def initialize(objects = nil)
     @soft_restart = false
-
     @storage = StorageMachine.new
+    @uptime = Time.new.to_i
 
     unless objects
       @cancelled_events = Set.new
@@ -38,8 +38,6 @@ class Manager
     else
       @game_objects = objects
     end
-
-    @uptime = Time.new.to_i
   end
 
   #Checks if a game object ID exists already, to avoid conflicts.
