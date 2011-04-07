@@ -8,15 +8,32 @@ require 'lib/errors'
 load 'util/all-behaviors.rb'
 load 'util/all-objects.rb'
 
-#Storage class for object persistance. Uses GDBM.
+# Storage class for object persistance. Uses GDBM.
 #
-#GDBM is a file-system hash table which is fast and available on many platforms. However, it only stores strings. So objects are stored as Strings representing the marshaled object.
+# GDBM is a file-system hash table which is fast and available on many
+# platforms. However, it only stores strings. So objects are stored as Strings
+# representing the marshaled object.
 #
-#The default storage system works this way: each GameObject is stored in a file which is named after the GameObject's class. For example, a Door would be in storage/Door. In each file, objects are indexed by their GOID. There is a special file in storage/goids which lists GOIDs and the class of the GameObject. This is used to find Objects according to their GOID.
+# The default storage system works this way: each GameObject is stored in a
+# file which is named after the GameObject's class. For example, a Door would
+# be in storage/Door. In each file, objects are indexed by their GOID. There
+# is a special file in storage/goids which lists GOIDs and the class of the
+# GameObject. This is used to find Objects according to their GOID.
 #
-#Here is an example: you want to load an object with a GOID of 476dfe3e-96bc-1952-fadd-26c22043a5a3. The StorageMachine will first open up storage/goids and retrieve the class pointed to by 476dfe3e-96bc-1952-fadd-26c22043a5a3, which happens to be Dog. The StorageMachine then opens up storage/Dog and again retrieves the Object pointed to by 476dfe3e-96bc-1952-fadd-26c22043a5a3, but this time it will be the (marshaled string of the) Dog object.
+# Here is an example: you want to load an object with a GOID of
+# 476dfe3e-96bc-1952-fadd-26c22043a5a3. The StorageMachine will first open up
+# storage/goids and retrieve the class pointed to by
+# 476dfe3e-96bc-1952-fadd-26c22043a5a3, which happens to be Dog. The
+# StorageMachine then opens up storage/Dog and again retrieves the Object
+# pointed to by 476dfe3e-96bc-1952-fadd-26c22043a5a3, but this time it will be
+# the (marshaled string of the) Dog object.
 #
-#Of course, there is an exception. Players are handled differently, because they are typically looked up by name and not by their GOID. Instead of being listed in storage/goids, they are listed in storage/players. This file maps player names to GOIDs. Then they can be looked up by GOID in the storage/Player file. Additionally, passwords are stored as MD5 hashes in storage/passwords, indexed by GOID (a tiny bit of security there).
+# Of course, there are exceptions. Players are handled differently, because
+# they are typically looked up by name and not by their GOID. Instead of being
+# listed in storage/goids, they are listed in storage/players. This file maps
+# player names to GOIDs. Then they can be looked up by GOID in the
+# storage/Player file. Additionally, passwords are stored as MD5 hashes in
+# storage/passwords, indexed by GOID (a tiny bit of security there).
 class StorageMachine
   def initialize(path = 'storage/')
     @path = path
