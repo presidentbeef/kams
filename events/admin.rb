@@ -571,7 +571,7 @@ module Admin
             when "false"
               value = false
             when /^:/
-              value = value.to_sym
+              value = value[1..-1].to_sym
             when "nil"
               value = nil
             when /^[0-9]+$/
@@ -899,7 +899,6 @@ module Admin
         elsif not object.is_a? Reacts and (event[:command] == "load" or event[:command] == "reload")
           player.output "Object cannot react, adding react ability."
           object.extend(Reacts)
-          object.init_reactor
         end
 
         case event[:command]

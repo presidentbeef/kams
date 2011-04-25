@@ -134,7 +134,7 @@ class Gary
     when /^\d+$/
       match = match.to_i
     when /^:/
-      match = match.to_sym
+      match = match[1..-1].to_sym
     end
     if attrib == "class" and (match.is_a? Class or match.is_a? Module)
       @ghash.dup.each do |goid, obj|
