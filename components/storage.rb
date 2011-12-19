@@ -329,7 +329,7 @@ class StorageMachine
       begin
         load_object(object.container, game_objects)
       rescue MUDError::NoSuchGOID, MUDError::ObjectLoadError
-        object.container = Config.start_room
+        object.container = ServerConfig.start_room
       end
     end
     return object
