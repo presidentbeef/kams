@@ -105,12 +105,15 @@ module Generic
 
     #Drops an item from the player's inventory into the room.
     def drop(event, player, room)
-      return if player.equipment.worn_or_wielded? event[:item]
-
       object = player.inventory.find(event[:object])
 
       if object.nil?
-        player.output("You have no #{event[:object]} to drop.")
+        if response = player.equipment.worn_or_wielded?(event[:object])
+          player.output response
+        else
+          player.output "You have no #{event[:object]} to drop."
+        end
+
         return
       end
 
