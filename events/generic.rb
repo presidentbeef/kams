@@ -73,12 +73,15 @@ module Generic
 
     #Gives an item to someone else.
     def give(event, player, room)
-      return if player.equipment.worn_or_wielded? event[:item]
-
       item = player.inventory.find(event[:item])
 
       if item.nil?
-        player.output("You do not seem to have a #{event[:item]}.")
+        if response = player.equipment.worn_or_wielded?(event[:item])
+          player.output response
+        else
+          player.output "You do not seem to have a #{event[:item]} to give away."
+        end
+
         return
       end
 
@@ -214,12 +217,16 @@ module Generic
 
     #Puts an object into a container.
     def put(event, player, room)
-      return if player.equipment.worn_or_wielded? event[:item]
 
       item = player.inventory.find(event[:item])
 
       if item.nil?
-        player.output("You do not seem to have a #{event[:item]}")
+        if response = player.equipment.worn_or_wielded?(event[:item])
+          player.output response
+        else
+          player.output "You do not seem to have a #{event[:item]}."
+        end
+
         return
       end
 
