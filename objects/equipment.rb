@@ -47,7 +47,7 @@ class Equipment
     @player
   end
 
-  #Checks if the given item is being worn or wielded.
+  #Checks if the given item is being worn or wielded or neither.
   def worn_or_wielded? item
     object = @inventory.find item
     return false if object.nil?
@@ -57,12 +57,10 @@ class Equipment
     return false if object.nil?
 
     if [:left_wield, :right_wield, :dual_wield].include? pos
-      player.output "You will need to unwield it first."
+      return "You will need to unwield #{object.name} first."
     else
-      player.output "You will need to remove it first."
+      return "You will need to remove #{object.name} first."
     end
-
-    true
   end
 
   #Takes string "left", "right", "dual"
