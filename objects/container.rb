@@ -9,6 +9,8 @@ class Container < GameObject
   #Create new container. Capacity is unlimited if unset.
   def initialize(capacity = nil, *args)
     super(*args)
+
+    @generic = "container"
     @inventory = Inventory.new(capacity)
   end
 
