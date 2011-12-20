@@ -275,8 +275,10 @@ module CommandParser
             { :action => :lock, :object => $1 }
           when /^unlock\s+(.*)$/i
             { :action => :unlock, :object => $1 }
-          when /^(get|grab|take)\s+((\w+\s*)*)(\s+from\s+(\w+))?/i
+          when /^(get|grab|take)\s+((\w+|\s)*)(\s+from\s+(\w+))/i
             { :action => :get, :object => $2.strip, :from => $5 }
+          when /^(get|grab|take)\s+(.*)$/i
+            { :action => :get, :object => $2.strip }
           when /^give\s+((\w+\s*)*)\s+to\s+(\w+)/i
             { :action => :give, :item => $2.strip, :to => $3 }
           when /^(i|inv|inventory)$/i
