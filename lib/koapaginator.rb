@@ -19,7 +19,7 @@ class KPaginator
     return "There is no more.\r\n" if @current > @pages
     page = @my_p.page(@current)
     if more?
-      page.items.join("\r\n") << "\r\n---MORE (#{@current}/#{@pages})---\r\n"
+      page.items.join("\r\n") << "\r\n---Type MORE for next page (#{@current}/#{@pages})---\r\n"
     else
       page.items.join("\r\n") << "\r\n"
     end
