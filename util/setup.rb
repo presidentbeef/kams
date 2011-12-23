@@ -483,4 +483,5 @@ player = event[:player]
 HERE
 end
 
-setup_menu
+setup_menu if __FILE__ == $0
+
