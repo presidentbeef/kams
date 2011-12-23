@@ -1,0 +1,91 @@
+#!/bin/env ruby
+
+def show_options
+  $stderr.puts "Usage:"
+  $stderr.puts "  kams new [path]"
+  $stderr.puts "  kams config"
+  $stderr.puts "  kams start"
+end
+
+def create_new path
+  path = File.expand_path(path)
+  abort "File or directory already exists: #{path}" if File.exists? path
+
+  require 'fileutils'
+  include FileUtils
+
+  resource_path = File.expand_path(File.dirname(__FILE__)) << "/../resources"
+
+  files = ["components", "conf", "events", "help", "lib", "objects", "traits", "util", "intro.txt", "server.rb"].map! do |file|
+    "#{resource_path}/#{file}"
+  end
+
+  $stderr.puts "Setting up files in #{path}"
+
+  #Copy files into the right place
+  mkdir path
+  cd path 
+  mkdir "logs"
+  cp_r files, "."
+  chmod 0766, "server.rb"
+
+  $stderr.puts "Copied files to #{path}"
+  $stderr.puts "-" * 20
+
+  unless File.exists? "./util/setup.rb"
+    abort "Problem! Cannot find util/setup.rb."
+  end
+
+  require './util/setup'
+  ARGV.clear
+
+  initial_setup
+
+  $stderr.puts "\nConfiguration complete."
+  $stderr.puts "Note: run 'kams start' inside #{path} to start your server in the future."
+  $stderr.puts "Starting KAMS!"
+  $stderr.puts "-" * 20
+
+  exec "./server.rb"
+end
+
+def run_config
+  unless File.exists? "./util/setup.rb"
+    abort "Cannot find util/setup.rb. Are you at the server root?"
+  end
+
+  require './util/setup'
+
+  setup_menu
+
+  exit
+end
+
+def start_server
+  unless File.exists? "./server.rb"
+    abort "Cannot find server.rb. Are you at the server root?"
+  end
+
+  exec "./server.rb"
+end
+
+if ARGV.empty?
+  show_options
+  exit
+end
+
+case ARGV[0]
+when "new"
+  create_new ARGV.pop
+when "config"
+  ARGV.clear
+  run_config
+when "start"
+  ARGV.clear
+  start_server
+when "server.rb"
+  ARGV.clear
+  exec "./server.rb"
+else
+  show_options
+end
