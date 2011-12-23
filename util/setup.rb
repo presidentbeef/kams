@@ -1,6 +1,6 @@
 #Erases and resets manager.
 
-here =File.expand_path(File.dirname(__FILE__))
+here = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH << here << "."
 
 require "gdbm"
@@ -46,14 +46,14 @@ end
 
 def initial_setup
   puts "\nThis option will walk you through a few steps to set up the server."
-  puts "Setting up storage..."
+  puts "\nSetting up storage..."
   reset_storage
-  puts "Setting up initial configuration...", ""
+  puts "\nSetting up initial configuration..."
   initial_options
 end
 
 def initial_options
-  puts "Press RETURN to keep current value."
+  puts "\nNOTE: Press RETURN to keep current value!", ""
   print "Administrator login (currently #{ServerConfig[:admin]}): "
   name = gets.strip.downcase
   print "Port number (currently #{ServerConfig[:port]}): "
@@ -65,9 +65,10 @@ def initial_options
   ServerConfig[:port] = port unless port == 0
   ServerConfig[:address] = address unless address.empty?
 
+  puts "-" * 20
   puts "Administrator login set to: #{ServerConfig[:admin]}"
   puts "Port number set to: #{ServerConfig[:port]}"
-  puts "Address set to: #{ServerConfig[:address]}"
+  puts "Address set to: #{ServerConfig[:address]}", "-" * 20
 end
 
 def reset_storage
