@@ -7,7 +7,7 @@ class Container < GameObject
   include HasInventory
 
   #Create new container. Capacity is unlimited if unset.
-  def initialize(capacity = nil, *args)
+  def initialize(*args, capacity: nil)
     super(*args)
 
     @generic = "container"
