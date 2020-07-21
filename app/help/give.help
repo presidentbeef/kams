@@ -1,0 +1,8 @@
+Command: Give
+Syntax: GIVE <object> TO <person>
+
+Give an object to someone else. Beware, though, they may not want to give it back.
+
+At the moment, the object must be in your inventory.
+
+See also: GET

@@ -1,0 +1,6 @@
+Command: Reply
+Syntax: REPLY <message>
+
+Reply is a shortcut to send a tell to the last person who sent you a tell.
+
+See also: TELL

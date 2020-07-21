@@ -1,0 +1,7 @@
+Syntax: ACPORTAL ([ACTION] [ROOM])
+
+Creates a portal to another room. Does not create one coming back. Other room and ACTION are optional. Also see PORTAL.
+
+Example: acportal d635469-7660-b99b-1764-cc95b9ec5f37
+Example: acportal jump
+Example: acportal climb d635469-7660-b99b-1764-cc95b9ec5f37

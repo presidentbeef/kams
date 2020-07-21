@@ -1,0 +1,13 @@
+Several server options can be set using ACONFIG or by editing the conf/conf.yaml file directly.
+
+address: Address of the server (0.0.0.0 is recommended)
+admin: Name of player who will always be set to admin
+debug: Whether Ruby debug mode is on or off
+intro_file: File to display when someone connects
+log_level: Logging level (0-3)
+port: Port to run server on
+restart_delay: Delay in seconds before server restarts
+restart_limit: Limit of how many times the server can restart before giving up
+save_rate: How often (in minutes) the game will autosave. If rate is 0, no autosave will occur
+start_room: GOID of room where players will start
+update_rate: How often (in seconds) the game will update all objects (30 seconds seems good)

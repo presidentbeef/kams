@@ -1,0 +1,6 @@
+Syntax: ACOMMENT [OBJECT] [COMMENT]
+
+Adds a comment to an object's comment field. Notes for yourself, perhaps.
+
+Example: acomment plant Note to self: make this plant more exciting
+

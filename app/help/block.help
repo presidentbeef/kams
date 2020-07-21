@@ -1,0 +1,8 @@
+Command: Simple Block
+Syntax: BLOCK <target>
+Syntax: BLOCK
+
+This is a simple block which uses your weapon to attempt to block an opponent's attack. If you are not wielding a weapon, you will attempt a block with your bare hands.
+
+
+See also: THRUST, STATUS

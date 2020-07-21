@@ -1,0 +1,7 @@
+Syntax: ADELETE [OBJECT]
+Syntax: ADELETE ALL [OBJECT TYPE]
+
+Deletes an object or all of a given type. The object's inventory and equipment should remain in the room.
+
+Example: adelete dog
+Example: adelete all mosquito

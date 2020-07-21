@@ -1,0 +1,7 @@
+Syntax: APUT [OBJECT] IN [CONTAINER]
+
+Puts an object in a specified container.
+
+Example: aput cat in box
+Example: aput me in bd635469-7660-b99b-1764-cc95b9ec5f37 
+

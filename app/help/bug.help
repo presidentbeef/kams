@@ -1,0 +1,23 @@
+Command: Bug
+Command: Idea
+Command: Typo
+Syntax: [BUG|IDEA|TYPO] <issue>
+Syntax: [BUG|IDEA|TYPO] <id number>
+Syntax: [BUG|IDEA|TYPO] LIST
+Syntax: [BUG|IDEA|TYPO] STATUS <id_number> <status>
+Syntax: [BUG|IDEA|TYPO] [SHOW|ADD|DEL] <id_number>
+
+These commands allow players and administrators to report and manipulate feedback about the game. The commands are essentially identical, but should be used to report different things. For the rest of this description, BUG is used.
+
+Note that players can only see and edit their own feedback, while adminsitrators will see them all.
+
+BUG <issue> is used to make the initial report.
+BUG LIST will list all reports.
+BUG ADD can be used to append comments to a report.
+BUG STATUS can be used to change the status of a report to a different value (administrators only).
+
+Examples:
+bug When I hit a dwarf with my axe, it doesn't do any damage.
+bug list
+bug 1
+bug add 1 Actually, this only happens with battleaxes, not all axes.

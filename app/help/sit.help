@@ -1,0 +1,14 @@
+Command: Sit
+Syntax: SIT
+Syntax: SIT ON <object>
+
+Using this command, you can sit on things like chairs and benches. When used without an object, you will sit down on the ground.
+
+Note that you must stand up before you can move anywhere.
+
+Example:
+
+SIT ON stool
+
+
+See also: STAND

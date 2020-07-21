@@ -1,0 +1,9 @@
+Command: Inventory
+Syntax: INVENTORY
+
+Displays what you are holding and wearing.
+
+'i' is a shortcut for inventory.
+
+
+See also: TAKE, DROP, WEAR, REMOVE

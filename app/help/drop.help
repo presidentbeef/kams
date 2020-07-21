@@ -1,0 +1,6 @@
+Command: Drop
+Syntax: DROP <object>
+
+Removes an object from your inventory and places it gently on the ground.
+
+See also: GET, TAKE, GRAB

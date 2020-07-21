@@ -1,0 +1,14 @@
+Command: Unwield weapon
+Syntax: UNWIELD
+Syntax: UNWIELD <weapon>
+Syntax: UNWIELD <left|right>
+
+This command will cause you to unwield a weapon and place it in your inventory. If you do not specify which weapon or which hand you are using to hold the weapon, it will favor your right hand.
+
+Example:
+
+UNWIELD halberd
+UNWIELD left
+
+
+See also: WIELD

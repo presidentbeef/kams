@@ -1,0 +1,10 @@
+Command: Lock
+Command: Unlock
+Syntax: LOCK <object or direction>
+Syntax: UNLOCK <object or direction>
+
+Lock or unlock the given object, if you have a key for it.
+
+Note that you can lock a door while it is open, then close it.
+
+See also: OPEN, CLOSE

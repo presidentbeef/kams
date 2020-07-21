@@ -48,3 +48,15 @@ The file help/syntax.rb provides syntax help in the game.
 ==Beware
 
 Some things (hunger) may appear to be implemented but they really are not.
+
+
+
+==Docker
+
+Storage is of course ephimeral. If you want to make persistant storage, you can bind volumes to /storage and /conf in the container. 
+
+This can be done by adding this to the run command:
+-v kams-storage:/storage -v kams-config:/conf
+
+Or if you want to map it to a directory on the host system:
+-v /var/kams/storage:/storage -v /etc/kams:/conf

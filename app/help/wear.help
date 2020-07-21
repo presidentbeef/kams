@@ -1,0 +1,8 @@
+Command: Wear
+Syntax: WEAR <object>
+Sytnax: WEAR <object> ON <body part>
+
+Wear an object. Objects usually have specific places they may be worn.
+
+
+See also: REMOVE, INVENTORY
