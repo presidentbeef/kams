@@ -1,0 +1,15 @@
+Command: Whisper
+Syntax: WHISPER <person> <message>
+
+To communicate with someone in the same room, but privately, use this command.
+
+Example:
+
+whisper justin that dog needs a bath
+
+Output:
+
+You whisper to Justin, "That dog needs a bath."
+
+
+See also: SAY

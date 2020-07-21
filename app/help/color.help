@@ -1,0 +1,40 @@
+Command: Set Color
+Syntax: SET COLOR [ON|OFF]
+Syntax: SET COLOR DEFAULT
+Syntax: SET COLOR <setting> <color>
+
+These commands allow you to customize your color palette.
+To view your current settings, use SHOW COLOR.
+To disable all colors, use SET COLOR OFF.
+To renable, use SET COLOR ON.
+To set colors back to the default, use SET COLOR DEFAULT.
+To set individual colors, use SET COLOR <setting> <color>
+
+You can currently set:
+
+Setting          Meaning
+----------------------------------------
+roomtitle    |  Room title
+roomdesc     |  Room description
+objects      |  Object list
+people       |  People list
+exits        |  Exit list
+important    |  Important messages
+say          |  Messages people say
+tell         |  Messages sent via TELL
+regular      |  Regular text
+
+Color Options
+--------------------------
+black           red
+green           yellow
+blue            magenta
+cyan            white
+brightred       brightgreen
+brightyellow    brightblue
+brightmagenta   brightcyan
+brightwhite
+
+Example:
+
+SET COLOR roomdesc brightmagenta

@@ -1,0 +1,5 @@
+Syntax: ACROOM [DIRECTION] [NAME]
+
+Creates a room in the given direction and exits between that room and your current room. The room will be placed in the current area.
+
+Example: acroom east Lounge of the Lizard King 

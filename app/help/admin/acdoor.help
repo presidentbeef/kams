@@ -1,0 +1,6 @@
+Syntax: ACDOOR [DIRECTION]
+Syntax: ACDOOR [DIRECTION] [EXIT ROOM]
+
+This creates a door to another room, and also creates a returning door from that room.
+
+If there are existing exits which you would like to replace with a door, just provide the direction of the exit.

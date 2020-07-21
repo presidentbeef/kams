@@ -1,0 +1,5 @@
+Syntax: ACONFIG [SETTING] [VALUE]
+
+Sets a server configuration value. ACONFIG by itself will display the current configuration.
+
+Example: aconfig restart_delay 5

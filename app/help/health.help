@@ -1,0 +1,21 @@
+Command: Health
+Syntax: HEALTH
+
+Shows you how healthy you are.
+
+You can be:
+	at full health
+	a bit bruised
+	a little beat up
+	slightly injured
+	quite injured
+	slightly wounded
+	wounded in several places
+	heavily wounded
+	bleeding profusely and in serious pain
+	nearly dead
+	dead
+
+
+
+See also: STATUS, HUNGER

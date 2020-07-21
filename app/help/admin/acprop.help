@@ -1,0 +1,6 @@
+ACPROP ([GENERIC_NAME])
+
+Creates a basic GameObject with the given GENERIC type. This is much easier than coding up a class for every object you might like to have.
+
+Example: acprop rock
+

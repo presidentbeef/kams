@@ -1,0 +1,16 @@
+Syntax: SET <option> [value]
+
+There are several settings available to you. To see them all, simply use SET.
+To see the values available for a certain setting, use SET <option> without a value.
+
+Example:
+
+To see your color settings, use
+
+SET COLOR
+
+To turn off word wrap, use
+
+SET WORDWRAP OFF
+
+See also: WORDWRAP, PAGELENGTH, DESCRIPTION, COLORS

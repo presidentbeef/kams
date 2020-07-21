@@ -1,0 +1,12 @@
+Command: Alarm
+Syntax: ALARM <length>
+
+This sets a simple alarm which will alert you in <length> seconds.
+
+Example:
+
+alarm 5
+
+... 5 seconds later ...
+
+***ALARM***

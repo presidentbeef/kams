@@ -1,0 +1,6 @@
+ACEXIT [DIRECTION] [EXIT_ROOM]
+
+Create an exit in the desired direction to the EXIT_ROOM, which needs to be a GOID of a room. This DOES NOT create the exit coming back the other way.
+
+Example: acexit west bd635469-7660-b99b-1764-cc95b9ec5f37 
+

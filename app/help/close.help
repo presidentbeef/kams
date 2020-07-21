@@ -1,0 +1,17 @@
+Command: Open
+Command: Close
+Syntax: OPEN <object or direction>
+Syntax: CLOSE <object or direction>
+
+Opens or closes the object. For doors and such, it is more accurate to use the direction in which the object lies.
+
+For example:
+
+OPEN north
+
+CLOSE box
+
+OPEN door
+
+
+See also: LOCK, UNLOCK

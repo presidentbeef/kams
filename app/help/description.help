@@ -1,0 +1,7 @@
+Command: Set Description
+Syntax: SET DESCRIPTION
+Syntax: SET DESC
+
+This will take you into the editor to edit the long description for your character, which is what people will see when they look at you.
+
+See also: LOOK, SET

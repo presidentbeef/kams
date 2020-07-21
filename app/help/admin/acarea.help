@@ -1,0 +1,5 @@
+Syntax: ACAREA [NAME]
+
+Creates a new area with the given name. Note that the name is shown as-is when using LOOK HERE.
+
+Example: acarea the Dungeons of DOOM

@@ -1,0 +1,7 @@
+Syntax: ALIST [ATTRIB] [QUERY]
+
+Lists objects which match this query. Not very powerful at the moment. ATTRIB is either 'class' or an object attribute like @name. If used by itself, ALIST lists all GameObjects, which can be fun.
+
+Example: alist
+Example: alist @generic plant
+Example: alist class Dog

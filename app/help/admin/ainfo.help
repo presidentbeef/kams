@@ -1,0 +1,11 @@
+Syntax: AINFO SET [OBJECT] @[ATTRIBUTE] [VALUE]
+Syntax: AINFO DELETE [OBJECT] @[ATTRIBUTE]
+Syntax: AINFO {SHOW|CLEAR} [OBJECT]
+
+Sets, deletes, or shows the info for an object. You can also use ALL [OBJECT TYPE] to apply it to all objects of a given type.
+See the Info class for more details. CLEAR removes all info for an object.
+
+Example: ainfo set @address.city Cleveland
+Example: ainfo delete person @address.city
+Example: ainfo show dog
+Example: ainfo clear dog

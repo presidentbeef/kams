@@ -1,0 +1,6 @@
+Syntax: ARELOAD [FILE]
+
+Reloads a source file. If there is something wrong with the source file, the game will likely crash. Do not include '.rb'.
+
+Example: areload objects/player
+

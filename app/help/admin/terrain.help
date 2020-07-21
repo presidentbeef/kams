@@ -1,0 +1,10 @@
+Syntax: TERRAIN AREA [TYPE]
+Syntax: TERRAIN HERE TYPE [TYPE]
+Syntax: TERRAIN HERE {INDOORS|WATER|UNDERWATER} {YES|NO}
+
+The first two forms ses the terrain type of the current area or room. The third form sets options for the current room.
+
+Example: terrain area urban
+Example: terrain here garden
+Example: terrain here water no
+Example: terrain here indoors yes

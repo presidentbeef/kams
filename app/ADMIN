@@ -1,0 +1,255 @@
+This is a rough guide to the in-game administrator commands. You can always (I think) use an object's GOID instead of its name when [OBJECT] is called for, which is useful if you cannot find it or are lazy. Also, 'me' can be used to refer to yourself and 'here' to the current room.
+
+!WARNING!
+
+This commands, even if used correctly, can seriously mess things up. Used incorrectly, they almost certainly will. The game assumes you know what you are doing, so it let's you do things that don't make a lot of sense (or maybe I was just too lazy to put in safeguards). Backup your storage/ directory often! 
+
+Here are the commands:
+
+ACAREA [NAME]
+
+Creates a new area with the given name. Note that the name is shown as-is when using LOOK HERE.
+
+Example: acarea the Dungeons of DOOM
+
+ACEXIT [DIRECTION] [EXIT_ROOM]
+
+Create an exit in the desired direction to the EXIT_ROOM, which needs to be a GOID of a room. This DOES NOT create the exit coming back the other way.
+
+Example: acexit west bd635469-7660-b99b-1764-cc95b9ec5f37 
+
+ACOMMENT [OBJECT] [COMMENT]
+
+Adds a comment to an object's comment field. Notes for yourself, perhaps.
+
+Example: acomment plant Note to self: make this plant more exciting
+
+ACONFIG {RELOAD}
+
+ACONFIG by itself shows the current server configuration. ACONFIG RELOAD will force the configuration to be reloaded from the configuration file. Useful if you made changes to the file and do not want to restart the server.
+
+Example: aconfig reload
+
+ACONFIG [SETTING] [VALUE]
+
+Sets a server configuration value.
+
+Example: aconfig restart_delay 5
+
+ACOPY [OBJECT]
+
+Makes a copy of an object, but with a fresh new GOID.
+
+Example: acopy dog
+
+ACPORTAL ([ACTION] [ROOM])
+
+Creates a portal to another room. Does not create one coming back. Other room and ACTION are optional. Also see PORTAL.
+
+Example: acportal d635469-7660-b99b-1764-cc95b9ec5f37
+Example: acportal jump
+Example: acportal climb d635469-7660-b99b-1764-cc95b9ec5f37
+
+ACPROP ([GENERIC_NAME])
+
+Creates a basic GameObject with the given GENERIC type. This is much easier than coding up a class for every object you might like to have.
+
+Example: acprop rock
+
+ACREATE [OBJECT_TYPE] ([NAME])
+
+This is the powerful all-purpose creation command. It creates a new object of the given OBJECT_TYPE with an optional NAME. OBJECT_TYPE corresponds to the class of the object in the code. In Ruby, classes are generally CamelCase, so if you have such a class, you will need to capitalize it properly. If it is a single word (like Dog) then it does not need to be capitalized. Puts the object in the room you are standing in.
+
+Example: acreate dog Spot
+
+ACROOM [DIRECTION] [NAME]
+
+Creates a room in the given direction and exits between that room and your current room. The room will be placed in the current area.
+
+Example: acroom east Lounge of the Lizard King 
+
+ADELETE [OBJECT]
+
+Deletes an object.
+
+Example: adelete dog
+
+ADESC [OBJECT] [DESC]
+
+Sets an object's description.
+
+Example: adesc dog This is just a mongrel.
+
+ADESC INROOM [DESC|FALSE]
+
+An object can be displayed as part of the room description rather than being seen in the room's object list. This either sets that description or turns it off.
+
+Example: adesc inroom dog A small dog sniffs around here.
+
+AFORCE [OBJECT] [ACTION]
+
+Force an object to 'perform' a given action, as if it were a player and had input the command. If it is a mobile, WATCH will be temporarily turned on.
+
+Example: aforce dog emote sits on its hind legs and begs pitifully
+
+AHIDE [OBJECT]
+
+Hides an object from being shown in LOOK. Note that if you want to hide an object but have it be part of the room description, it is equivalent to do use ADESC INROOM and simply describe it as something else. Use ASHOW to reverse.
+
+Example: ahide secretdoor
+
+AINFO SET [OBJECT] [ATTRIBUTE] [VALUE]
+
+Sets the info to a given value. See the Info class for more details.
+
+Example: ainfo set address.city Cleveland
+
+AINFO DELETE [OBJECT] [ATTRIBUTE]
+
+Removes the attribute from the info of the given OBJECT.
+
+Example: ainfo delete person address.city
+
+AINFO {SHOW|CLEAR} [OBJECT]
+
+SHOW shows the info of the given object, CLEAR wipes it clean.
+
+Example: ainfo show dog
+Example: ainfo clear dog
+
+ALIST [ATTRIB] [QUERY]
+
+Lists objects which match this query. Not very powerful at the moment. ATTRIB is either 'class' or an object attribute like @name. If used by itself, ALIST lists all GameObjects, which can be fun.
+
+Example: alist
+Example: alist @generic plant
+Example: alist class Dog
+
+ALOG {FLUSH|NORMAL|HIGH|ULTIMATE|DEBUG}
+
+This command can be used to set the logging level, flush the log, and turn debugging information on and off. FLUSH just writes the log out to disk, but this is typically done automatically so you will probably never need it.
+
+Example: alog high
+
+ALOG {PLAYER|SERVER|SYSTEM} ([LINES])
+
+This command displays the latest log entries for the player, server, and system logs.
+
+Example: alog player
+Example: alog system 50
+
+ALOOK [OBJECT]
+
+Displays a bunch of information about an object. Probably more than you need to know. Without an OBJECT, it will show the room's information.
+
+Example: alook me
+
+APUT [OBJECT] IN [CONTAINER]
+
+Puts an object in a specified container.
+
+Example: aput cat in box
+Example: aput me in bd635469-7660-b99b-1764-cc95b9ec5f37 
+
+AREACT LOAD ({ALL}) [OBJECT] [FILE]
+
+This loads a reaction file for a given OBJECT. Assumes the FILE is in objects/reactions/ and ends in '.rx'. Case must match. Note that if this file has already been loaded for this OBJECT, it will result in duplicate reactions.
+
+Example: areact load sam townsperson
+
+AREACT {SHOW|RELOAD|CLEAR} ({ALL}) [OBJECT]
+
+More commands reaction commands. SHOW will show the reactions loaded for the give OBJECT but in a very ugly way at the moment. RELOAD will clear out any reactions and reload them from files which have been loaded before. IMPORTANT: This means you may lose reactions created online. CLEAR removes all reactions from the OBJECT.
+
+Example: areact show dog
+
+AREAS
+
+Lists current areas.
+
+ARELOAD [FILE]
+
+Reloads a source file. If there is something wrong with the source file, the game will likely crash. Do not include '.rb'.
+
+Example: areload objects/player
+
+ASET [OBJECT] [@ATTRIBUTE|{SMELL|FEEL|TASTE|SOUND}] [VALUE]
+
+This is a fairly dangerous command which sets an attribute of an object. The '@' is required for attributes. Hopefully this will be used infrequently as AINFO replaces things. VALUE is generally converted to just a String with the following exceptions:
+
+:something => a Symbol
+false      => false
+true       => true
+nil        => nil
+!nothing   => empty String
+12345      => Integer
+
+Also, if the ATTRIBUTE is already an array, then the VALUE will be made into an array like so:
+
+things apart => ["things", "apart"]
+"things together" => ["things together"]
+
+Example: aset dog @name Spot
+Example: aset plant @movable true
+Example: aset cactus feel Ow!!
+
+ASHOW [OBJECT]
+
+Reverses the effects of AHIDE.
+
+Example: ashow dog
+
+ASTATUS
+
+Shows what objects currently exist in the game.
+
+Example: astatus
+
+DELETEPLAYER [NAME]
+
+Deletes the player of that name.
+
+PORTAL {ACTION|EXIT|ENTRANCE|PORTAL} [PORTAL] [VALUE]
+
+Set various options for a portal. To set a value to the default, use '!nothing'. EXIT, ENTRANCE, and PORTAL refer to the exit, entrance, and portal messages. These messages can include the special values '!name' and '!pronoun' to get at the name and pronoun of the player who is moving. ACTION can be jump, enter, climb, or crawl.
+
+Example: portal exit mirror !nothing
+Example: portal action mirror enter
+Example: portal entrance mirror !name suddenly appears in the room, !pronoun(:possessive) eyes darting about wildly
+
+RESTART
+
+Restarts the server.
+
+Example: restart
+
+TERRAIN AREA [TYPE]
+
+Sets the terrain type of the current area.
+
+Example: terrain area urban
+
+TERRAIN HERE TYPE [TYPE]
+
+Sets the terrain type of the current room.
+
+Example: terrain here garden
+
+TERRAIN HERE {INDOORS|WATER|UNDERWATER} {YES|NO}
+
+Sets the various terrain options for the room.
+
+Example: terrain here water no
+Example: terrain here indoors yes
+
+AWATCH {START|STOP} [MOBILE]
+
+Echoes what a mobile sees to you.
+
+Example: awatch start dog
+
+WHEREIS [OBJECT]
+
+Finds an object.
+
+Example: whereis bd635469-7660-b99b-1764-cc95b9ec5f37
